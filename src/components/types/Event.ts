@@ -4,5 +4,5 @@ export interface Event
     name: string
     datetime: Date
     location: string
-    cost?: Number
+    ticketPrice?: number
 }
