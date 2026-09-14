@@ -1,3 +1,5 @@
+import "./footer.css"
+
 // Footer of Event Application
 export function Footer() {
     return (
