@@ -1,8 +1,9 @@
 import "./Image.css"
+import type { Event } from '../../../types/Event'
 
-export function Image(image: string, alt: string)
+export function Image(event: Event)
 {
     return (
-        <img className="event-image" src={image} alt={alt}/>
+        <img className="event-image" src={event.image} alt={event.name}/>
     )
 }
