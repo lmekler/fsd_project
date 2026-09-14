@@ -2,7 +2,7 @@ export interface Event
 {
     image: string
     name: string
-    datetime: Date
+    dateTime: Date
     location: string
     ticketPrice?: number
 }
