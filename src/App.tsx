@@ -5,8 +5,7 @@ import { Footer } from './components/common/footer/Footer'
 
 import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
 
-function App()
-{
+function App() {
   return (
     <>
       <Header/>
