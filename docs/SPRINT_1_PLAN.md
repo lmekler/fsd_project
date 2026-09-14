@@ -12,8 +12,8 @@ Patrick Arevalo (Documentation Lead)
 
 ### User Stories
 
-- *"As a User, I want to be able to browse community events happening in my area, so that I know which events to go to."*
-- *"As a User, I want to be able to see all the events I saved in a separate page so that I know which events I'm going to."*
+- *"As a User, I want to be able to browse community events happening in my area, so that I know what events are happening."*
+- *"As a User, I want to be able to see all the events I saved in a separate page so that I can find events I'm interested in."*
 - *"As a User, I want to be able to see events hosted by an organizer I support so that I can be more involved in their programming."*
 
 ## Feature Owners
