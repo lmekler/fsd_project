@@ -25,7 +25,7 @@ Patrick Arevalo (Documentation Lead)
 ## Directory Structure
 
 fsd_project/
-├── documentation
+├── docs
 ├── public
 ├── src/
 │   ├── components/
