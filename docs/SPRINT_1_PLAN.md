@@ -24,6 +24,7 @@ Patrick Arevalo (Documentation Lead)
 
 ## Directory Structure
 
+```
 fsd_project/
 ├── docs
 ├── public
@@ -51,6 +52,7 @@ fsd_project/
 ├── tsconfig.app.json
 ├── tsconfig.node.json
 └── vite.config.ts
+```
 
 ## Leann To-Dos
 - Build Repo
