@@ -1,8 +1,13 @@
 import './DateTime.css'
+import type { Event } from '../../../types/Event'
 
-export function DateTime(datetime: Date)
+export function DateTime(event: Event)
 {
     return (
-        <p className="date-time">{datetime.getDay().toString()}, {datetime.getDate().toString()}, {datetime.toLocaleTimeString()}</p>
+        <p className="date-time">
+            {event.datetime.getDay().toString()}, 
+            {event.datetime.getDate().toString()}, 
+            {event.datetime.toLocaleTimeString()}
+        </p>
     )
 }
