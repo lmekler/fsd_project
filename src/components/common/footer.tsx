@@ -2,7 +2,7 @@
 export function Footer() {
     return (
         <>
-            <footer>Patrick Arevalo, Leann Mekler, and Chan Madut</footer>
+            <footer className="authors">Patrick Arevalo, Leann Mekler, and Chan Madut</footer>
         </>
     );
 }
