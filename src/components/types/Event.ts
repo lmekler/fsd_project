@@ -1,0 +1,25 @@
+export interface Event
+{
+    id: string
+    organizerId: string
+    title: string
+    description?: string
+    category?: string
+    date: string
+    startTime: string
+    endTime?: string
+    location: {
+        venue?: string
+        address: string
+        city: string
+        province: string
+        postalCode: string
+    }
+    image: string
+    capacity: number
+    registeredCount: number
+    price: number
+    isFree: boolean
+    isFeatured: boolean
+    tags?: string[]
+}
