@@ -8,7 +8,7 @@ interface EventCardProps {
 export function EventCard({event} : EventCardProps)
 {
     return (
-        <article className="event">
+        <article key={event.name} className="event">
             <img className="event-image" src={event.image} alt={event.name}/>
              <p className="event-description">
                 <span className="event-name">{event.name}</span>
