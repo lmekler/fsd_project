@@ -7,6 +7,7 @@ import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
 
 import SavedEvents from './components/pages/saved-events/SavedEvents'
 
+
 function App() {
   return (
     <>
