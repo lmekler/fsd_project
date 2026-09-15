@@ -4,7 +4,7 @@ export interface Event
     organizerId: string
     title: string
     description?: string
-    category?: string[]
+    category?: string
     date: string
     startTime: string
     endTime?: string
