@@ -83,7 +83,7 @@ function RenderEvents({ events }: {events: EventStructure[] }) {
 
 export default function SavedEvents() {
     
-    const parsedData: EventStructure[] = data.events;
+    const parsedData: EventStructure[] = data.savedEvents;
 
     return (
         <>
