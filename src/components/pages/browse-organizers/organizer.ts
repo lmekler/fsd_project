@@ -5,4 +5,11 @@ export interface Organizer {
     website: string;
     email: string;
     phone: string
+    location: Location;
+}
+
+interface Location {
+    city: string;
+    province: string;
+    country: string;
 }
