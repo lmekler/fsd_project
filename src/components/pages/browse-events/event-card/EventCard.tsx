@@ -15,7 +15,7 @@ export function EventCard({event} : EventCardProps)
             <img className="event-image" src={event.image} alt={event.title}/>
              <p className="event-description">
                 <span className="event-name">{event.title}</span>
-                <br/>
+                <br></br>
                 <span className="event-date-time">
                     {eventDate.toLocaleString(
                         'en-us', 
@@ -29,9 +29,9 @@ export function EventCard({event} : EventCardProps)
                         }
                     )}
                 </span>
-                <br/>
+                <br></br>
                 <span className="event-location">{event.location.address}</span>
-                <br/>
+                <br></br>
                 <span className="event-ticket-price">{event.isFree ? "Free" : "$" + event.price}</span>
             </p>
         </article>
