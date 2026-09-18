@@ -7,6 +7,7 @@ import { Footer } from './components/common/footer/Footer'
 // Feature Imports
 import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
 import SavedEvents from './components/pages/saved-events/SavedEvents'
+import Organizers from './components/pages/browse-organizers/BrowseOrganizers'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Header/>
       <BrowseEvents/>
       <SavedEvents/>
+      <Organizers/>
       <Footer/>
     </>
   )
