@@ -1,4 +1,4 @@
-import "./footer.css"
+import "./Footer.css"
 
 // Footer of Event Application
 export function Footer() {
