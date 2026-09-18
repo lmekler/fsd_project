@@ -6,11 +6,11 @@ function Organizers() {
 
     return (
         <section className="organizers">
-            <h1>Event Organizers</h1>
+            <h2>Event Organizers</h2>
 
             {organizers.map((organizer) => (
                 <section className="{organizer.id}">
-                    <h2 className="name">{organizer.name}</h2>
+                    <h3 className="name">{organizer.name}</h3>
                     <p className="description">{organizer.description}</p>
                     <p className="website">Website: <a href="#">{organizer.website}</a></p>
                     <p className="email">Email: {organizer.email}</p>
