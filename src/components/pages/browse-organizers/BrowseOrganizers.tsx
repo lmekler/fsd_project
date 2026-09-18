@@ -1,4 +1,4 @@
-import type { Organizer } from "./organizer"
+import type { Organizer } from "../../types/Organizer"
 import organizerData from "../../../data.json"
 
 function Organizers() {

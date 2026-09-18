@@ -14,12 +14,8 @@ function App() {
   return (
     <>
       <Header/>
-<<<<<<<<< Temporary merge branch 1
-      <Organizers/>
-=========
       <BrowseEvents/>
       <SavedEvents/>
->>>>>>> c39dbcfdead1070b6010e2fefcd2e8ae563fbc2e
       <Organizers/>
       <Footer/>
     </>
