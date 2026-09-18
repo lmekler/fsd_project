@@ -8,13 +8,7 @@ export interface Event
     date: string
     startTime: string
     endTime?: string
-    location: {
-        venue?: string
-        address: string
-        city: string
-        province: string
-        postalCode: string
-    }
+    location: Location
     image: string
     capacity: number
     registeredCount: number
@@ -22,4 +16,13 @@ export interface Event
     isFree: boolean
     isFeatured: boolean
     tags?: string[]
+}
+
+interface Location 
+{
+    venue?: string;
+    address: string;
+    city: string;
+    province: string;
+    postalCode: string;
 }
