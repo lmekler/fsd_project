@@ -3,7 +3,7 @@ import { useState } from "react"
 import "./NewEventForm.css"
 import type { Event } from "../../../types/Event"
 
-export function NewEventForm()
+export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
 {
     // default event fields
     const [event, setEvent] = useState<Event>
@@ -169,6 +169,14 @@ export function NewEventForm()
                         type="file"
                         value={event.image}
                         accept="image/*"
+                        onChange=
+                        {
+                            (e) => setEvent(
+                            {
+                                ...event,
+                                image: e.target.value
+                            })
+                        }
                     />
                 </label>
             </div>
@@ -180,6 +188,14 @@ export function NewEventForm()
                         type="text"
                         value={event.title}
                         placeholder="Event title"
+                        onChange=
+                        {
+                            (e) => setEvent(
+                            {
+                                ...event,
+                                title: e.target.value
+                            })
+                        }
                     />
                 </label>
             </div>
@@ -191,6 +207,14 @@ export function NewEventForm()
                         type="text"
                         value={event.description}
                         placeholder="Description"
+                        onChange=
+                        {
+                            (e) => setEvent(
+                            {
+                                ...event,
+                                description: e.target.value
+                            })
+                        }
                     />
                 </label>
             </div>
@@ -203,6 +227,14 @@ export function NewEventForm()
                             key="date" 
                             type="date"
                             value={event.date}
+                            onChange=
+                            {
+                                (e) => setEvent(
+                                {
+                                    ...event,
+                                    date: e.target.value
+                                })
+                            }
                         />
                     </label>
                     <label>
@@ -210,6 +242,14 @@ export function NewEventForm()
                         <select 
                             key="time" 
                             value={event.startTime}
+                            onChange=
+                            {
+                                (e) => setEvent(
+                                {
+                                    ...event,
+                                    startTime: e.target.value
+                                })
+                            }
                         >
                             {
                                 timeOptions.map((time) =>
@@ -226,6 +266,14 @@ export function NewEventForm()
                         <select 
                             key="time" 
                             value={event.endTime}
+                            onChange=
+                            {
+                                (e) => setEvent(
+                                {
+                                    ...event,
+                                    endTime: e.target.value
+                                })
+                            }
                         >
                             {
                                 timeOptions.map((time) =>
@@ -245,6 +293,18 @@ export function NewEventForm()
                                 key="venue" 
                                 type="text"
                                 value={event.location.venue}
+                                onChange=
+                                {
+                                    (e) => setEvent(
+                                    {
+                                        ...event,
+                                        location: 
+                                        {
+                                            ...event.location,
+                                            venue: e.target.value
+                                        }
+                                    })
+                                }
                             />
                         </label>
                         <label>
@@ -253,6 +313,18 @@ export function NewEventForm()
                                 key="address" 
                                 type="text"
                                 value={event.location.address}
+                                onChange=
+                                {
+                                    (e) => setEvent(
+                                    {
+                                        ...event,
+                                        location: 
+                                        {
+                                            ...event.location,
+                                            address: e.target.value
+                                        }
+                                    })
+                                }
                             />
                         </label>
                         <label>
@@ -261,6 +333,18 @@ export function NewEventForm()
                                 key="city" 
                                 type="text"
                                 value={event.location.city}
+                                onChange=
+                                {
+                                    (e) => setEvent(
+                                    {
+                                        ...event,
+                                        location: 
+                                        {
+                                            ...event.location,
+                                            city: e.target.value
+                                        }
+                                    })
+                                }
                             />
                         </label>
                         <label>
@@ -269,6 +353,18 @@ export function NewEventForm()
                                 key="province" 
                                 type="text"
                                 value={event.location.province}
+                                onChange=
+                                {
+                                    (e) => setEvent(
+                                    {
+                                        ...event,
+                                        location: 
+                                        {
+                                            ...event.location,
+                                            province: e.target.value
+                                        }
+                                    })
+                                }
                             />
                         </label>
                         <label>
@@ -277,6 +373,18 @@ export function NewEventForm()
                                 key="postalCode" 
                                 type="text"
                                 value={event.location.postalCode}
+                                onChange=
+                                {
+                                    (e) => setEvent(
+                                    {
+                                        ...event,
+                                        location: 
+                                        {
+                                            ...event.location,
+                                            postalCode: e.target.value
+                                        }
+                                    })
+                                }
                             />
                         </label>
                     </label>
@@ -292,6 +400,14 @@ export function NewEventForm()
                             type="number"
                             value={event.price}
                             placeholder="0.00"
+                            onChange=
+                            {
+                                (e) => setEvent(
+                                {
+                                    ...event,
+                                    price: parseInt(e.target.value)
+                                })
+                            }
                         />
                     </label>
                     <label>
@@ -301,6 +417,14 @@ export function NewEventForm()
                             type="number"
                             value={event.capacity}
                             placeholder="0"
+                            onChange=
+                            {
+                                (e) => setEvent(
+                                {
+                                    ...event,
+                                    capacity: parseInt(e.target.value)
+                                })
+                            }
                         />
                     </label>
                 </label>
@@ -313,6 +437,14 @@ export function NewEventForm()
                         <select 
                             key="category" 
                             value={event.category}
+                            onChange=
+                            {
+                                (e) => setEvent(
+                                {
+                                    ...event,
+                                    category: e.target.value
+                                })
+                            }
                         >
                             {
                                 categories.map((category) =>
@@ -330,6 +462,17 @@ export function NewEventForm()
                             key="tags" 
                             value={event.tags}
                             multiple={true}
+                            onChange=
+                            {
+                                (e) => setEvent(
+                                {
+                                    ...event,
+                                    tags: 
+                                    [
+                                        e.target.value
+                                    ]
+                                })
+                            }
                         >
                             {
                                 tags.map((tag) =>
@@ -343,6 +486,18 @@ export function NewEventForm()
                     </label>
                 </label>
             </div>
+            <button
+                onClick=
+                {
+                    (e) => 
+                    {
+                        e.preventDefault()
+                        handleSubmit(event)
+                    }
+                }
+            >
+                Submit
+            </button>
         </form>
     )
 }
