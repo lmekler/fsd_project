@@ -1,5 +1,5 @@
 import eventData from "../../../data.json"
-import { EventCard } from "./event-card/EventCard";
+import { EventCard } from "../../common/event-card/EventCard"
 import type { Event } from "../../types/Event";
 
 export function BrowseEvents()
