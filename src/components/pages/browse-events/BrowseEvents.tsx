@@ -2,6 +2,8 @@ import eventData from "../../../data.json"
 import { EventCard } from "../../common/event-card/EventCard"
 import type { Event } from "../../types/Event";
 
+import { NewEventForm } from "./new-event-form/NewEventForm";
+
 export function BrowseEvents()
 {
     const events: Event[] = eventData.events
@@ -9,6 +11,7 @@ export function BrowseEvents()
     return (
         <main className="browse-events">
             <h2>Browsing Events in Winnipeg</h2>
+            <NewEventForm/>
             {events.map((event) =>
             (
                 <EventCard key={event.title} event={event}/>
