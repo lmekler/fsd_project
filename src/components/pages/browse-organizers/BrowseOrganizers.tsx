@@ -1,5 +1,5 @@
 import type { Organizer } from "../../types/Organizer"
-import organizerData from "../../../data.json"
+import organizerData from "../../data/data.json"
 
 function Organizers() {
     const organizers: Organizer[] = organizerData.organizers
