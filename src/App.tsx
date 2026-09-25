@@ -14,21 +14,21 @@ import Organizers from './components/pages/browse-organizers/BrowseOrganizers'
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout/>}>
 
-        {/* All child pages that will have Layout as a render goes below */}
+        <Route index element={<BrowseEvents />}/>
 
-        <Route index 
-          element={<BrowseEvents />}
-        />
+        <Route path="/browse-events" element={<BrowseEvents />}>
+          <Route index element={<BrowseEvents/>}/>
+        </Route>
 
-        <Route path="/saved-events"
-          element={<SavedEvents />}
-        />
+        <Route path="/saved-events" element={<SavedEvents />}>
+          <Route index element={<SavedEvents/>}/>
+        </Route>
 
-        <Route path="/organizers"
-          element={<Organizers />}
-        />
+        <Route path="/organizers" element={<Organizers />}>
+          <Route index element={<Organizers/>}/>
+        </Route>
 
       </Route>
     </Routes>
