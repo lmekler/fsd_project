@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import "./NewEventForm.css"
+import dropdown from "../../../data/dropdown.json"
 import type { Event } from "../../../types/Event"
 import type { Location } from "../../../types/Event"
 
@@ -19,11 +20,13 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
     // helper function for updating location fields
     const updateLocation = (field: keyof Location, value: string) => 
     {
-        updateEvent("location", 
+        updateEvent(
+            "location", 
             {
                 ...event.location,
                 [field]: value
-            })
+            }
+        )
     }
 
     // default event fields
@@ -50,135 +53,6 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
             isFeatured: false,
         }
     )
-
-    // list of times the event can start/end at (in increments of 30 minutes)
-    const timeOptions = 
-    [
-        "12:00 AM",
-        "12:30 AM",
-        "1:00 AM",
-        "1:30 AM",
-        "2:00 AM",
-        "2:30 AM",
-        "3:00 AM",
-        "3:30 AM",
-        "4:00 AM",
-        "4:30 AM",
-        "5:00 AM",
-        "5:30 AM",
-        "6:00 AM",
-        "6:30 AM",
-        "7:00 AM",
-        "7:30 AM",
-        "8:00 AM",
-        "8:30 AM",
-        "9:00 AM",
-        "9:30 AM",
-        "10:00 AM",
-        "10:30 AM",
-        "11:00 AM",
-        "11:30 AM",
-        "12:00 PM",
-        "12:30 PM",
-        "1:00 PM",
-        "1:30 PM",
-        "2:00 PM",
-        "2:30 PM",
-        "3:00 PM",
-        "3:30 PM",
-        "4:00 PM",
-        "4:30 PM",
-        "5:00 PM",
-        "5:30 PM",
-        "6:00 PM",
-        "6:30 PM",
-        "7:00 PM",
-        "7:30 PM",
-        "8:00 PM",
-        "8:30 PM",
-        "9:00 PM",
-        "9:30 PM",
-        "10:00 PM",
-        "10:30 PM",
-        "11:00 PM",
-        "11:30 PM",
-    ]
-
-    // list of categories the user can choose from
-    const categories = 
-    [
-        "Social",
-        "Sports",
-        "Music",
-        "Arts & Culture",
-        "Food & Drink",
-        "Education",
-        "Business & Networking",
-        "Technology",
-        "Health & Wellness",
-        "Outdoors & Nature",
-        "Entertainment",
-        "Community",
-        "Family & Kids",
-        "Gaming",
-        "Travel",
-        "Charity & Fundraising",
-        "Religious & Spiritual",
-        "Other",
-    ]
-
-    // list of tags the user can select
-    const tags = 
-    [
-        "Free",
-        "Paid",
-        "Family Friendly",
-        "18+",
-        "All Ages",
-        "Beginner Friendly",
-        "Intermediate",
-        "Advanced",
-        "Networking",
-        "Live Music",
-        "Live Entertainment",
-        "Food",
-        "Drinks",
-        "Dancing",
-        "Workshop",
-        "Lecture",
-        "Conference",
-        "Meetup",
-        "Competition",
-        "Tournament",
-        "Fundraiser",
-        "Volunteer",
-        "Outdoor",
-        "Indoor",
-        "Virtual",
-        "In Person",
-        "Local",
-        "Community",
-        "Arts",
-        "Culture",
-        "Sports",
-        "Fitness",
-        "Gaming",
-        "Technology",
-        "Business",
-        "Education",
-        "Career",
-        "Wellness",
-        "Social",
-        "Nightlife",
-        "Festival",
-        "Concert",
-        "Exhibition",
-        "Market",
-        "Networking",
-        "Pets Welcome",
-        "Accessible",
-        "Student Friendly",
-    ]
 
     return (
         <form className="new-event-form">
@@ -233,7 +107,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             onChange={(e) => updateEvent("startTime", e.target.value)}
                         >
                             {
-                                timeOptions.map((time) =>
+                                dropdown.timeOptions.map((time) =>
                                 (
                                     <option key={time} value={time}>
                                         {time}
@@ -249,7 +123,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             onChange={(e) => updateEvent("endTime", e.target.value)}
                         >
                             {
-                                timeOptions.map((time) =>
+                                dropdown.timeOptions.map((time) =>
                                 (
                                     <option key={time} value={time}>
                                         {time}
@@ -339,7 +213,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             onChange={(e) => updateEvent("category", e.target.value)}
                         >
                             {
-                                categories.map((category) =>
+                                dropdown.categories.map((category) =>
                                 (
                                     <option key={category} value={category}>
                                         {category}
@@ -357,7 +231,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             onChange={(e) => updateEvent("tags", [e.target.value])}
                         >
                             {
-                                tags.map((tag) =>
+                                dropdown.tags.map((tag) =>
                                 (
                                     <option key={tag} value={tag}>
                                         {tag}

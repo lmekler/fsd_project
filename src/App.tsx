@@ -10,7 +10,7 @@ import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
 import SavedEvents from './components/pages/saved-events/SavedEvents'
 import Organizers from './components/pages/browse-organizers/BrowseOrganizers'
 import { useState } from 'react'
-import eventData from "./data.json"
+import eventData from "./components/data/data.json"
 
 // Type Imports
 import type { Event } from './components/types/Event'
