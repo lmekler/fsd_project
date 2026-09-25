@@ -9,9 +9,19 @@ import { Layout } from './components/common/layout/Layout'
 import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
 import SavedEvents from './components/pages/saved-events/SavedEvents'
 import Organizers from './components/pages/browse-organizers/BrowseOrganizers'
+import { useState } from 'react'
+import eventData from "./data.json"
+
+// Type Imports
+import type { Event } from './components/types/Event'
+import type { Organizer } from './components/types/Organizer'
 
 
 function App() {
+  const [events, setEvents] = useState<Event[]>(eventData.events)
+  const [savedEvents, setSavedEvents] = useState<Event[]>(eventData.savedEvents);
+  const [organizers, setOrganizers] = useState<Organizer[]>(eventData.organizers);
+
   return (
     <Routes>
       <Route path="/" element={<Layout/>}>
@@ -19,15 +29,24 @@ function App() {
         <Route index element={<BrowseEvents />}/>
 
         <Route path="/browse-events" element={<BrowseEvents />}>
-          <Route index element={<BrowseEvents/>}/>
+          <Route index element={<BrowseEvents
+              events={events}
+              setEvents={setEvents}
+            />}/>
         </Route>
 
         <Route path="/saved-events" element={<SavedEvents />}>
-          <Route index element={<SavedEvents/>}/>
+          <Route index element={<SavedEvents
+              savedEvents={savedEvents}
+              setSavedEvents={setSavedEvents}
+            />}/>
         </Route>
 
         <Route path="/organizers" element={<Organizers />}>
-          <Route index element={<Organizers/>}/>
+          <Route index element={<Organizers
+              organizers={organizers}
+              setOrganizers={setOrganizers}
+            />}/>
         </Route>
 
       </Route>
