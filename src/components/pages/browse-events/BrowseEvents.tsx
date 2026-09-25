@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import eventData from "../../../data.json"
+import eventData from "../../data/data.json"
 import { EventCard } from "../../common/event-card/EventCard"
 import type { Event } from "../../types/Event";
 
