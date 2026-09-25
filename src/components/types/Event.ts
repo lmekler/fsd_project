@@ -9,7 +9,7 @@ export interface Event
     startTime: string
     endTime?: string
     location: Location
-    image: string
+    image?: string
     capacity: number
     registeredCount: number
     price: number
@@ -18,7 +18,7 @@ export interface Event
     tags?: string[]
 }
 
-interface Location 
+export interface Location 
 {
     venue?: string;
     address: string;

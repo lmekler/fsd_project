@@ -2,9 +2,30 @@ import { useState } from "react"
 
 import "./NewEventForm.css"
 import type { Event } from "../../../types/Event"
+import type { Location } from "../../../types/Event"
 
 export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
 {
+    // helper function for updating event fields
+    const updateEvent = (field: keyof Event, value: any) => 
+    {
+        setEvent(
+        {
+            ...event,
+            [field]: value
+        })
+    }
+
+    // helper function for updating location fields
+    const updateLocation = (field: keyof Location, value: string) => 
+    {
+        updateEvent("location", 
+            {
+                ...event.location,
+                [field]: value
+            })
+    }
+
     // default event fields
     const [event, setEvent] = useState<Event>
     (
@@ -165,18 +186,10 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 <label>
                     Photo
                     <input 
-                        key="photo" 
                         type="file"
                         value={event.image}
                         accept="image/*"
-                        onChange=
-                        {
-                            (e) => setEvent(
-                            {
-                                ...event,
-                                image: e.target.value
-                            })
-                        }
+                        onChange={(e) => updateEvent("image", e.target.value)}
                     />
                 </label>
             </div>
@@ -184,18 +197,10 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 <label>
                     Event title
                     <input 
-                        key="eventTitle" 
                         type="text"
                         value={event.title}
                         placeholder="Event title"
-                        onChange=
-                        {
-                            (e) => setEvent(
-                            {
-                                ...event,
-                                title: e.target.value
-                            })
-                        }
+                        onChange={(e) => updateEvent("title", e.target.value)}
                     />
                 </label>
             </div>
@@ -203,18 +208,10 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 <label>
                     Description
                     <input 
-                        key="description" 
                         type="text"
                         value={event.description}
                         placeholder="Description"
-                        onChange=
-                        {
-                            (e) => setEvent(
-                            {
-                                ...event,
-                                description: e.target.value
-                            })
-                        }
+                        onChange={(e) => updateEvent("description", e.target.value)}
                     />
                 </label>
             </div>
@@ -224,32 +221,16 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                     <label>
                         Date
                         <input 
-                            key="date" 
                             type="date"
                             value={event.date}
-                            onChange=
-                            {
-                                (e) => setEvent(
-                                {
-                                    ...event,
-                                    date: e.target.value
-                                })
-                            }
+                            onChange={(e) => updateEvent("date", e.target.value)}
                         />
                     </label>
                     <label>
                         Start time
                         <select 
-                            key="time" 
                             value={event.startTime}
-                            onChange=
-                            {
-                                (e) => setEvent(
-                                {
-                                    ...event,
-                                    startTime: e.target.value
-                                })
-                            }
+                            onChange={(e) => updateEvent("startTime", e.target.value)}
                         >
                             {
                                 timeOptions.map((time) =>
@@ -264,16 +245,8 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                     <label>
                         End time
                         <select 
-                            key="time" 
                             value={event.endTime}
-                            onChange=
-                            {
-                                (e) => setEvent(
-                                {
-                                    ...event,
-                                    endTime: e.target.value
-                                })
-                            }
+                            onChange={(e) => updateEvent("endTime", e.target.value)}
                         >
                             {
                                 timeOptions.map((time) =>
@@ -290,101 +263,41 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                         <label>
                             Venue name
                             <input 
-                                key="venue" 
                                 type="text"
                                 value={event.location.venue}
-                                onChange=
-                                {
-                                    (e) => setEvent(
-                                    {
-                                        ...event,
-                                        location: 
-                                        {
-                                            ...event.location,
-                                            venue: e.target.value
-                                        }
-                                    })
-                                }
+                                onChange={(e) => updateLocation("venue", e.target.value)}
                             />
                         </label>
                         <label>
                             Address
                             <input 
-                                key="address" 
                                 type="text"
                                 value={event.location.address}
-                                onChange=
-                                {
-                                    (e) => setEvent(
-                                    {
-                                        ...event,
-                                        location: 
-                                        {
-                                            ...event.location,
-                                            address: e.target.value
-                                        }
-                                    })
-                                }
+                                onChange={(e) => updateLocation("address", e.target.value)}
                             />
                         </label>
                         <label>
                             City
                             <input 
-                                key="city" 
                                 type="text"
                                 value={event.location.city}
-                                onChange=
-                                {
-                                    (e) => setEvent(
-                                    {
-                                        ...event,
-                                        location: 
-                                        {
-                                            ...event.location,
-                                            city: e.target.value
-                                        }
-                                    })
-                                }
+                                onChange={(e) => updateLocation("city", e.target.value)}
                             />
                         </label>
                         <label>
                             Province
                             <input 
-                                key="province" 
                                 type="text"
                                 value={event.location.province}
-                                onChange=
-                                {
-                                    (e) => setEvent(
-                                    {
-                                        ...event,
-                                        location: 
-                                        {
-                                            ...event.location,
-                                            province: e.target.value
-                                        }
-                                    })
-                                }
+                                onChange={(e) => updateLocation("province", e.target.value)}
                             />
                         </label>
                         <label>
                             Postal Code
                             <input 
-                                key="postalCode" 
                                 type="text"
                                 value={event.location.postalCode}
-                                onChange=
-                                {
-                                    (e) => setEvent(
-                                    {
-                                        ...event,
-                                        location: 
-                                        {
-                                            ...event.location,
-                                            postalCode: e.target.value
-                                        }
-                                    })
-                                }
+                                onChange={(e) => updateLocation("postalCode", e.target.value)}
                             />
                         </label>
                     </label>
@@ -400,14 +313,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             type="number"
                             value={event.price}
                             placeholder="0.00"
-                            onChange=
-                            {
-                                (e) => setEvent(
-                                {
-                                    ...event,
-                                    price: parseInt(e.target.value)
-                                })
-                            }
+                            onChange={(e) => updateEvent("price", e.target.value)}
                         />
                     </label>
                     <label>
@@ -417,14 +323,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             type="number"
                             value={event.capacity}
                             placeholder="0"
-                            onChange=
-                            {
-                                (e) => setEvent(
-                                {
-                                    ...event,
-                                    capacity: parseInt(e.target.value)
-                                })
-                            }
+                            onChange={(e) => updateEvent("capacity", parseInt(e.target.value))}
                         />
                     </label>
                 </label>
@@ -437,14 +336,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                         <select 
                             key="category" 
                             value={event.category}
-                            onChange=
-                            {
-                                (e) => setEvent(
-                                {
-                                    ...event,
-                                    category: e.target.value
-                                })
-                            }
+                            onChange={(e) => updateEvent("category", e.target.value)}
                         >
                             {
                                 categories.map((category) =>
@@ -462,17 +354,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             key="tags" 
                             value={event.tags}
                             multiple={true}
-                            onChange=
-                            {
-                                (e) => setEvent(
-                                {
-                                    ...event,
-                                    tags: 
-                                    [
-                                        e.target.value
-                                    ]
-                                })
-                            }
+                            onChange={(e) => updateEvent("tags", [e.target.value])}
                         >
                             {
                                 tags.map((tag) =>
