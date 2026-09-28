@@ -7,36 +7,43 @@ import { toCamelCase, toCapitalized, toKebabCase, toTitle } from "../../../commo
 
 function FieldInput(
     {
-        field, 
+        className,
+        label,
         type, 
+        name,
         value, 
         onChange, 
-        extraFields
+        extraFields,
+        errorField
     } : {
-        field: string, 
+        className: string,
+        label: string,
         type: string, 
+        name: string,
         value?: string, 
         onChange: (e: any) => void, 
         extraFields?: React.InputHTMLAttributes<HTMLInputElement>
+        errorField?: React.ReactNode
     })
 {
-    const className = field.toLowerCase().replace(" ", "-")
-    
     return (
         <div>
             <label className={className}>
-                {field}
+                {label}
                 <input 
                     type={type}
+                    name={name}
                     value={value}
-                    placeholder= {field}
+                    placeholder= {label}
                     onChange={onChange}
                     {...extraFields}
                 />
             </label>
+            <span>{errorField}</span>
         </div>
     )
 }
+
 export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
 {
     // default event fields
