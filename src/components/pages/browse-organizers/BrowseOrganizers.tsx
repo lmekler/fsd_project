@@ -1,6 +1,6 @@
 import { useState } from "react"
 import type { Organizer } from "../../types/Organizer"
-import { provinces } from "../../types/Provinces";
+import { provinces } from "../../types/Province";
 
 function Organizers({
         organizers,
@@ -23,6 +23,15 @@ function Organizers({
             country: 'Canada'
         }
     });
+
+    const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+        const {name, value} = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    }
 
     const organizerListItem = organizers.map(organizer => {
         return <section className="organizer" key={organizer.id}>
