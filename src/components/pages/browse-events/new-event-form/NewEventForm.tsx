@@ -7,63 +7,45 @@ import type { Location } from "../../../types/Event"
 
 function FieldInput(
     {
-        field, 
+        className,
+        label,
         type, 
+        name,
         value, 
         onChange, 
-        extraFields
+        extraFields,
+        errorField
     } : {
-        field: string, 
+        className: string,
+        label: string,
         type: string, 
+        name: string,
         value?: string, 
         onChange: (e: any) => void, 
         extraFields?: React.InputHTMLAttributes<HTMLInputElement>
+        errorField?: React.ReactNode
     })
 {
-    const className = field.toLowerCase().replace(" ", "-")
-    
     return (
         <div>
             <label className={className}>
-                {field}
+                {label}
                 <input 
                     type={type}
+                    name={name}
                     value={value}
-                    placeholder= {field}
+                    placeholder= {label}
                     onChange={onChange}
                     {...extraFields}
                 />
             </label>
+            <span>{errorField}</span>
         </div>
     )
 }
+
 export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
 {
-    // helper function for updating event fields
-    const updateEvent = (field: keyof Event, value: any) => 
-    {
-        if (!validate(true, field, value))
-        {
-            setEvent(
-            {
-                ...event,
-                [field]: value
-            })
-        }
-    }
-
-    // helper function for updating location fields
-    const updateLocation = (field: keyof Location, value: string) => 
-    {
-        updateEvent(
-            "location", 
-            {
-                ...event.location,
-                [field]: value
-            }
-        )
-    }
-
     // default event fields
     const [event, setEvent] = useState<Event>
     (
@@ -89,12 +71,111 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         }
     )
 
+    // fields that require validation
+    interface Errors   
+    {
+        image?: string
+        title?: string
+        description?: string
+        date?: string
+        address?: string
+        city?: string
+        province?: string
+        postalCode?: string
+    }
+
+    const [errors, setErrors] = useState<Errors>({})
+
+    // sets error messages for invalid inputs and 
+    // returns whether the inputs are all valid or not
+    const formIsValid = (): boolean =>
+    {
+        let errors: Errors = {}
+
+        if (!event.image)
+        {
+            errors.image = "Image is required."
+        }
+        
+        if (!event.title) 
+        {
+            errors.title = "Title is required."
+        } 
+        
+        if (event.description && event.description.length >= 500) {
+            errors.description = "Description cannot exceed 500 characters."
+        }
+
+        if (!event.date) 
+        {
+            errors.date = "Date is required."
+        }
+        else if (new Date(event.date) < new Date)
+        {
+            errors.date = "Date must be in the future."
+        }
+
+        if (!event.location.address) 
+        {
+            errors.address = "Address is required."
+        }
+
+        if (!event.location.city) 
+        {
+            errors.city = "City is required."
+        }
+
+        if (!event.location.province) 
+        {
+            errors.province = "Province is required."
+        }
+
+        if (!event.location.postalCode) 
+        {
+            errors.postalCode = "Postal code is required."
+        }
+
+        setErrors(errors);
+        
+        return (Object.keys(errors).length === 0)
+    }
+
+    // updates the event with user input
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => 
+    {
+        const { name, value } = e.target
+
+        if (name in Location)
+        {
+            setEvent(
+            {
+                ...event,
+                "location": 
+                {
+                    ...event.location,
+                    [name]: value
+                }
+            })
+        }
+        else
+        {
+            setEvent(
+            {
+                ...event,
+                [name]: value
+            })
+        }
+    }
+
+
     return (
         <form className="new-event-form">
             <FieldInput 
-                field="Event title" 
+                className="image"
+                label="Image" 
                 type="file" 
-                onChange={(e) => updateEvent("image", e.target.value)}
+                name="image"
+                onChange={(e) => handleChange(e)}
                 extraFields={
                     {
                         accept: "image/*"
@@ -102,24 +183,33 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 }
             />
             <FieldInput 
-                field="Event title" 
+                className="title"
+                label="Title" 
                 type="text" 
+                name="title"
                 value={event.title} 
-                onChange={(e) => updateEvent("title", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                errorField={errors.title}
             />
             <FieldInput 
-                field="Description"
+                className="description"
+                label="Description"
                 type="text" 
+                name="description"
                 value={event.description || ""} 
-                onChange={(e) => updateEvent("description", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                errorField={errors.description}
             />
             <FieldInput 
-                field="Date"
+                className="date"
+                label="Date"
                 type="date" 
+                name="date"
                 value={event.date} 
-                onChange={(e) => updateEvent("date", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                errorField={errors.date}
             />
-            <label>
+            {/* <label>
                 Start time
                 <select 
                     value={event.startTime}
@@ -150,50 +240,78 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                         ))   
                     }
                 </select>
-            </label>
+            </label> */}
             <FieldInput 
-                field="Venue"
+                className="venue"
+                label="Venue"
                 type="text" 
+                name="venue"
                 value={event.location.venue || ""} 
-                onChange={(e) => updateLocation("venue", e.target.value)}
+                onChange={(e) => handleChange(e)}
             />
             <FieldInput 
-                field="Address"
+                className="address"
+                label="Address"
                 type="text" 
+                name="address"
                 value={event.location.address} 
-                onChange={(e) => updateLocation("address", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                errorField={errors.address}
             />
-            <FieldInput 
-                field="City"
+            <FieldInput
+                className="city"
+                label="City"
                 type="text" 
+                name="city"
                 value={event.location.city} 
-                onChange={(e) => updateLocation("city", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                errorField={errors.city}
             />
             <FieldInput 
-                field="Province"
+                className="province"
+                label="Province"
                 type="text" 
+                name="province"
                 value={event.location.province} 
-                onChange={(e) => updateLocation("province", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                errorField={errors.province}
             />
              <FieldInput 
-                field="Postal Code"
+                className="postal-code"
+                label="Postal Code"
                 type="text" 
+                name="postalCode"
                 value={event.location.postalCode} 
-                onChange={(e) => updateLocation("postalCode", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                errorField={errors.postalCode}
             />
             <FieldInput 
-                field="Price"
+                className="price"
+                label="Price"
+                name="price"
                 type="number" 
                 value={event.price.toString() || "0"} 
-                onChange={(e) => updateEvent("price", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                extraFields={
+                    {
+                        min: 0
+                    }
+                }
             />
             <FieldInput 
-                field="Capacity"
-                type="capacity" 
+                className="capacity"
+                label="Capacity"
+                type="number" 
+                name="capacity"
                 value={event.capacity.toString() || "0"} 
-                onChange={(e) => updateEvent("capacity", e.target.value)}
+                onChange={(e) => handleChange(e)}
+                extraFields={
+                    {
+                        min: 0
+                    }
+                }
             />
-            <div>
+            {/* <div>
                 <label className="extra-info">
                     Extra information
                     <label className="category">
@@ -232,14 +350,17 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                         </select>
                     </label>
                 </label>
-            </div>
+            </div> */}
             <button
                 onClick=
                 {
                     (e) => 
                     {
                         e.preventDefault()
-                        handleSubmit(event)
+                        if (formIsValid())
+                        {
+                            handleSubmit(event)
+                        }
                     }
                 }
             >
