@@ -5,6 +5,38 @@ import dropdown from "../../../data/dropdown.json"
 import type { Event } from "../../../types/Event"
 import { toCamelCase, toCapitalized, toKebabCase, toTitle } from "../../../common/stringUtils"
 
+function FieldInput(
+    {
+        field, 
+        type, 
+        value, 
+        onChange, 
+        extraFields
+    } : {
+        field: string, 
+        type: string, 
+        value?: string, 
+        onChange: (e: any) => void, 
+        extraFields?: React.InputHTMLAttributes<HTMLInputElement>
+    })
+{
+    const className = field.toLowerCase().replace(" ", "-")
+    
+    return (
+        <div>
+            <label className={className}>
+                {field}
+                <input 
+                    type={type}
+                    value={value}
+                    placeholder= {field}
+                    onChange={onChange}
+                    {...extraFields}
+                />
+            </label>
+        </div>
+    )
+}
 export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
 {
     // default event fields
