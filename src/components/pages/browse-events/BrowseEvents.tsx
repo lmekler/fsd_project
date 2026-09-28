@@ -15,8 +15,8 @@ export function BrowseEvents()
         setEvents(events =>
         (
             [
-                ...events,
-                event
+                event,
+                ...events
             ]
         ))
     }

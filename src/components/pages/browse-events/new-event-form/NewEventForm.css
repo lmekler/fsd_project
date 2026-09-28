@@ -1,0 +1,62 @@
+.new-event-form
+{
+    padding: 1em;
+}
+
+.new-event-form > div
+{
+    border: 1px solid red;
+}
+
+.new-event-form > div
+{
+    padding: 0.5em;
+}
+
+.date-time > label
+{
+    padding: 0.5em 0;
+}
+
+.location > label
+{
+    padding: 0.5em 0;
+}
+
+.date-time
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.location
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-info
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-info > label
+{
+    padding: 0.5em 0;
+}
+
+
+.extra-info
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.extra-info > label
+{
+    padding: 0.5em 0;
+}
+
+
+
