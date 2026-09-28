@@ -5,16 +5,51 @@ import dropdown from "../../../data/dropdown.json"
 import type { Event } from "../../../types/Event"
 import type { Location } from "../../../types/Event"
 
+function FieldInput(
+    {
+        field, 
+        type, 
+        value, 
+        onChange, 
+        extraFields
+    } : {
+        field: string, 
+        type: string, 
+        value?: string, 
+        onChange: (e: any) => void, 
+        extraFields?: React.InputHTMLAttributes<HTMLInputElement>
+    })
+{
+    const className = field.toLowerCase().replace(" ", "-")
+    
+    return (
+        <div>
+            <label className={className}>
+                {field}
+                <input 
+                    type={type}
+                    value={value}
+                    placeholder= {field}
+                    onChange={onChange}
+                    {...extraFields}
+                />
+            </label>
+        </div>
+    )
+}
 export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
 {
     // helper function for updating event fields
     const updateEvent = (field: keyof Event, value: any) => 
     {
-        setEvent(
+        if (!validate(true, field, value))
         {
-            ...event,
-            [field]: value
-        })
+            setEvent(
+            {
+                ...event,
+                [field]: value
+            })
+        }
     }
 
     // helper function for updating location fields
@@ -56,156 +91,112 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
 
     return (
         <form className="new-event-form">
-            <div className="photo">
-                <label>
-                    Photo
-                    <input 
-                        type="file"
-                        value={event.image}
-                        accept="image/*"
-                        onChange={(e) => updateEvent("image", e.target.value)}
-                    />
-                </label>
-            </div>
-            <div className="event-title">
-                <label>
-                    Event title
-                    <input 
-                        type="text"
-                        value={event.title}
-                        placeholder="Event title"
-                        onChange={(e) => updateEvent("title", e.target.value)}
-                    />
-                </label>
-            </div>
-            <div className="description">
-                <label>
-                    Description
-                    <input 
-                        type="text"
-                        value={event.description}
-                        placeholder="Description"
-                        onChange={(e) => updateEvent("description", e.target.value)}
-                    />
-                </label>
-            </div>
-            <div className="date-time">
-                <label>
-                    Date and location
-                    <label>
-                        Date
-                        <input 
-                            type="date"
-                            value={event.date}
-                            onChange={(e) => updateEvent("date", e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Start time
-                        <select 
-                            value={event.startTime}
-                            onChange={(e) => updateEvent("startTime", e.target.value)}
-                        >
-                            {
-                                dropdown.timeOptions.map((time) =>
-                                (
-                                    <option key={time} value={time}>
-                                        {time}
-                                    </option>
-                                ))   
-                            }
-                        </select>
-                    </label>
-                    <label>
-                        End time
-                        <select 
-                            value={event.endTime}
-                            onChange={(e) => updateEvent("endTime", e.target.value)}
-                        >
-                            {
-                                dropdown.timeOptions.map((time) =>
-                                (
-                                    <option key={time} value={time}>
-                                        {time}
-                                    </option>
-                                ))   
-                            }
-                        </select>
-                    </label>
-                    <label>
-                        Location
-                        <label>
-                            Venue name
-                            <input 
-                                type="text"
-                                value={event.location.venue}
-                                onChange={(e) => updateLocation("venue", e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Address
-                            <input 
-                                type="text"
-                                value={event.location.address}
-                                onChange={(e) => updateLocation("address", e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            City
-                            <input 
-                                type="text"
-                                value={event.location.city}
-                                onChange={(e) => updateLocation("city", e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Province
-                            <input 
-                                type="text"
-                                value={event.location.province}
-                                onChange={(e) => updateLocation("province", e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Postal Code
-                            <input 
-                                type="text"
-                                value={event.location.postalCode}
-                                onChange={(e) => updateLocation("postalCode", e.target.value)}
-                            />
-                        </label>
-                    </label>
-                </label>
-            </div>
-            <div className="ticket-info">
-                <label>
-                    Ticket information
-                    <label>
-                        Price
-                        <input 
-                            key="price" 
-                            type="number"
-                            value={event.price}
-                            placeholder="0.00"
-                            onChange={(e) => updateEvent("price", e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Capacity
-                        <input 
-                            key="capacity" 
-                            type="number"
-                            value={event.capacity}
-                            placeholder="0"
-                            onChange={(e) => updateEvent("capacity", parseInt(e.target.value))}
-                        />
-                    </label>
-                </label>
-            </div>
-            <div className="extra-info">
-                <label>
+            <FieldInput 
+                field="Event title" 
+                type="file" 
+                onChange={(e) => updateEvent("image", e.target.value)}
+                extraFields={
+                    {
+                        accept: "image/*"
+                    }
+                }
+            />
+            <FieldInput 
+                field="Event title" 
+                type="text" 
+                value={event.title} 
+                onChange={(e) => updateEvent("title", e.target.value)}
+            />
+            <FieldInput 
+                field="Description"
+                type="text" 
+                value={event.description || ""} 
+                onChange={(e) => updateEvent("description", e.target.value)}
+            />
+            <FieldInput 
+                field="Date"
+                type="date" 
+                value={event.date} 
+                onChange={(e) => updateEvent("date", e.target.value)}
+            />
+            <label>
+                Start time
+                <select 
+                    value={event.startTime}
+                    onChange={(e) => updateEvent("startTime", e.target.value)}
+                >
+                    {
+                        dropdown.timeOptions.map((time) =>
+                        (
+                            <option key={time} value={time}>
+                                {time}
+                            </option>
+                        ))   
+                    }
+                </select>
+            </label>
+            <label>
+                End time
+                <select 
+                    value={event.endTime}
+                    onChange={(e) => updateEvent("endTime", e.target.value)}
+                >
+                    {
+                        dropdown.timeOptions.map((time) =>
+                        (
+                            <option key={time} value={time}>
+                                {time}
+                            </option>
+                        ))   
+                    }
+                </select>
+            </label>
+            <FieldInput 
+                field="Venue"
+                type="text" 
+                value={event.location.venue || ""} 
+                onChange={(e) => updateLocation("venue", e.target.value)}
+            />
+            <FieldInput 
+                field="Address"
+                type="text" 
+                value={event.location.address} 
+                onChange={(e) => updateLocation("address", e.target.value)}
+            />
+            <FieldInput 
+                field="City"
+                type="text" 
+                value={event.location.city} 
+                onChange={(e) => updateLocation("city", e.target.value)}
+            />
+            <FieldInput 
+                field="Province"
+                type="text" 
+                value={event.location.province} 
+                onChange={(e) => updateLocation("province", e.target.value)}
+            />
+             <FieldInput 
+                field="Postal Code"
+                type="text" 
+                value={event.location.postalCode} 
+                onChange={(e) => updateLocation("postalCode", e.target.value)}
+            />
+            <FieldInput 
+                field="Price"
+                type="number" 
+                value={event.price.toString() || "0"} 
+                onChange={(e) => updateEvent("price", e.target.value)}
+            />
+            <FieldInput 
+                field="Capacity"
+                type="capacity" 
+                value={event.capacity.toString() || "0"} 
+                onChange={(e) => updateEvent("capacity", e.target.value)}
+            />
+            <div>
+                <label className="extra-info">
                     Extra information
-                    <label>
+                    <label className="category">
                         Category
                         <select 
                             key="category" 
@@ -222,7 +213,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             }
                         </select>
                     </label>
-                    <label>
+                    <label className="tags">
                         Tags
                         <select 
                             key="tags" 
