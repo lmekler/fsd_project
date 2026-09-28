@@ -42,7 +42,7 @@ function App() {
             />}/>
         </Route>
 
-        <Route path="/organizers" element={<Organizers />}>
+        <Route path="/organizers">
           <Route index element={<Organizers
               organizers={organizers}
               setOrganizers={setOrganizers}
