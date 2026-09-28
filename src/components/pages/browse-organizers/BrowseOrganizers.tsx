@@ -63,30 +63,28 @@ function Organizers({
                 <hr />
                 <label>
                     Website:
-                    <input name="website">
+                    <input name="website" />
                 </label>
                 <label>
                     Email:
-                    <input name="email">
+                    <input name="email" />
                 </label>
                 <label>
                     Phone Number:
-                    <input name="phone">
+                    <input name="phone" />
                 </label>
                 <hr />
                 <p>Location:</p>
                 <label>
                     City:
-                    <input name="city">
+                    <input name="city" />
                 </label>
                 <label>
                     Province:
                     <select name="province" id="province" value={formData.location.province}>
-                        {provinces.array.forEach(p => {
-                            return (
-                                <option key={p} value={p}>{p}</option>
-                            )
-                        });
+                        {provinces.map(p => {
+                            return <option key={p} value={p}>{p}</option>
+                        })};
                     </select>
                 </label>
                 <hr />
