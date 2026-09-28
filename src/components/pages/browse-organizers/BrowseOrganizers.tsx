@@ -1,4 +1,6 @@
+import { useState } from "react"
 import type { Organizer } from "../../types/Organizer"
+import { provinces } from "../../types/Provinces";
 
 function Organizers({
         organizers,
@@ -8,6 +10,19 @@ function Organizers({
         organizers: Organizer[],
         setOrganizers: React.Dispatch<React.SetStateAction<Organizer[]>>
     }) {
+
+    const [formData, setFormData] = useState({
+        name: '',
+        description: '',
+        website: '',
+        email: '',
+        phone: '',
+        location: {
+            city: '',
+            province: 'Manitoba',
+            country: 'Canada'
+        }
+    });
 
     const organizerListItem = organizers.map(organizer => {
         return <section className="organizer" key={organizer.id}>
@@ -19,7 +34,6 @@ function Organizers({
             <p className="location" key={organizer.id + "location"}>Location: {organizer.location.city}, {organizer.location.province}</p>
         </section>
     })
-
     
     return (
         <section className="organizers">
@@ -42,13 +56,35 @@ function Organizers({
                     Website:
                     <input name="website">
                 </label>
+                <label>
+                    Email:
+                    <input name="email">
+                </label>
+                <label>
+                    Phone Number:
+                    <input name="phone">
+                </label>
+                <hr />
+                <p>Location:</p>
+                <label>
+                    City:
+                    <input name="city">
+                </label>
+                <label>
+                    Province:
+                    <select name="province" id="province" value={formData.location.province}>
+                        {provinces.array.forEach(p => {
+                            return (
+                                <option key={p} value={p}>{p}</option>
+                            )
+                        });
+                    </select>
+                </label>
                 <hr />
                 <button type="submit">Add Organizer</button>
             </form>
         </section>
     );
 }
-
-
 
 export default Organizers;
