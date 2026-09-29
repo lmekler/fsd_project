@@ -7,19 +7,15 @@ import { toCamelCase, toCapitalized, toKebabCase, toTitle } from "../../../commo
 
 function FieldInput(
     {
-        className,
-        label,
+        field,
         type, 
-        name,
         value, 
         onChange, 
         extraFields,
         errorField
     } : {
-        className: string,
-        label: string,
+        field: string,
         type: string, 
-        name: string,
         value?: string, 
         onChange: (e: any) => void, 
         extraFields?: React.InputHTMLAttributes<HTMLInputElement>
@@ -28,13 +24,13 @@ function FieldInput(
 {
     return (
         <div>
-            <label className={className}>
-                {label}
+            <label className={toKebabCase(field)}>
+                {toTitle(field)}
                 <input 
                     type={type}
-                    name={name}
+                    name={toCamelCase(field)}
                     value={value}
-                    placeholder= {label}
+                    placeholder= {toCapitalized(field)}
                     onChange={onChange}
                     {...extraFields}
                 />
