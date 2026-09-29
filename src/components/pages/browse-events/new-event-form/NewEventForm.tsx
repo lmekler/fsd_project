@@ -21,7 +21,8 @@ function FieldInput(
         onChange: (e: any) => void, 
         extraFields?: React.InputHTMLAttributes<HTMLInputElement>
         errorField?: React.ReactNode
-    })
+    }
+)
 {
     return (
         <div>
@@ -38,6 +39,40 @@ function FieldInput(
             </label>
             <span>{errorField}</span>
         </div>
+    )
+}
+
+function FieldSelect(
+    {
+        field,
+        value,
+        onChange,
+        dropdown
+    } : {
+        field: string,
+        value?: string,
+        onChange: (e: any) => void,
+        dropdown: string[]
+    }
+)
+{
+    return (
+        <label>
+            {toTitle(field)}
+            <select 
+                value={value}
+                onChange={onChange}
+            >
+                {
+                    dropdown.map((value) =>
+                    (
+                        <option key={value} value={value}>
+                            {value}
+                        </option>
+                    ))   
+                }
+            </select>
+        </label>
     )
 }
 
@@ -164,7 +199,6 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         }
     }
 
-
     return (
         <form className="new-event-form">
             <FieldInput 
@@ -195,41 +229,21 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 field="date"
                 type="date"
                 value={event.date} 
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => (handleChange(e))}
                 errorField={errors.date}
             />
-            {/* <label>
-                Start time
-                <select 
-                    value={event.startTime}
-                    onChange={(e) => updateEvent("startTime", e.target.value)}
-                >
-                    {
-                        dropdown.timeOptions.map((time) =>
-                        (
-                            <option key={time} value={time}>
-                                {time}
-                            </option>
-                        ))   
-                    }
-                </select>
-            </label>
-            <label>
-                End time
-                <select 
-                    value={event.endTime}
-                    onChange={(e) => updateEvent("endTime", e.target.value)}
-                >
-                    {
-                        dropdown.timeOptions.map((time) =>
-                        (
-                            <option key={time} value={time}>
-                                {time}
-                            </option>
-                        ))   
-                    }
-                </select>
-            </label> */}
+            <FieldSelect
+                field="start time"
+                value={event.startTime}
+                onChange={(e) => (handleChange(e))}
+                dropdown={dropdown.timeOptions}
+            />
+            <FieldSelect
+                field="end time"
+                value={event.endTime}
+                onChange={(e) => (handleChange(e))}
+                dropdown={dropdown.timeOptions}
+            />
             <FieldInput 
                 field="venue"
                 type="text"
@@ -286,46 +300,12 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                     }
                 }
             />
-            {/* <div>
-                <label className="extra-info">
-                    Extra information
-                    <label className="category">
-                        Category
-                        <select 
-                            key="category" 
-                            value={event.category}
-                            onChange={(e) => updateEvent("category", e.target.value)}
-                        >
-                            {
-                                dropdown.categories.map((category) =>
-                                (
-                                    <option key={category} value={category}>
-                                        {category}
-                                    </option>
-                                ))   
-                            }
-                        </select>
-                    </label>
-                    <label className="tags">
-                        Tags
-                        <select 
-                            key="tags" 
-                            value={event.tags}
-                            multiple={true}
-                            onChange={(e) => updateEvent("tags", [e.target.value])}
-                        >
-                            {
-                                dropdown.tags.map((tag) =>
-                                (
-                                    <option key={tag} value={tag}>
-                                        {tag}
-                                    </option>
-                                ))   
-                            }
-                        </select>
-                    </label>
-                </label>
-            </div> */}
+            <FieldSelect
+                field="category"
+                value={event.category}
+                onChange={(e) => (handleChange(e))}
+                dropdown={dropdown.categories}
+            />
             <button
                 onClick=
                 {
