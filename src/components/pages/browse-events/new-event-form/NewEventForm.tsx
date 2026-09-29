@@ -20,7 +20,8 @@ function FieldInput(
         onChange: (e: any) => void, 
         extraFields?: React.InputHTMLAttributes<HTMLInputElement>
         errorField?: React.ReactNode
-    })
+    }
+)
 {
     return (
         <div>
@@ -37,6 +38,40 @@ function FieldInput(
             </label>
             <span>{errorField}</span>
         </div>
+    )
+}
+
+function FieldSelect(
+    {
+        field,
+        value,
+        onChange,
+        dropdown
+    } : {
+        field: string,
+        value?: string,
+        onChange: (e: any) => void,
+        dropdown: string[]
+    }
+)
+{
+    return (
+        <label>
+            {toTitle(field)}
+            <select 
+                value={value}
+                onChange={onChange}
+            >
+                {
+                    dropdown.map((value) =>
+                    (
+                        <option key={value} value={value}>
+                            {value}
+                        </option>
+                    ))   
+                }
+            </select>
+        </label>
     )
 }
 
