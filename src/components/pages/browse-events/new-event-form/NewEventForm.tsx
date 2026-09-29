@@ -4,22 +4,19 @@ import "./NewEventForm.css"
 import dropdown from "../../../data/dropdown.json"
 import type { Event } from "../../../types/Event"
 import type { Location } from "../../../types/Event"
+import { toCamelCase, toCapitalized, toKebabCase, toTitle } from "../../../common/stringUtils"
 
 function FieldInput(
     {
-        className,
-        label,
+        field,
         type, 
-        name,
         value, 
         onChange, 
         extraFields,
         errorField
     } : {
-        className: string,
-        label: string,
+        field: string,
         type: string, 
-        name: string,
         value?: string, 
         onChange: (e: any) => void, 
         extraFields?: React.InputHTMLAttributes<HTMLInputElement>
@@ -28,13 +25,13 @@ function FieldInput(
 {
     return (
         <div>
-            <label className={className}>
-                {label}
+            <label className={toKebabCase(field)}>
+                {toTitle(field)}
                 <input 
                     type={type}
-                    name={name}
+                    name={toCamelCase(field)}
                     value={value}
-                    placeholder= {label}
+                    placeholder= {toCapitalized(field)}
                     onChange={onChange}
                     {...extraFields}
                 />
@@ -171,10 +168,8 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
     return (
         <form className="new-event-form">
             <FieldInput 
-                className="image"
-                label="Image" 
+                field="image"
                 type="file" 
-                name="image"
                 onChange={(e) => handleChange(e)}
                 extraFields={
                     {
@@ -183,28 +178,22 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 }
             />
             <FieldInput 
-                className="title"
-                label="Title" 
+                field="title"
                 type="text" 
-                name="title"
                 value={event.title} 
                 onChange={(e) => handleChange(e)}
                 errorField={errors.title}
             />
             <FieldInput 
-                className="description"
-                label="Description"
+                field="description"
                 type="text" 
-                name="description"
                 value={event.description || ""} 
                 onChange={(e) => handleChange(e)}
                 errorField={errors.description}
             />
             <FieldInput 
-                className="date"
-                label="Date"
-                type="date" 
-                name="date"
+                field="date"
+                type="date"
                 value={event.date} 
                 onChange={(e) => handleChange(e)}
                 errorField={errors.date}
@@ -242,53 +231,41 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 </select>
             </label> */}
             <FieldInput 
-                className="venue"
-                label="Venue"
-                type="text" 
-                name="venue"
+                field="venue"
+                type="text"
                 value={event.location.venue || ""} 
                 onChange={(e) => handleChange(e)}
             />
             <FieldInput 
-                className="address"
-                label="Address"
-                type="text" 
-                name="address"
+                field="address"
+                type="text"
                 value={event.location.address} 
                 onChange={(e) => handleChange(e)}
                 errorField={errors.address}
             />
             <FieldInput
-                className="city"
-                label="City"
-                type="text" 
-                name="city"
+                field="city"
+                type="text"
                 value={event.location.city} 
                 onChange={(e) => handleChange(e)}
                 errorField={errors.city}
             />
             <FieldInput 
-                className="province"
-                label="Province"
-                type="text" 
-                name="province"
+                field="province"
+                type="text"
                 value={event.location.province} 
                 onChange={(e) => handleChange(e)}
                 errorField={errors.province}
             />
              <FieldInput 
-                className="postal-code"
-                label="Postal Code"
-                type="text" 
-                name="postalCode"
+                field="postal code"
+                type="text"
                 value={event.location.postalCode} 
                 onChange={(e) => handleChange(e)}
                 errorField={errors.postalCode}
             />
             <FieldInput 
-                className="price"
-                label="Price"
-                name="price"
+                field="price"
                 type="number" 
                 value={event.price.toString() || "0"} 
                 onChange={(e) => handleChange(e)}
@@ -299,10 +276,8 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 }
             />
             <FieldInput 
-                className="capacity"
-                label="Capacity"
-                type="number" 
-                name="capacity"
+                field="capacity"
+                type="number"
                 value={event.capacity.toString() || "0"} 
                 onChange={(e) => handleChange(e)}
                 extraFields={
