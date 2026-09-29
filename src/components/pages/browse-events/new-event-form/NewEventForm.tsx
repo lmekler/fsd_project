@@ -177,7 +177,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
     {
         const { name, value } = e.target
 
-        if (name in Location)
+        if (name in event.location)
         {
             setEvent(
             {
@@ -306,6 +306,23 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                 onChange={(e) => (handleChange(e))}
                 dropdown={dropdown.categories}
             />
+            <label>
+                Tags
+                {
+                    dropdown.tags.map((value) =>
+                    (
+                        <label>
+                            {value}
+                            <input 
+                                type="checkbox" 
+                                name={value} 
+                                value={value}
+                                onChange={(e) => handleChange(e)}
+                            />
+                        </label>
+                    ))   
+                }
+            </label>
             <button
                 onClick=
                 {
