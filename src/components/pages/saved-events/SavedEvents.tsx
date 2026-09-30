@@ -26,7 +26,10 @@ export default function SavedEvents({
     const filteredEvents: Event[] = savedEvents.filter((event) => {
 
         // Check if there is any filtering submitted from forms
-        const searchMatches: boolean = event.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const searchMatches: boolean = 
+            searchTerm === "" ||
+            event.title.toLowerCase().includes(searchTerm.toLowerCase());
+        
         const categoryMatches: boolean = categoryFilters === "" || event.category === categoryFilters;
         
         return searchMatches && categoryMatches;
