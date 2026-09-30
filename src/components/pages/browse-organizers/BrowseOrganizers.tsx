@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type JSX } from "react"
 import type { Organizer } from "../../types/Organizer"
 import { provinces } from "../../types/Province";
 
@@ -67,14 +67,10 @@ function Organizers({
             }
         }
 
-        setOrganizers(prevOrganizers => 
-            prevOrganizers.map(o => {
-                return {
-                    ...o,
-                    newOrganizer
-                };
-            })
-        )
+        setOrganizers(prevOrganizers => [
+            ...prevOrganizers,
+            newOrganizer
+        ])
 
         setFormData({
             name: '',
@@ -90,7 +86,7 @@ function Organizers({
         });
     }
 
-    const organizerListItem = organizers.map(organizer => {
+    const organizerListItem: JSX.Element[] = organizers.map(organizer => {
         return <section className="organizer" key={organizer.id}>
             <h3 className="name" key={organizer.id + "name"}>{organizer.name}</h3>
             <p className="description" key={organizer.id + "description"}>{organizer.description}</p>
