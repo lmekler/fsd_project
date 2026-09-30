@@ -1,7 +1,7 @@
 import Button from "../../../common/button/Button";
 
 interface CategoryFormProps {
-    categories: string[]
+    categories: (string | undefined)[]
     onCategoryFilter: (category: string) => void;
 }
 
