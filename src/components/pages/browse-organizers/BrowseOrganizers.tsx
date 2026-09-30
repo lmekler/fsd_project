@@ -34,10 +34,20 @@ function Organizers({
     const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
         const {name, value} = e.target;
 
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value
-        }));
+        if (name === "city" || name === "province") {
+            setFormData(prev => ({
+                ...prev,
+                location: {
+                    ...prev.location,
+                    [name]: value
+                }
+            }));
+        } else {
+            setFormData((prev) => ({
+                ...prev,
+                [name]: value
+            }));
+        }
     }
 
     const handleAddOrganizer = (e: React.FormEvent<HTMLFormElement>) => {
