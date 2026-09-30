@@ -24,6 +24,13 @@ function Organizers({
         }
     });
 
+    function GenerateId () {
+        const prefix: string = "org-";
+        const zerosNeeded: number = Math.max(0, 3 - organizers.length.toString().length);
+
+        return prefix + "0".repeat(zerosNeeded) + (organizers.length + 1).toString();
+    }
+
     const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
         const {name, value} = e.target;
 
@@ -31,6 +38,46 @@ function Organizers({
             ...prev,
             [name]: value
         }));
+    }
+
+    const handleAddOrganizer = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const newOrganizer: Organizer = {
+            id: GenerateId(),
+            name: formData.name,
+            description: formData.description,
+            website: formData.website,
+            email: formData.email,
+            phone: formData.phone,
+            location: {
+                city: formData.location.city,
+                province: formData.location.province,
+                country: formData.location.country
+            }
+        }
+
+        setOrganizers(prevOrganizers => 
+            prevOrganizers.map(o => {
+                return {
+                    ...o,
+                    newOrganizer
+                };
+            })
+        )
+
+        setFormData({
+            name: '',
+            description: '',
+            website: '',
+            email: '',
+            phone: '',
+            location: {
+                city: '',
+                province: 'Manitoba',
+                country: 'Canada'
+            }
+        });
     }
 
     const organizerListItem = organizers.map(organizer => {
