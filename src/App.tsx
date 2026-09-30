@@ -19,11 +19,12 @@ import type { Organizer } from './components/types/Organizer'
 
 function App() {
   const [events, setEvents] = useState<Event[]>(eventData.events)
-  const [savedEvents, setSavedEvents] = useState<Event[]>(eventData.savedEvents);
+  const [savedEvents, setSavedEvents] = useState<Event[]>(eventData.savedEvents); // Currently loading the sample data
   const [organizers, setOrganizers] = useState<Organizer[]>(eventData.organizers);
 
   // Logic for saving and removing events
   const saveEvent = (event: Event) => {
+    // Using the setSavedEvents state here instead of the component
     setSavedEvents((currentSaved) => [
       ...currentSaved,
       event
@@ -58,12 +59,11 @@ function App() {
           }
         />
 
-        <Route path="/saved-events" element={<SavedEvents />}>
-          <Route index element={<SavedEvents
-              savedEvents={savedEvents}
-              setSavedEvents={setSavedEvents}
-            />}/>
-        </Route>
+        <Route path="/saved-events" element={
+          <SavedEvents 
+            savedEvents={savedEvents}
+            removeSavedEvent={removeSavedEvent}/>
+        }/>
 
         <Route path="/organizers" element={<Organizers />}>
           <Route index element={<Organizers
