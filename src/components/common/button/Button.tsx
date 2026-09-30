@@ -1,19 +1,15 @@
-interface ButtonProps {
+import type { ButtonHTMLAttributes } from "react";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     children: React.ReactNode; // Prop for button label
-    onClick: () => void; // Prop for clicking behaviour
-    disabled?: boolean;
 }
 
 export default function Button( { 
     children,
-    onClick,
-    disabled = false,
+    ...props
 }: ButtonProps) {
     return (
-        <button
-            onClick={onClick}
-            disabled={disabled}
-        >
+        <button {...props}>
             {children}
         </button>
     )
