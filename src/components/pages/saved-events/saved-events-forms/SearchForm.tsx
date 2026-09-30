@@ -9,13 +9,18 @@ export default function SearchForm({
     const [searchValue, setSearchValue] = useState<string>("");
     const [searchErrors, setSearchErrors] = useState<string>(""); // For validation
 
-    // Handlers & Validation
+    // Handlers
     const handleSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
 
-        const search: string = searchValue.trim();
+        const search = searchValue.trim();
 
-        if (search && search.length < 2) {
+        if (!search) {
+            setSearchErrors("Please enter a search term.");
+            return;
+        }
+
+        if (search.length < 2) {
             setSearchErrors("Search must be at least 2 characters.");
             return;
         }
