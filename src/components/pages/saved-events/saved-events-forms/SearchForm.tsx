@@ -13,7 +13,7 @@ export default function SearchForm({
     const handleSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
 
-        const search = searchValue.trim();
+        const search: string = searchValue.trim();
 
         if (!search) {
             setSearchErrors("Please enter a search term.");
