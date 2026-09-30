@@ -11,7 +11,8 @@ function Organizers({
         setOrganizers: React.Dispatch<React.SetStateAction<Organizer[]>>
     }) {
 
-    const [formData, setFormData] = useState({
+    const defaultOrganizer: Organizer = {
+        id: '',
         name: '',
         description: '',
         website: '',
@@ -22,7 +23,49 @@ function Organizers({
             province: 'Manitoba',
             country: 'Canada'
         }
-    });
+    }
+
+    const [formData, setFormData] = useState(defaultOrganizer);
+
+    const validateForm = (): boolean => {
+        let isValid = true;
+        const newErrors = defaultOrganizer;
+
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        const phoneRegex = /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+
+        if (formData.name.trim().length < 3) {
+            newErrors.name = "First name must be at least 3 characters long.";
+            isValid = false;
+        }
+
+        if (!formData.description.trim()) {
+            newErrors.description = "Description is required.";
+            isValid = false;
+        }
+
+        if (!formData.website.trim()) {
+            newErrors.website = "Website is required.";
+            isValid = false;
+        }
+
+        if (!emailRegex.test(formData.email)) {
+            newErrors.email = "Email is invalid.";
+            isValid = false;
+        }
+
+        if (!phoneRegex.test(formData.phone)) {
+            newErrors.phone = "Phone number is invalid.";
+            isValid = false;
+        }
+
+        if (!formData.location.city.trim()) {
+            newErrors.location.city = "City is required.";
+            isValid = false;
+        }
+
+        return isValid;
+    }
 
     function GenerateId () {
         const prefix: string = "org-";
@@ -72,18 +115,7 @@ function Organizers({
             newOrganizer
         ])
 
-        setFormData({
-            name: '',
-            description: '',
-            website: '',
-            email: '',
-            phone: '',
-            location: {
-                city: '',
-                province: 'Manitoba',
-                country: 'Canada'
-            }
-        });
+        setFormData(defaultOrganizer);
     }
 
     const organizerListItem: JSX.Element[] = organizers.map(organizer => {
