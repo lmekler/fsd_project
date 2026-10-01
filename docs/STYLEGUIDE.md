@@ -87,7 +87,16 @@ line-height: 1.25
 
 Tailwind: `text-3x1 font-heading font-bold`
 
-#### Small Heading — H4
+#### Section Heading - H3
+
+font: Lato
+weight: 700
+size: 24px
+line-height: 1.3
+
+Tailwind: `text-2x1 font-heading font-bold`
+
+#### Small Heading - H4
 
 font: Lato
 weight: 700
