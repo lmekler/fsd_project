@@ -8,8 +8,6 @@ interface EventCardProps
 
 export function EventCard({event} : EventCardProps)
 {
-    const eventDate: Date = new Date(`${event.date}T${event.startTime}`)
-    
     return (
         <article key={event.title} className="event">
             <img className="event-image" src={event.image} alt={event.title}/>
@@ -17,17 +15,15 @@ export function EventCard({event} : EventCardProps)
                 <span className="event-name">{event.title}</span>
                 <br></br>
                 <span className="event-date-time">
-                    {eventDate.toLocaleString(
+                    {new Date(event.date).toLocaleString(
                         'en-us', 
                         {
                             weekday: "long", 
                             day: "numeric", 
-                            month: "short", 
-                            hour12: true, 
-                            hour: "numeric", 
-                            minute: "numeric"
+                            month: "short"
                         }
                     )}
+                    {", " + event.startTime}
                 </span>
                 <br></br>
                 <span className="event-location">{event.location.address}</span>
