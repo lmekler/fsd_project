@@ -45,6 +45,7 @@ function Organizers({
         let isValid: boolean = true;
         const newErrors = organizerErrors;
 
+        const websiteRegex = /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
         const phoneRegex = /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
 
@@ -58,8 +59,8 @@ function Organizers({
             isValid = false;
         }
 
-        if (!formData.website.trim()) {
-            newErrors.website = "Website is required.";
+        if (!websiteRegex.test(formData.website)) {
+            newErrors.website = "Website is invalid.";
             isValid = false;
         }
 
@@ -159,38 +160,62 @@ function Organizers({
                 {organizerListItem}
             </section>
             
-            <form method="post" onSubmit={handleAddOrganizer} onChange={handleChange}>
+            <form method="post" onSubmit={handleAddOrganizer}>
                 <label>
                     Name:
-                    <input name="name" />
+                    <input 
+                        name="name" 
+                        value={formData.name} 
+                        onChange={handleChange}
+                    />
                     {errors.name && <span className="error-message" style={{ color: 'red' }}>{errors.name}</span>}
                 </label>
                 <label>
                     Description:
-                    <input name="description" />
+                    <input 
+                        name="description" 
+                        value={formData.description} 
+                        onChange={handleChange}
+                    />
                     {errors.description && <span className="error-message" style={{ color: 'red' }}>{errors.description}</span>}
                 </label>
                 <hr />
                 <label>
                     Website:
-                    <input name="website" />
+                    <input 
+                        name="website" 
+                        value={formData.website} 
+                        onChange={handleChange}
+                    />
                     {errors.website && <span className="error-message" style={{ color: 'red' }}>{errors.website}</span>}
                 </label>
                 <label>
                     Email:
-                    <input name="email" />
+                    <input 
+                        name="email" 
+                        value={formData.email} 
+                        onChange={handleChange}
+                    />
                     {errors.email && <span className="error-message" style={{ color: 'red' }}>{errors.email}</span>}
                 </label>
                 <label>
                     Phone Number:
-                    <input name="phone" />
+                    <input 
+                        name="phone" 
+                        value={formData.phone} 
+                        onChange={handleChange}
+                    />
                     {errors.phone && <span className="error-message" style={{ color: 'red' }}>{errors.phone}</span>}
                 </label>
                 <hr />
                 <p>Location:</p>
                 <label>
                     City:
-                    <input name="city" />
+                    <input 
+                        name="city" 
+                        value={formData.city} 
+                        onChange={handleChange}
+                    />
                     {errors.location.city && <span className="error-message" style={{ color: 'red' }}>{errors.location.city}</span>}
                 </label>
                 <label>
