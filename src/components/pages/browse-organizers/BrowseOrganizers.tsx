@@ -9,7 +9,7 @@ function Organizers({
     {
         organizers: Organizer[],
         setOrganizers: React.Dispatch<React.SetStateAction<Organizer[]>>
-    }) {
+    }): JSX.Element {
 
     // Defines organizer with default values
     const defaultOrganizer: Organizer = {
@@ -42,7 +42,7 @@ function Organizers({
     const [errors, setErrors] = useState(organizerErrors);
 
     const validateForm = (): boolean => {
-        let isValid = true;
+        let isValid: boolean = true;
         const newErrors = organizerErrors;
 
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -83,14 +83,14 @@ function Organizers({
         return isValid;
     }
 
-    function GenerateId () {
+    function GenerateId (): string {
         const prefix: string = "org-";
         const zerosNeeded: number = Math.max(0, 3 - organizers.length.toString().length);
 
         return prefix + "0".repeat(zerosNeeded) + (organizers.length + 1).toString();
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLFormElement>): void => {
         const {name, value} = e.target;
 
         if (name === "city" || name === "province") {
@@ -114,7 +114,7 @@ function Organizers({
         };
     }
 
-    const handleAddOrganizer = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleAddOrganizer = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
         if (!validateForm()) return;
