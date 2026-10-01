@@ -17,7 +17,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
             description: "",
             category: "",
             date: new Date().toLocaleDateString(),
-            startTime: "",
+            startTime: "12:00",
             endTime: "",
             location: 
             {
@@ -76,7 +76,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         {
             errors.date = "Date is required."
         }
-        else if (new Date(event.date) < new Date)
+        else if (new Date(event.date.toString()) < new Date)
         {
             errors.date = "Date must be in the future."
         }
@@ -138,7 +138,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         {field: "image", type: "file", extraFields: {accept: "image/*"}},
         {field: "title", type: "text"},
         {field: "description", type: "text"},
-        {field: "date", type: "text"},
+        {field: "date", type: "date"},
         {field: "start time", type: "dropdown", dropdown: dropdown.timeOptions},
         {field: "end time", type: "dropdown", dropdown: dropdown.timeOptions},
         {field: "venue", type: "text"},
@@ -155,14 +155,16 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         <form className="new-event-form">
             {eventFields.map(({field, type, extraFields, dropdown}) =>
             (
-                dropdown &&
-                <div>
+                dropdown 
+                &&
+                <div key={field}>
                     <label>
                         {toTitle(field)}
                         <div>
                             <select 
+                                name={toCamelCase(field)}
                                 value={event[toCamelCase(field) as keyof Event]?.toString()}
-                                onChange={(e) => (handleChange(e))}
+                                onChange={handleChange}
                             >
                                 {
                                     dropdown.map((value) =>
@@ -177,7 +179,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                     </label>
                 </div>
                 ||
-                <div>
+                <div key={field}>
                     <label className={toKebabCase(field)}>
                         {toTitle(field)}
                         <div>
@@ -186,7 +188,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                                 name={toCamelCase(field)}
                                 value={event[toCamelCase(field) as keyof Event]?.toString()} 
                                 placeholder= {toCapitalized(field)}
-                                onChange={(e) => handleChange(e)}
+                                onChange={handleChange}
                                 {...extraFields}
                             />
                         </div>
@@ -194,7 +196,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                     <span>{errors[toCamelCase(field) as keyof Errors]?.toString()}</span>
                 </div>
             ))}
-            <div>
+            <div key="tags">
                 <label>
                     Tags
                     <div>
@@ -207,7 +209,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                                         type="checkbox" 
                                         name={value} 
                                         value={value}
-                                        onChange={(e) => handleChange(e)}
+                                        onChange={handleChange}
                                     />
                                 </label>
                             ))   
