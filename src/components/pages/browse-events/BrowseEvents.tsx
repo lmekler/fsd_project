@@ -27,7 +27,7 @@ export function BrowseEvents()
             <NewEventForm handleSubmit={handleSubmit}/>
             {events.map((event) =>
             (
-                <EventCard key={event.title+event.date.toString()} event={event}/>
+                <EventCard key={event.title+event.date} event={event}/>
             ))}
         </main>
     )
