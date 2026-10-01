@@ -160,6 +160,7 @@ function Organizers({
                 {organizerListItem}
             </section>
             
+            <h3>Add New Organizer</h3>
             <form method="post" onSubmit={handleAddOrganizer}>
                 <label>
                     Name:
@@ -170,12 +171,15 @@ function Organizers({
                     />
                     {errors.name && <span className="error-message" style={{ color: 'red' }}>{errors.name}</span>}
                 </label>
+                <hr />
                 <label>
                     Description:
-                    <input 
+                    <textarea 
                         name="description" 
                         value={formData.description} 
                         onChange={handleChange}
+                        rows={5}
+                        cols={40}
                     />
                     {errors.description && <span className="error-message" style={{ color: 'red' }}>{errors.description}</span>}
                 </label>
