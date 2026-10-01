@@ -5,82 +5,6 @@ import dropdown from "../../../data/dropdown.json"
 import type { Event } from "../../../types/Event"
 import { toCamelCase, toCapitalized, toKebabCase, toTitle } from "../../../common/stringUtils"
 
-function FieldInput(
-    {
-        field,
-        type, 
-        value, 
-        onChange, 
-        extraFields,
-        errorField
-    } : {
-        field: string,
-        type: string, 
-        value?: string, 
-        onChange: (e: any) => void, 
-        extraFields?: React.InputHTMLAttributes<HTMLInputElement>
-        errorField?: React.ReactNode
-    }
-)
-{
-    return (
-        <div>
-            <label className={toKebabCase(field)}>
-                {toTitle(field)}
-                <div>
-                    <input 
-                        type={type}
-                        name={toCamelCase(field)}
-                        value={value}
-                        placeholder= {toCapitalized(field)}
-                        onChange={onChange}
-                        {...extraFields}
-                    />
-                </div>
-            </label>
-            <span>{errorField}</span>
-        </div>
-    )
-}
-
-function FieldSelect(
-    {
-        field,
-        value,
-        onChange,
-        dropdown
-    } : {
-        field: string,
-        value?: string,
-        onChange: (e: any) => void,
-        dropdown: string[]
-    }
-)
-{
-    return (
-        <div>
-            <label>
-                {toTitle(field)}
-                <div>
-                    <select 
-                        value={value}
-                        onChange={onChange}
-                    >
-                        {
-                            dropdown.map((value) =>
-                            (
-                                <option key={field+value} value={value}>
-                                    {value}
-                                </option>
-                            ))   
-                        }
-                    </select>
-                </div>
-            </label>
-        </div>
-    )
-}
-
 export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
 {
     // default event fields
@@ -231,16 +155,14 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         <form className="new-event-form">
             {eventFields.map(({field, type, extraFields, dropdown}) =>
             (
-                dropdown 
-                &&
-                <div key={field}>
+                dropdown &&
+                <div>
                     <label>
                         {toTitle(field)}
                         <div>
                             <select 
-                                name={toCamelCase(field)}
                                 value={event[toCamelCase(field) as keyof Event]?.toString()}
-                                onChange={handleChange}
+                                onChange={(e) => (handleChange(e))}
                             >
                                 {
                                     dropdown.map((value) =>
@@ -255,7 +177,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                     </label>
                 </div>
                 ||
-                <div key={field}>
+                <div>
                     <label className={toKebabCase(field)}>
                         {toTitle(field)}
                         <div>
@@ -264,7 +186,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                                 name={toCamelCase(field)}
                                 value={event[toCamelCase(field) as keyof Event]?.toString()} 
                                 placeholder= {toCapitalized(field)}
-                                onChange={handleChange}
+                                onChange={(e) => handleChange(e)}
                                 {...extraFields}
                             />
                         </div>
