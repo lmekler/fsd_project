@@ -28,14 +28,16 @@ function FieldInput(
         <div>
             <label className={toKebabCase(field)}>
                 {toTitle(field)}
-                <input 
-                    type={type}
-                    name={toCamelCase(field)}
-                    value={value}
-                    placeholder= {toCapitalized(field)}
-                    onChange={onChange}
-                    {...extraFields}
-                />
+                <div>
+                    <input 
+                        type={type}
+                        name={toCamelCase(field)}
+                        value={value}
+                        placeholder= {toCapitalized(field)}
+                        onChange={onChange}
+                        {...extraFields}
+                    />
+                </div>
             </label>
             <span>{errorField}</span>
         </div>
@@ -57,22 +59,26 @@ function FieldSelect(
 )
 {
     return (
-        <label>
-            {toTitle(field)}
-            <select 
-                value={value}
-                onChange={onChange}
-            >
-                {
-                    dropdown.map((value) =>
-                    (
-                        <option key={value} value={value}>
-                            {value}
-                        </option>
-                    ))   
-                }
-            </select>
-        </label>
+        <div>
+            <label>
+                {toTitle(field)}
+                <div>
+                    <select 
+                        value={value}
+                        onChange={onChange}
+                    >
+                        {
+                            dropdown.map((value) =>
+                            (
+                                <option key={field+value} value={value}>
+                                    {value}
+                                </option>
+                            ))   
+                        }
+                    </select>
+                </div>
+            </label>
+        </div>
     )
 }
 
@@ -85,10 +91,14 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
             id: "",
             organizerId: "",
             title: "",
+            description: "",
+            category: "",
             date: new Date().toLocaleDateString(),
             startTime: "",
+            endTime: "",
             location: 
             {
+                venue: "",
                 address: "",
                 city: "",
                 province: "",
@@ -100,6 +110,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
             price: 0,
             isFree: true,
             isFeatured: false,
+            tags: []
         }
     )
 
@@ -199,145 +210,85 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         }
     }
 
+    const eventFields =
+    [
+        {field: "image", type: "file", extraFields: {accept: "image/*"}},
+        {field: "title", type: "text"},
+        {field: "description", type: "text"},
+        {field: "date", type: "text"},
+        {field: "start time", type: "dropdown", dropdown: dropdown.timeOptions},
+        {field: "end time", type: "dropdown", dropdown: dropdown.timeOptions},
+        {field: "venue", type: "text"},
+        {field: "address", type: "text"},
+        {field: "city", type: "text"},
+        {field: "province", type: "text"},
+        {field: "postal code", type: "text"},
+        {field: "price", type: "number", extraFields: {min: "0"}},
+        {field: "capacity", type: "number", extraFields: {min: "0"}},
+        {field: "category", type: "dropdown", dropdown: dropdown.categories}
+    ]
+    
     return (
         <form className="new-event-form">
-            <FieldInput 
-                field="image"
-                type="file" 
-                onChange={(e) => handleChange(e)}
-                extraFields={
-                    {
-                        accept: "image/*"
-                    }
-                }
-            />
-            <FieldInput 
-                field="title"
-                type="text" 
-                value={event.title} 
-                onChange={(e) => handleChange(e)}
-                errorField={errors.title}
-            />
-            <FieldInput 
-                field="description"
-                type="text" 
-                value={event.description || ""} 
-                onChange={(e) => handleChange(e)}
-                errorField={errors.description}
-            />
-            <FieldInput 
-                field="date"
-                type="date"
-                value={event.date} 
-                onChange={(e) => (handleChange(e))}
-                errorField={errors.date}
-            />
-            <FieldSelect
-                field="start time"
-                value={event.startTime}
-                onChange={(e) => (handleChange(e))}
-                dropdown={dropdown.timeOptions}
-            />
-            <FieldSelect
-                field="end time"
-                value={event.endTime}
-                onChange={(e) => (handleChange(e))}
-                dropdown={dropdown.timeOptions}
-            />
-            <FieldInput 
-                field="venue"
-                type="text"
-                value={event.location.venue || ""} 
-                onChange={(e) => handleChange(e)}
-            />
-            <FieldInput 
-                field="address"
-                type="text"
-                value={event.location.address} 
-                onChange={(e) => handleChange(e)}
-                errorField={errors.address}
-            />
-            <FieldInput
-                field="city"
-                type="text"
-                value={event.location.city} 
-                onChange={(e) => handleChange(e)}
-                errorField={errors.city}
-            />
-            <FieldInput 
-                field="province"
-                type="text"
-                value={event.location.province} 
-                onChange={(e) => handleChange(e)}
-                errorField={errors.province}
-            />
-             <FieldInput 
-                field="postal code"
-                type="text"
-                value={event.location.postalCode} 
-                onChange={(e) => handleChange(e)}
-                errorField={errors.postalCode}
-            />
-            <FieldInput 
-                field="price"
-                type="number" 
-                value={event.price.toString() || "0"} 
-                onChange={(e) => handleChange(e)}
-                extraFields={
-                    {
-                        min: 0
-                    }
-                }
-            />
-            <FieldInput 
-                field="capacity"
-                type="number"
-                value={event.capacity.toString() || "0"} 
-                onChange={(e) => handleChange(e)}
-                extraFields={
-                    {
-                        min: 0
-                    }
-                }
-            />
-            <FieldSelect
-                field="category"
-                value={event.category}
-                onChange={(e) => (handleChange(e))}
-                dropdown={dropdown.categories}
-            />
-            <label>
-                Tags
-                {
-                    dropdown.tags.map((value) =>
-                    (
-                        <label>
-                            {value}
-                            <input 
-                                type="checkbox" 
-                                name={value} 
-                                value={value}
-                                onChange={(e) => handleChange(e)}
-                            />
-                        </label>
-                    ))   
-                }
-            </label>
-            <button
-                onClick=
-                {
-                    (e) => 
-                    {
-                        e.preventDefault()
-                        if (formIsValid())
+            {eventFields.map(({field, type, extraFields, dropdown}) =>
+            (
+                dropdown &&
+                <FieldSelect
+                    key={field}
+                    field={field}
+                    value={event[toCamelCase(field) as keyof Event]?.toString()}
+                    onChange={(e) => (handleChange(e))}
+                    dropdown={dropdown}
+                />
+                ||
+                <FieldInput 
+                    key={field}
+                    field={field}
+                    type={type} 
+                    value={event[toCamelCase(field) as keyof Event]?.toString()} 
+                    onChange={(e) => handleChange(e)}
+                    extraFields={extraFields}
+                    errorField={errors[toCamelCase(field) as keyof Errors]?.toString()}
+                />
+            ))}
+            <div>
+                <label>
+                    Tags
+                    <div>
                         {
-                            handleSubmit(event)
+                            dropdown.tags.map((value) =>
+                            (
+                                <label key={"tags"+value}>
+                                    {value}
+                                    <input 
+                                        type="checkbox" 
+                                        name={value} 
+                                        value={value}
+                                        onChange={(e) => handleChange(e)}
+                                    />
+                                </label>
+                            ))   
+                        }
+                    </div>
+                </label>
+            </div>
+            <div>
+                <button
+                    onClick=
+                    {
+                        (e) => 
+                        {
+                            e.preventDefault()
+                            if (formIsValid())
+                            {
+                                handleSubmit(event)
+                            }
                         }
                     }
-                }
-            >
-                Submit
-            </button>
+                >
+                    Submit
+                </button>
+            </div>
         </form>
     )
 }
