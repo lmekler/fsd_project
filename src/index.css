@@ -5,28 +5,28 @@
 
     /* Brand Colours */
 
-    --colour-primary: #FF6666;
-    --colour-primary-hover: #E85555;
-    --colour-primary-light: #FFE5E5;
+    --color-primary: #FF6666;
+    --color-primary-hover: #E85555;
+    --color-primary-light: #FFE5E5;
 
-    --colour-background: #FFFBF1;
-    --colour-accent: #D3D3D3;
+    --color-background: #FFFBF1;
+    --color-accent: #D3D3D3;
 
     /* Neutral Colours */
     
-    --colour-surface: #FFFFFF;
-    --colour-border: #E5E5E5;
+    --color-surface: #FFFFFF;
+    --color-border: #E5E5E5;
 
-    --colour-text: #222222;
-    --colour-text-muted: #6B6B6B;
-    --colour-text-inverse: #FFFFFF;
+    --color-text: #222222;
+    --color-text-muted: #6B6B6B;
+    --color-text-inverse: #FFFFFF;
 
     /* Feedback Colours */
 
-    --colour-success: #2E7D32;
-    --colour-warning: #ED6C02;
-    --colour-error: #D32F2F;
-    --colour-info: #1976D2;
+    --color-success: #2E7D32;
+    --color-warning: #ED6C02;
+    --color-error: #D32F2F;
+    --color-info: #1976D2;
 
     /* Typography */
 
