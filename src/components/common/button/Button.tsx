@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 export default function Button( { 
     children,
     variant = "primary",
-    size = "md",
+    size = "sm",
     className = "",
     ...props
 }: ButtonProps) {

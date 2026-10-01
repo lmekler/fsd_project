@@ -60,6 +60,8 @@ export default function SavedEvents({
                         location={event.location}
                     />
                     <Button
+                        variant="danger"
+                        size="sm"
                         onClick={() => removeSavedEvent(event.id)}
                     >
                         Unsave
