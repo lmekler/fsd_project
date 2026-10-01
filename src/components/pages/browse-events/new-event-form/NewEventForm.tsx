@@ -27,14 +27,16 @@ function FieldInput(
         <div>
             <label className={toKebabCase(field)}>
                 {toTitle(field)}
-                <input 
-                    type={type}
-                    name={toCamelCase(field)}
-                    value={value}
-                    placeholder= {toCapitalized(field)}
-                    onChange={onChange}
-                    {...extraFields}
-                />
+                <div>
+                    <input 
+                        type={type}
+                        name={toCamelCase(field)}
+                        value={value}
+                        placeholder= {toCapitalized(field)}
+                        onChange={onChange}
+                        {...extraFields}
+                    />
+                </div>
             </label>
             <span>{errorField}</span>
         </div>
@@ -56,22 +58,26 @@ function FieldSelect(
 )
 {
     return (
-        <label>
-            {toTitle(field)}
-            <select 
-                value={value}
-                onChange={onChange}
-            >
-                {
-                    dropdown.map((value) =>
-                    (
-                        <option key={value} value={value}>
-                            {value}
-                        </option>
-                    ))   
-                }
-            </select>
-        </label>
+        <div>
+            <label>
+                {toTitle(field)}
+                <div>
+                    <select 
+                        value={value}
+                        onChange={onChange}
+                    >
+                        {
+                            dropdown.map((value) =>
+                            (
+                                <option key={field+value} value={value}>
+                                    {value}
+                                </option>
+                            ))   
+                        }
+                    </select>
+                </div>
+            </label>
+        </div>
     )
 }
 
