@@ -11,6 +11,7 @@ function Organizers({
         setOrganizers: React.Dispatch<React.SetStateAction<Organizer[]>>
     }) {
 
+    // Defines organizer with default values
     const defaultOrganizer: Organizer = {
         id: '',
         name: '',
@@ -25,11 +26,24 @@ function Organizers({
         }
     }
 
+    const organizerErrors = {
+        name: '',
+        description: '',
+        website: '',
+        email: '',
+        phone: '',
+        location: {
+            city: ''
+        }
+    }
+
     const [formData, setFormData] = useState(defaultOrganizer);
+
+    const [errors, setErrors] = useState(organizerErrors);
 
     const validateForm = (): boolean => {
         let isValid = true;
-        const newErrors = defaultOrganizer;
+        const newErrors = organizerErrors;
 
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
         const phoneRegex = /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
@@ -64,6 +78,8 @@ function Organizers({
             isValid = false;
         }
 
+        setErrors(newErrors);
+
         return isValid;
     }
 
@@ -91,10 +107,17 @@ function Organizers({
                 [name]: value
             }));
         }
+
+        // Clears error once field is updated
+        if (errors[name as keyof typeof errors]) {
+            setErrors(prev => ({ ...prev, [name]: '' }));
+        };
     }
 
     const handleAddOrganizer = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (!validateForm()) return;
 
         const newOrganizer: Organizer = {
             id: GenerateId(),
@@ -140,29 +163,35 @@ function Organizers({
                 <label>
                     Name:
                     <input name="name" />
+                    {errors.name && <span className="error-message" style={{ color: 'red' }}>{errors.name}</span>}
                 </label>
                 <label>
                     Description:
                     <input name="description" />
+                    {errors.description && <span className="error-message" style={{ color: 'red' }}>{errors.description}</span>}
                 </label>
                 <hr />
                 <label>
                     Website:
                     <input name="website" />
+                    {errors.website && <span className="error-message" style={{ color: 'red' }}>{errors.website}</span>}
                 </label>
                 <label>
                     Email:
                     <input name="email" />
+                    {errors.email && <span className="error-message" style={{ color: 'red' }}>{errors.email}</span>}
                 </label>
                 <label>
                     Phone Number:
                     <input name="phone" />
+                    {errors.phone && <span className="error-message" style={{ color: 'red' }}>{errors.phone}</span>}
                 </label>
                 <hr />
                 <p>Location:</p>
                 <label>
                     City:
                     <input name="city" />
+                    {errors.location.city && <span className="error-message" style={{ color: 'red' }}>{errors.location.city}</span>}
                 </label>
                 <label>
                     Province:
