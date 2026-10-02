@@ -1,94 +1,100 @@
-import data from "../../../data.json"
+import { useState } from "react";
+import Button from "../../common/button/Button";
+import EventArticle from "../../common/event-article/EventArticle";
+import type { Event } from "../../types/Event";
+import SearchForm from "./saved-events-forms/SearchForm";
+import CategoryForm from "./saved-events-forms/CategoryForm";
 
-interface EventStructure {
-    id: string;
-    organizerId: string;
-    title: string;
-    description: string;
-    category: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-    location: Location;
-    image: string;
-    capacity: number;
-    registeredCount: number;
-    price: number;
-    isFree: boolean;
-    isFeatured: boolean;
-    tags: string[];
-}
+export default function SavedEvents({
+    savedEvents,
+    removeSavedEvent
+}: {
+    savedEvents: Event[],
+    removeSavedEvent: (eventId: string) => void
+}) {
 
-interface Location {
-    venue: string;
-    address: string;
-    city: string;
-    province: string;
-    postalCode: string;
-}
+    // Set States
+    const [searchTerm, setSearchTerm] = useState<string>("")
+    const [categoryFilters, setCategoryFilters] = useState<string>("")
 
-interface SavedEventProps {
-    title: string;
-    description: string;
-    category: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-    location: Location;
-}
+    // Derive categories from saved events
+    const categories: (string | undefined)[] = [
+        ...new Set(savedEvents.map((savedEvent) => savedEvent.category))
+    ];
 
-function EventEntry({
-    title,
-    description,
-    category,
-    date,
-    startTime,
-    endTime,
-    location
-}: SavedEventProps) {
+    // Filtering logic
+    const filteredEvents: Event[] = savedEvents.filter((event) => {
+
+        // Check if there is any filtering submitted from forms
+        const searchMatches: boolean = 
+            searchTerm === "" ||
+            event.title.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        const categoryMatches: boolean = categoryFilters === "" || event.category === categoryFilters;
+        
+        return searchMatches && categoryMatches;
+    })
+
     return (
-        <article className="event-entry">
-            <div className="info-container">
-                <h2 className="entry-title">{title}</h2>
-                <div className="event-details-container">
-                    <p className="event-location">Location: {location.venue}</p>
-                    <p className="address">{location.address}, {location.city}</p>
-                    <p className="event-date"><strong>Date:</strong> {date}</p>
-                    <p className="event-time"><strong>Time:</strong> {startTime} - {endTime}</p>
+        <main className="page-container grid grid-cols-1 gap-8 py-8 md:grid-cols-[1fr_280px]">
+
+            {/* Saved Events Section */}
+
+            <section>
+                <h2 className="page-title mb-6">
+                    Saved Events
+                </h2>
+                <div className="flex flex-col gap-6">
+                    {filteredEvents.map((event) =>
+                        <div
+                            key={event.id}
+                            className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">
+                            <EventArticle
+                                title={event.title}
+                                description={event.description}
+                                category={event.category}
+                                date={event.date}
+                                startTime={event.startTime}
+                                endTime={event.endTime}
+                                location={event.location}
+                            />
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                onClick={() => removeSavedEvent(event.id)}
+                            >
+                                Unsave
+                            </Button>
+                        </div>
+                    )}
+
+                    {/* No filter matches messaging */}
+                    {filteredEvents.length === 0 && (
+                        <p className="muted-text">
+                            No saved events match your filters.
+                        </p>
+                    )}
+
                 </div>
-                <p className="event-description">{description}</p>
-                <p className="category">Category: {category}</p>
-            </div>
-        </article>
-    )
-}
+            </section>
 
-function RenderEvents({ events }: {events: EventStructure[] }) {
-    return (
-        <>
-            {events.map((entry) =>
-                <EventEntry
-                    key={entry.id}
-                    title={entry.title}
-                    description={entry.description}
-                    category={entry.category}
-                    date={entry.date}
-                    startTime={entry.startTime}
-                    endTime={entry.endTime}
-                    location={entry.location}
-                />)}
-        </>
-    )
-}
+            {/* Filters Section */}
+            <aside className="surface-card h-fit p-6 md:sticky md:top-6">
+                <h3 className="subsection-title mb-6">
+                    Filter Events
+                </h3>
 
-export default function SavedEvents() {
-    
-    const parsedData: EventStructure[] = data.savedEvents;
+                <div className="flex flex-col gap-6">
+                    <SearchForm
+                        onSearch={setSearchTerm}
+                    />
 
-    return (
-        <>
-            <h2>Saved Events</h2>
-            <RenderEvents events={parsedData}/>
-        </>
+                    <CategoryForm
+                        categories={categories}
+                        onCategoryFilter={setCategoryFilters}
+                    />
+                </div>
+            </aside>
+        </main>
     )
 }
