@@ -142,25 +142,34 @@ function Organizers({
         setFormData(defaultOrganizer);
     }
 
+    const handleRemoveOrganizer = (id: string) => {
+        setOrganizers((prevOrganizers) => prevOrganizers.filter(
+            (organizer) => organizer.id !== id
+        ));
+    }
+
     const organizerListItem: JSX.Element[] = organizers.map(organizer => {
-        return <section className="organizer" key={organizer.id}>
-            <h3 className="name" key={organizer.id + "name"}>{organizer.name}</h3>
-            <p className="description" key={organizer.id + "description"}>{organizer.description}</p>
-            <p className="website" key={organizer.id + "website"}>Website: <a href="#">{organizer.website}</a></p>
-            <p className="email" key={organizer.id + "email"}>Email: {organizer.email}</p>
-            <p className="phone-number" key={organizer.id + "phone"}>Phone Number: {organizer.phone}</p>
-            <p className="location" key={organizer.id + "location"}>Location: {organizer.location.city}, {organizer.location.province}</p>
+        return <section className="muted-text mb-4 flex flex-col gap-1" key={organizer.id}>
+            <h3 className="font-medium text-text" key={organizer.id + "name"}>{organizer.name}</h3>
+            <p className="font-medium text-text" key={organizer.id + "description"}>{organizer.description}</p>
+            <p className="font-medium text-text" key={organizer.id + "website"}>Website: <a href="#">{organizer.website}</a></p>
+            <p className="font-medium text-text" key={organizer.id + "email"}>Email: {organizer.email}</p>
+            <p className="font-medium text-text" key={organizer.id + "phone"}>Phone Number: {organizer.phone}</p>
+            <p className="font-medium text-text" key={organizer.id + "location"}>Location: {organizer.location.city}, {organizer.location.province}</p>
+            <button onClick={() => handleRemoveOrganizer(organizer.id)}>
+                Remove
+            </button>
         </section>
     })
     
     return (
-        <section className="organizers">
-            <section className="organizerList">
-                <h2>Event Organizers</h2>
+        <section className="page-container grid grid-cols-1 gap-8 py-8 md:grid-cols-[1fr_280px]">
+            <section className="flex-1">
+                <h2 className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">Event Organizers</h2>
                 {organizerListItem}
             </section>
             
-            <h3>Add New Organizer</h3>
+            <h3 className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">Add New Organizer</h3>
             <form method="post" onSubmit={handleAddOrganizer}>
                 <label>
                     Name:
