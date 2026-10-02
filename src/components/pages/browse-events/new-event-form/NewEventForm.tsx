@@ -188,7 +188,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                                 name={toCamelCase(field)}
                                 value={event[toCamelCase(field) as keyof Event]?.toString()} 
                                 placeholder= {toCapitalized(field)}
-                                onChange={handleChange}
+                                onChange={(e) => handleChange(e)}
                                 {...extraFields}
                             />
                         </div>
