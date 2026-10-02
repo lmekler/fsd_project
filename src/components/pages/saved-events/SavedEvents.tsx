@@ -1,94 +1,71 @@
-import data from "../../data/data.json"
+import { useState } from "react";
+import Button from "../../common/button/Button";
+import EventArticle from "../../common/event-article/EventArticle";
+import type { Event } from "../../types/Event";
+import SearchForm from "./saved-events-forms/SearchForm";
+import CategoryForm from "./saved-events-forms/CategoryForm";
 
-interface EventStructure {
-    id: string;
-    organizerId: string;
-    title: string;
-    description: string;
-    category: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-    location: Location;
-    image: string;
-    capacity: number;
-    registeredCount: number;
-    price: number;
-    isFree: boolean;
-    isFeatured: boolean;
-    tags: string[];
-}
+export default function SavedEvents({
+    savedEvents,
+    removeSavedEvent
+}: {
+    savedEvents: Event[],
+    removeSavedEvent: (eventId: string) => void
+}) {
 
-interface Location {
-    venue: string;
-    address: string;
-    city: string;
-    province: string;
-    postalCode: string;
-}
+    // Set States
+    const [searchTerm, setSearchTerm] = useState<string>("")
+    const [categoryFilters, setCategoryFilters] = useState<string>("")
 
-interface SavedEventProps {
-    title: string;
-    description: string;
-    category: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-    location: Location;
-}
+    // Derive categories from saved events
+    const categories: (string | undefined)[] = [
+        ...new Set(savedEvents.map((savedEvent) => savedEvent.category))
+    ];
 
-function EventEntry({
-    title,
-    description,
-    category,
-    date,
-    startTime,
-    endTime,
-    location
-}: SavedEventProps) {
-    return (
-        <article className="event-entry">
-            <div className="info-container">
-                <h2 className="entry-title">{title}</h2>
-                <div className="event-details-container">
-                    <p className="event-location">Location: {location.venue}</p>
-                    <p className="address">{location.address}, {location.city}</p>
-                    <p className="event-date"><strong>Date:</strong> {date}</p>
-                    <p className="event-time"><strong>Time:</strong> {startTime} - {endTime}</p>
-                </div>
-                <p className="event-description">{description}</p>
-                <p className="category">Category: {category}</p>
-            </div>
-        </article>
-    )
-}
+    // Filtering logic
+    const filteredEvents: Event[] = savedEvents.filter((event) => {
 
-function RenderEvents({ events }: {events: EventStructure[] }) {
-    return (
-        <>
-            {events.map((entry) =>
-                <EventEntry
-                    key={entry.id}
-                    title={entry.title}
-                    description={entry.description}
-                    category={entry.category}
-                    date={entry.date}
-                    startTime={entry.startTime}
-                    endTime={entry.endTime}
-                    location={entry.location}
-                />)}
-        </>
-    )
-}
-
-export default function SavedEvents() {
-    
-    const parsedData: EventStructure[] = data.savedEvents;
+        // Check if there is any filtering submitted from forms
+        const searchMatches: boolean = 
+            searchTerm === "" ||
+            event.title.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        const categoryMatches: boolean = categoryFilters === "" || event.category === categoryFilters;
+        
+        return searchMatches && categoryMatches;
+    })
 
     return (
-        <>
+        <main className="saved-events-page">
             <h2>Saved Events</h2>
-            <RenderEvents events={parsedData}/>
-        </>
+
+            <SearchForm
+                onSearch={setSearchTerm}
+            />
+
+            <CategoryForm
+                categories={categories}
+                onCategoryFilter={setCategoryFilters}
+            />
+
+            {filteredEvents.map((event) =>
+                <div key={event.id} className="saved-event-container">
+                    <EventArticle
+                        title={event.title}
+                        description={event.description}
+                        category={event.category}
+                        date={event.date}
+                        startTime={event.startTime}
+                        endTime={event.endTime}
+                        location={event.location}
+                    />
+                    <Button
+                        onClick={() => removeSavedEvent(event.id)}
+                    >
+                        Unsave
+                    </Button>
+                </div>
+            )}
+        </main>
     )
 }
