@@ -36,19 +36,19 @@ export default function SavedEvents({
     })
 
     return (
-        <main className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 py-8 md:grid-cols-[1fr_280px] md:px-6 lg:px-8">
+        <main className="page-container grid grid-cols-1 gap-8 py-8 md:grid-cols-[1fr_280px]">
 
             {/* Saved Events Section */}
 
             <section>
-                <h2 className="mb-6 font-heading text-xl font-bold text-text">
+                <h2 className="page-title mb-6">
                     Saved Events
                 </h2>
                 <div className="flex flex-col gap-6">
                     {filteredEvents.map((event) =>
                         <div
                             key={event.id}
-                            className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-6 shadow-sm sm:flex-row sm:items-start sm:justify-between">
+                            className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">
                             <EventArticle
                                 title={event.title}
                                 description={event.description}
@@ -70,7 +70,7 @@ export default function SavedEvents({
 
                     {/* No filter matches messaging */}
                     {filteredEvents.length === 0 && (
-                        <p className="font-body text-text-muted">
+                        <p className="muted-text">
                             No saved events match your filters.
                         </p>
                     )}
@@ -79,8 +79,8 @@ export default function SavedEvents({
             </section>
 
             {/* Filters Section */}
-            <aside className="h-fit rounded-lg border border-border bg-surface p-6 shadow-sm md:sticky md:top-6">
-                <h3 className="mb-6 font-heading text-xl font-bold text-text">
+            <aside className="surface-card h-fit p-6 md:sticky md:top-6">
+                <h3 className="subsection-title mb-6">
                     Filter Events
                 </h3>
 

@@ -25,11 +25,11 @@ export default function CategoryForm({
     return (
         <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-2"
+            className="form-group"
         >
             <label
                 htmlFor="category-filter"
-                className="font-body text-sm font-medium text-text"
+                className="form-label"
             >
                 Filter by Category
             </label>
@@ -38,6 +38,7 @@ export default function CategoryForm({
                     id="category-filter"
                     name="category"
                     defaultValue=""
+                    className="form-control"
                 >
                     <option value="">
                         Select Category

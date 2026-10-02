@@ -21,28 +21,27 @@ export default function EventArticle({
 }: EventArticleProps) {
     return (
         <article className="flex-1">
-            <div className="info-container">
-                <h2 className="mb-4 font-heading text-2xl font-bold text-text">
-                    {title}
-                </h2>
-                <div className="mb-4 flex flex-col gap-1 font-body text-sm text-text-muted">
-                    <p className="event-location">Location: {location.venue}</p>
-                    <p className="address">{location.address}, {location.city}</p>
-                    <p className="event-date"><strong>Date:</strong> {date}</p>
-                    <p className="event-time"><strong>Time:</strong> {
-                        endTime ? `${startTime} - ${endTime}`
-                        : `${startTime}`
-                    }</p>
-                </div>
-                <p className="mb-4 font-body text-base leading-relaxed text-text">{
-                    description ? `${description}`
-                    : 'No description available.'
-                }</p>
-                <p className="font-medium text-text">Category: {
-                    category ? `${category}`
-                    : 'Unassigned'
+            <h2 className="section-title mb-4">
+                {title}
+            </h2>
+            <div className="muted-text mb-4 flex flex-col gap-1">
+                <p className="font-medium text-text">Location: {location.venue}</p>
+                <p>{location.address}, {location.city}</p>
+                <p className="font-medium text-text">Date: {date}</p>
+                <p className="font-medium text-text"><strong>Time:</strong> {
+                    endTime ? `${startTime} - ${endTime}`
+                    : `${startTime}`
                 }</p>
             </div>
+            <p className="body-text mb-4 leading-relaxed">
+                {description || "No description available."}
+            </p>
+            <p className="muted-text">
+                <span className="font-medium text-text">
+                    Category:
+                </span>{" "}
+                {category || "Unassigned"}
+            </p>
         </article>
     )
 }

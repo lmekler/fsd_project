@@ -27,11 +27,11 @@ export default function SearchForm({
     return (
         <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-2"
+            className="form-group"
         >
             <label
                 htmlFor="event-search"
-                className="font-body text-sm font-medium text-text"
+                className="form-label"
             >
                 Search Saved Events
             </label>
@@ -42,7 +42,7 @@ export default function SearchForm({
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                     placeholder="Search event"
-                    className="w-full rounded-md border border-border bg-surface px-3 py-2.5 font-body text-base text-text outline-none transition-colors placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    className="form-control"
                 />
 
                 <Button type="submit">
@@ -53,7 +53,7 @@ export default function SearchForm({
             {searchErrors && (
                 <p 
                     role="alert"
-                    className="font-body text-sm text-error"
+                    className="form-error"
                 >
                     {searchErrors}
                 </p>
