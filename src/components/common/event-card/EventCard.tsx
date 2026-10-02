@@ -9,10 +9,10 @@ interface EventCardProps
 export function EventCard({event} : EventCardProps)
 {
     return (
-        <article key={event.title} className="event">
+        <article key={event.title}>
             <img className="event-image" src={event.image} alt={event.title}/>
-             <p className="event-description">
-                <span className="event-name">{event.title}</span>
+             <p className="body-text">
+                <span className="subsection-title">{event.title}</span>
                 <br></br>
                 <span className="event-date-time">
                     {new Date(event.date).toLocaleString(

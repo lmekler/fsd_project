@@ -75,6 +75,31 @@ You can then use other tailwind notations to adjust for context-specific layout.
     box-shadow: var(--shadow-sm);
 }
 
+@utility event-form {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-areas:
+        "title title title image image image"
+        "description description description image image image"
+        "date start-time end-time image image image"
+        "venue venue venue address address address"
+        "city city province province postal-code postal-code"
+        "category category price price capacity capacity";
+    gap: 1.25rem;
+}
+
+@utility browse-events-container {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 1.25rem;
+}
+
+.browse-events-container Button {
+    align-self: end;
+    margin-top: auto;
+    padding: 0.25em 0.5em;
+}
+
 @utility form-group {
     display: flex;
     flex-direction: column;
