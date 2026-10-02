@@ -3,6 +3,7 @@ import { useState } from "react"
 import "./NewEventForm.css"
 import dropdown from "../../../data/dropdown.json"
 import type { Event } from "../../../types/Event"
+import Button from "../../../common/button/Button"
 import { toCamelCase, toCapitalized, toKebabCase, toTitle } from "../../../common/stringUtils"
 
 export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
@@ -152,16 +153,16 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
     ]
     
     return (
-        <form className="new-event-form">
+        <form className="event-form">
             {eventFields.map(({field, type, extraFields, dropdown}) =>
             (
-                dropdown 
-                &&
-                <div key={field}>
-                    <label>
+                dropdown ? (
+                <div className={"event-" + toKebabCase(field)}>
+                    <label className="form-label">
                         {toTitle(field)}
                         <div>
                             <select 
+                                className="form-control"
                                 name={toCamelCase(field)}
                                 value={event[toCamelCase(field) as keyof Event]?.toString()}
                                 onChange={handleChange}
@@ -169,7 +170,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                                 {
                                     dropdown.map((value) =>
                                     (
-                                        <option key={field+value} value={value}>
+                                        <option key={toKebabCase(field+" "+value)} value={value}>
                                             {value}
                                         </option>
                                     ))   
@@ -178,12 +179,13 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                         </div>
                     </label>
                 </div>
-                ||
-                <div key={field}>
-                    <label className={toKebabCase(field)}>
+                ) : (
+                <div className={"event-" + toKebabCase(field)}>
+                    <label className="form-label">
                         {toTitle(field)}
                         <div>
                             <input 
+                                className="form-control"
                                 type={type}
                                 name={toCamelCase(field)}
                                 value={event[toCamelCase(field) as keyof Event]?.toString()} 
@@ -193,11 +195,16 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                             />
                         </div>
                     </label>
-                    <span>{errors[toCamelCase(field) as keyof Errors]?.toString()}</span>
-                </div>
+                    {
+                        errors[toCamelCase(field) as keyof Errors]?.toString() 
+                        &&
+                        <span className="form-error">{errors[toCamelCase(field) as keyof Errors]?.toString()}</span>
+                    }
+                    </div>
+                )
             ))}
-            <div key="tags">
-                <label>
+            {/* <div key="tags">
+                <label className="form-label">
                     Tags
                     <div>
                         {
@@ -216,12 +223,14 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                         }
                     </div>
                 </label>
-            </div>
+            </div> */}
             <div>
-                <button
+                <Button
+                    variant="primary"
+                    size="md"
                     onClick=
                     {
-                        (e) => 
+                        (e: any) => 
                         {
                             e.preventDefault()
                             if (formIsValid())
@@ -232,7 +241,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                     }
                 >
                     Submit
-                </button>
+                </Button>
             </div>
         </form>
     )
