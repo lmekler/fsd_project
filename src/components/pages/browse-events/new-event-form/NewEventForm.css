@@ -1,0 +1,9 @@
+.new-event-form
+{
+    padding: 1em;
+}
+
+.new-event-form > div
+{
+    border: 1px solid red;
+}

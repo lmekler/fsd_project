@@ -1,22 +1,17 @@
-import { useState } from "react";
-
-import eventData from "../../../data.json"
 import { EventCard } from "../../common/event-card/EventCard"
 import type { Event } from "../../types/Event";
 
 import { NewEventForm } from "./new-event-form/NewEventForm";
 
-export function BrowseEvents()
+export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: React.Dispatch<React.SetStateAction<Event[]>>})
 {
-    const [events, setEvents] = useState<Event[]>(eventData.events)
-
     function handleSubmit(event: Event): void
     {
         setEvents(events =>
         (
             [
-                ...events,
-                event
+                event,
+                ...events
             ]
         ))
     }
@@ -27,7 +22,7 @@ export function BrowseEvents()
             <NewEventForm handleSubmit={handleSubmit}/>
             {events.map((event) =>
             (
-                <EventCard key={event.title} event={event}/>
+                <EventCard key={event.title+event.date} event={event}/>
             ))}
         </main>
     )

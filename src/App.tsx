@@ -10,7 +10,7 @@ import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
 import SavedEvents from './components/pages/saved-events/SavedEvents'
 import Organizers from './components/pages/browse-organizers/BrowseOrganizers'
 import { useState } from 'react'
-import eventData from "./data.json"
+import eventData from "../src/components/data/data.json"
 
 // Type Imports
 import type { Event } from './components/types/Event'
@@ -26,14 +26,23 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout/>}>
 
-        <Route index element={<BrowseEvents />}/>
-
-        <Route path="/browse-events" element={<BrowseEvents />}>
-          <Route index element={<BrowseEvents
+        <Route index element=
+          {
+            <BrowseEvents
               events={events}
               setEvents={setEvents}
-            />}/>
-        </Route>
+            />
+          }
+        />
+
+        <Route path="/browse-events" element=
+          {
+            <BrowseEvents
+              events={events}
+              setEvents={setEvents}
+            />
+          }
+        />
 
         <Route path="/saved-events" element={<SavedEvents />}>
           <Route index element={<SavedEvents
