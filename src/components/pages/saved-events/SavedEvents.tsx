@@ -36,36 +36,65 @@ export default function SavedEvents({
     })
 
     return (
-        <main className="saved-events-page">
-            <h2>Saved Events</h2>
+        <main className="page-container grid grid-cols-1 gap-8 py-8 md:grid-cols-[1fr_280px]">
 
-            <SearchForm
-                onSearch={setSearchTerm}
-            />
+            {/* Saved Events Section */}
 
-            <CategoryForm
-                categories={categories}
-                onCategoryFilter={setCategoryFilters}
-            />
+            <section>
+                <h2 className="page-title mb-6">
+                    Saved Events
+                </h2>
+                <div className="flex flex-col gap-6">
+                    {filteredEvents.map((event) =>
+                        <div
+                            key={event.id}
+                            className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">
+                            <EventArticle
+                                title={event.title}
+                                description={event.description}
+                                category={event.category}
+                                date={event.date}
+                                startTime={event.startTime}
+                                endTime={event.endTime}
+                                location={event.location}
+                            />
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                onClick={() => removeSavedEvent(event.id)}
+                            >
+                                Unsave
+                            </Button>
+                        </div>
+                    )}
 
-            {filteredEvents.map((event) =>
-                <div key={event.id} className="saved-event-container">
-                    <EventArticle
-                        title={event.title}
-                        description={event.description}
-                        category={event.category}
-                        date={event.date}
-                        startTime={event.startTime}
-                        endTime={event.endTime}
-                        location={event.location}
-                    />
-                    <Button
-                        onClick={() => removeSavedEvent(event.id)}
-                    >
-                        Unsave
-                    </Button>
+                    {/* No filter matches messaging */}
+                    {filteredEvents.length === 0 && (
+                        <p className="muted-text">
+                            No saved events match your filters.
+                        </p>
+                    )}
+
                 </div>
-            )}
+            </section>
+
+            {/* Filters Section */}
+            <aside className="surface-card h-fit p-6 md:sticky md:top-6">
+                <h3 className="subsection-title mb-6">
+                    Filter Events
+                </h3>
+
+                <div className="flex flex-col gap-6">
+                    <SearchForm
+                        onSearch={setSearchTerm}
+                    />
+
+                    <CategoryForm
+                        categories={categories}
+                        onCategoryFilter={setCategoryFilters}
+                    />
+                </div>
+            </aside>
         </main>
     )
 }

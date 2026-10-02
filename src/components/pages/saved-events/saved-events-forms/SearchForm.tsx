@@ -25,25 +25,38 @@ export default function SearchForm({
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="event-search">
+        <form
+            onSubmit={handleSubmit}
+            className="form-group"
+        >
+            <label
+                htmlFor="event-search"
+                className="form-label"
+            >
                 Search Saved Events
             </label>
+            <div className="flex gap-2">
+                <input
+                    id="event-search"
+                    type="text"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    placeholder="Search event"
+                    className="form-control"
+                />
 
-            <input
-                id="event-search"
-                type="text"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Search event"
-            />
-
-            <Button type="submit">
-                Search
-            </Button>
+                <Button type="submit">
+                    Search
+                </Button>
+            </div>
 
             {searchErrors && (
-                <p role="alert">{searchErrors}</p>
+                <p 
+                    role="alert"
+                    className="form-error"
+                >
+                    {searchErrors}
+                </p>
             )}
         </form>
     )

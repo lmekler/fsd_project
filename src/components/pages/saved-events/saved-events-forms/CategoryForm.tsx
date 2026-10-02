@@ -23,31 +23,40 @@ export default function CategoryForm({
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="category-filter">
+        <form
+            onSubmit={handleSubmit}
+            className="form-group"
+        >
+            <label
+                htmlFor="category-filter"
+                className="form-label"
+            >
                 Filter by Category
             </label>
-            <select
-                id="category-filter"
-                name="category"
-                defaultValue=""
-            >
-                <option value="">
-                    Select Category
-                </option>
-
-                {categories.map((category) => (
-                    <option
-                        key={category}
-                        value={category}
-                    >
-                        {category}
+            <div className="flex gap-2">
+                <select
+                    id="category-filter"
+                    name="category"
+                    defaultValue=""
+                    className="form-control"
+                >
+                    <option value="">
+                        Select Category
                     </option>
-                ))}
-            </select>
-            <Button type="submit">
-                Filter
-            </Button>
+
+                    {categories.map((category) => (
+                        <option
+                            key={category}
+                            value={category}
+                        >
+                            {category}
+                        </option>
+                    ))}
+                </select>
+                <Button type="submit">
+                    Filter
+                </Button>
+            </div>
         </form>
     )
 }

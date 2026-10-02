@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;500&family=Roboto:wght@400;500;700&display=swap');
+@import "tailwindcss";
+@import "./components/common/styles/components.css";
+
+
+@theme {
+
+    /* Brand Colours */
+
+    --color-primary: #FF6666;
+    --color-primary-hover: #E85555;
+    --color-primary-light: #FFE5E5;
+
+    --color-background: #FFFBF1;
+    --color-accent: #D3D3D3;
+
+    /* Neutral Colours */
+    
+    --color-surface: #FFFFFF;
+    --color-border: #E5E5E5;
+
+    --color-text: #222222;
+    --color-text-muted: #6B6B6B;
+    --color-text-inverse: #FFFFFF;
+
+    /* Feedback Colours */
+
+    --color-success: #2E7D32;
+    --color-warning: #ED6C02;
+    --color-error: #D32F2F;
+    --color-info: #1976D2;
+
+    /* Typography */
+
+    --font-heading: "Lato", sans-serif;
+    --font-body: "Roboto", sans-serif;
+    --font-profile: "Open Sans", sans-serif;
+
+}

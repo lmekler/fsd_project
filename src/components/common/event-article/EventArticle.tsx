@@ -20,27 +20,28 @@ export default function EventArticle({
     location
 }: EventArticleProps) {
     return (
-        <article className="event-article">
-            <div className="info-container">
-                <h2 className="article-title">{title}</h2>
-                <div className="event-details-container">
-                    <p className="event-location">Location: {location.venue}</p>
-                    <p className="address">{location.address}, {location.city}</p>
-                    <p className="event-date"><strong>Date:</strong> {date}</p>
-                    <p className="event-time"><strong>Time:</strong> {
-                        endTime ? `${startTime} - ${endTime}`
-                        : `${startTime}`
-                    }</p>
-                </div>
-                <p className="event-description">{
-                    description ? `${description}`
-                    : 'No description available.'
-                }</p>
-                <p className="category">Category: {
-                    category ? `${category}`
-                    : 'Unassigned'
+        <article className="flex-1">
+            <h2 className="section-title mb-4">
+                {title}
+            </h2>
+            <div className="muted-text mb-4 flex flex-col gap-1">
+                <p className="font-medium text-text">Location: {location.venue}</p>
+                <p>{location.address}, {location.city}</p>
+                <p className="font-medium text-text">Date: {date}</p>
+                <p className="font-medium text-text"><strong>Time:</strong> {
+                    endTime ? `${startTime} - ${endTime}`
+                    : `${startTime}`
                 }</p>
             </div>
+            <p className="body-text mb-4 leading-relaxed">
+                {description || "No description available."}
+            </p>
+            <p className="muted-text">
+                <span className="font-medium text-text">
+                    Category:
+                </span>{" "}
+                {category || "Unassigned"}
+            </p>
         </article>
     )
 }
