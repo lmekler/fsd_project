@@ -1,6 +1,7 @@
 import { useState, type JSX } from "react"
 import type { Organizer } from "../../types/Organizer"
 import { provinces } from "../../types/Province";
+import Button from "../../common/button/Button";
 
 function Organizers({
         organizers,
@@ -149,99 +150,124 @@ function Organizers({
     }
 
     const organizerListItem: JSX.Element[] = organizers.map(organizer => {
-        return <section className="muted-text mb-4 flex flex-col gap-1" key={organizer.id}>
-            <h3 className="font-medium text-text" key={organizer.id + "name"}>{organizer.name}</h3>
-            <p className="font-medium text-text" key={organizer.id + "description"}>{organizer.description}</p>
-            <p className="font-medium text-text" key={organizer.id + "website"}>Website: <a href="#">{organizer.website}</a></p>
-            <p className="font-medium text-text" key={organizer.id + "email"}>Email: {organizer.email}</p>
-            <p className="font-medium text-text" key={organizer.id + "phone"}>Phone Number: {organizer.phone}</p>
-            <p className="font-medium text-text" key={organizer.id + "location"}>Location: {organizer.location.city}, {organizer.location.province}</p>
-            <button onClick={() => handleRemoveOrganizer(organizer.id)}>
-                Remove
-            </button>
-        </section>
+        return (
+            <section className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between" key={organizer.id}>
+                <h3 className="section-title mb-4" key={organizer.id + "name"}>{organizer.name}</h3>
+                <p className="font-medium text-text" key={organizer.id + "description"}>{organizer.description}</p>
+                <p className="font-medium text-text" key={organizer.id + "website"}>Website: <a href="#">{organizer.website}</a></p>
+                <p className="font-medium text-text" key={organizer.id + "email"}>Email: {organizer.email}</p>
+                <p className="font-medium text-text" key={organizer.id + "phone"}>Phone Number: {organizer.phone}</p>
+                <p className="font-medium text-text" key={organizer.id + "location"}>Location: {organizer.location.city}, {organizer.location.province}</p>
+                <Button 
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleRemoveOrganizer(organizer.id)}
+                >
+                    Remove
+                </Button>
+            </section>
+        )
     })
     
     return (
         <section className="page-container grid grid-cols-1 gap-8 py-8 md:grid-cols-[1fr_280px]">
-            <section className="flex-1">
-                <h2 className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">Event Organizers</h2>
+            <section className="flex flex-col gap-6">
+                <h2 className="page-title mb-6">Event Organizers</h2>
                 {organizerListItem}
             </section>
             
-            <h3 className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">Add New Organizer</h3>
-            <form method="post" onSubmit={handleAddOrganizer}>
-                <label>
-                    Name:
-                    <input 
-                        name="name" 
-                        value={formData.name} 
-                        onChange={handleChange}
-                    />
-                    {errors.name && <span className="error-message" style={{ color: 'red' }}>{errors.name}</span>}
-                </label>
-                <hr />
-                <label>
-                    Description:
-                    <textarea 
-                        name="description" 
-                        value={formData.description} 
-                        onChange={handleChange}
-                        rows={5}
-                        cols={40}
-                    />
-                    {errors.description && <span className="error-message" style={{ color: 'red' }}>{errors.description}</span>}
-                </label>
-                <hr />
-                <label>
-                    Website:
-                    <input 
-                        name="website" 
-                        value={formData.website} 
-                        onChange={handleChange}
-                    />
-                    {errors.website && <span className="error-message" style={{ color: 'red' }}>{errors.website}</span>}
-                </label>
-                <label>
-                    Email:
-                    <input 
-                        name="email" 
-                        value={formData.email} 
-                        onChange={handleChange}
-                    />
-                    {errors.email && <span className="error-message" style={{ color: 'red' }}>{errors.email}</span>}
-                </label>
-                <label>
-                    Phone Number:
-                    <input 
-                        name="phone" 
-                        value={formData.phone} 
-                        onChange={handleChange}
-                    />
-                    {errors.phone && <span className="error-message" style={{ color: 'red' }}>{errors.phone}</span>}
-                </label>
-                <hr />
-                <p>Location:</p>
-                <label>
-                    City:
-                    <input 
-                        name="city" 
-                        value={formData.city} 
-                        onChange={handleChange}
-                    />
-                    {errors.location.city && <span className="error-message" style={{ color: 'red' }}>{errors.location.city}</span>}
-                </label>
-                <label>
-                    Province:
-                    <select name="province" id="province" value={formData.location.province}>
-                        {provinces.map(p => {
-                            return <option key={p} value={p}>{p}</option>
-                        })};
-                    </select>
-                </label>
-                <hr />
-                <button type="submit">Add Organizer</button>
-            </form>
+            <section className="surface-card h-fit p-6 md:sticky md:top-6">
+                <h3 className="subsection-title mb-6">Add New Organizer</h3>
+                <form className="flex flex-col gap-6" method="post" onSubmit={handleAddOrganizer}>
+                    <label className="form-label">
+                        Name:
+                        <input 
+                            name="name" 
+                            value={formData.name} 
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                        {errors.name && <span className="error-message" style={{ color: 'red' }}>{errors.name}</span>}
+                    </label>
+                    <hr />
+                    <label className="form-label">
+                        Description:
+                        <textarea 
+                            name="description" 
+                            value={formData.description} 
+                            onChange={handleChange}
+                            rows={5}
+                            cols={40}
+                            className="form-control"
+                        />
+                        {errors.description && <span className="error-message" style={{ color: 'red' }}>{errors.description}</span>}
+                    </label>
+                    <hr />
+                    <label className="form-label">
+                        Website:
+                        <input 
+                            name="website" 
+                            value={formData.website} 
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                        {errors.website && <span className="error-message" style={{ color: 'red' }}>{errors.website}</span>}
+                    </label>
+                    <label className="form-label">
+                        Email:
+                        <input 
+                            name="email" 
+                            value={formData.email} 
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                        {errors.email && <span className="error-message" style={{ color: 'red' }}>{errors.email}</span>}
+                    </label>
+                    <label className="form-label">
+                        Phone Number:
+                        <input 
+                            name="phone" 
+                            value={formData.phone} 
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                        {errors.phone && <span className="error-message" style={{ color: 'red' }}>{errors.phone}</span>}
+                    </label>
+                    <hr />
+                    <p className="form-label">Location:</p>
+                    <label className="form-label">
+                        City:
+                        <input 
+                            name="city" 
+                            value={formData.city} 
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                        {errors.location.city && <span className="error-message" style={{ color: 'red' }}>{errors.location.city}</span>}
+                    </label>
+                    <label className="form-label">
+                        Province:
+                        <select 
+                            name="province" 
+                            id="province" 
+                            value={formData.location.province}
+                            className="form-control"
+                        >
+                            {provinces.map(p => {
+                                return <option key={p} value={p}>{p}</option>
+                            })};
+                        </select>
+                    </label>
+                    <hr />
+                    <Button
+                        variant="danger"
+                        size="sm"
+                        type="submit"
+                    >
+                        Add Organizer
+                    </Button>
+                </form>
+            </section>
         </section>
     );
 }
