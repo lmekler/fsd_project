@@ -25,25 +25,38 @@ export default function SearchForm({
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="event-search">
+        <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-2"
+        >
+            <label
+                htmlFor="event-search"
+                className="font-body text-sm font-medium text-text"
+            >
                 Search Saved Events
             </label>
+            <div className="flex gap-2">
+                <input
+                    id="event-search"
+                    type="text"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    placeholder="Search event"
+                    className="w-full rounded-md border border-border bg-surface px-3 py-2.5 font-body text-base text-text outline-none transition-colors placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
+                />
 
-            <input
-                id="event-search"
-                type="text"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Search event"
-            />
-
-            <Button type="submit">
-                Search
-            </Button>
+                <Button type="submit">
+                    Search
+                </Button>
+            </div>
 
             {searchErrors && (
-                <p role="alert">{searchErrors}</p>
+                <p 
+                    role="alert"
+                    className="font-body text-sm text-error"
+                >
+                    {searchErrors}
+                </p>
             )}
         </form>
     )
