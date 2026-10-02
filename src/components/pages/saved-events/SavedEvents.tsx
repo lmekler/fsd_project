@@ -36,38 +36,65 @@ export default function SavedEvents({
     })
 
     return (
-        <main className="saved-events-page">
-            <h2>Saved Events</h2>
+        <main className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 py-8 md:grid-cols-[1fr_280px] md:px-6 lg:px-8">
 
-            <SearchForm
-                onSearch={setSearchTerm}
-            />
+            {/* Saved Events Section */}
 
-            <CategoryForm
-                categories={categories}
-                onCategoryFilter={setCategoryFilters}
-            />
+            <section>
+                <h2 className="mb-6 font-heading text-xl font-bold text-text">
+                    Saved Events
+                </h2>
+                <div className="flex flex-col gap-6">
+                    {filteredEvents.map((event) =>
+                        <div
+                            key={event.id}
+                            className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-6 shadow-sm sm:flex-row sm:items-start sm:justify-between">
+                            <EventArticle
+                                title={event.title}
+                                description={event.description}
+                                category={event.category}
+                                date={event.date}
+                                startTime={event.startTime}
+                                endTime={event.endTime}
+                                location={event.location}
+                            />
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                onClick={() => removeSavedEvent(event.id)}
+                            >
+                                Unsave
+                            </Button>
+                        </div>
+                    )}
 
-            {filteredEvents.map((event) =>
-                <div key={event.id} className="saved-event-container">
-                    <EventArticle
-                        title={event.title}
-                        description={event.description}
-                        category={event.category}
-                        date={event.date}
-                        startTime={event.startTime}
-                        endTime={event.endTime}
-                        location={event.location}
-                    />
-                    <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => removeSavedEvent(event.id)}
-                    >
-                        Unsave
-                    </Button>
+                    {/* No filter matches messaging */}
+                    {filteredEvents.length === 0 && (
+                        <p className="font-body text-text-muted">
+                            No saved events match your filters.
+                        </p>
+                    )}
+
                 </div>
-            )}
+            </section>
+
+            {/* Filters Section */}
+            <aside className="h-fit rounded-lg border border-border bg-surface p-6 shadow-sm md:sticky md:top-6">
+                <h3 className="mb-6 font-heading text-xl font-bold text-text">
+                    Filter Events
+                </h3>
+
+                <div className="flex flex-col gap-6">
+                    <SearchForm
+                        onSearch={setSearchTerm}
+                    />
+
+                    <CategoryForm
+                        categories={categories}
+                        onCategoryFilter={setCategoryFilters}
+                    />
+                </div>
+            </aside>
         </main>
     )
 }
