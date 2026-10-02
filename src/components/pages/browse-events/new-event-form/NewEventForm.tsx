@@ -155,14 +155,16 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         <form className="new-event-form">
             {eventFields.map(({field, type, extraFields, dropdown}) =>
             (
-                dropdown &&
-                <div>
+                dropdown 
+                &&
+                <div key={field}>
                     <label>
                         {toTitle(field)}
                         <div>
                             <select 
+                                name={toCamelCase(field)}
                                 value={event[toCamelCase(field) as keyof Event]?.toString()}
-                                onChange={(e) => (handleChange(e))}
+                                onChange={handleChange}
                             >
                                 {
                                     dropdown.map((value) =>
@@ -177,7 +179,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                     </label>
                 </div>
                 ||
-                <div>
+                <div key={field}>
                     <label className={toKebabCase(field)}>
                         {toTitle(field)}
                         <div>
