@@ -22,7 +22,19 @@ export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: 
             <NewEventForm handleSubmit={handleSubmit}/>
             {events.map((event) =>
             (
-                <EventCard key={event.title+event.date} event={event}/>
+                <div>
+                    <EventCard key={event.title+event.date} event={event}/>
+                    <button onClick=
+                        {
+                            () => 
+                            {
+                                setEvents((events) => events.filter(currentEvent => currentEvent.id !== event.id))
+                            }
+                        }
+                    >
+                        Delete
+                    </button>
+                </div>
             ))}
         </main>
     )
