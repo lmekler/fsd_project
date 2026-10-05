@@ -23,13 +23,13 @@ function App() {
   const [organizers, setOrganizers] = useState<Organizer[]>(eventData.organizers);
 
   // Logic for saving and removing events
-  // const saveEvent = (event: Event) => {
-  //   // Using the setSavedEvents state here instead of the component
-  //   setSavedEvents((currentSaved) => [
-  //     ...currentSaved,
-  //     event
-  //   ])
-  // }
+  const saveEvent = (event: Event) => {
+    // Using the setSavedEvents state here instead of the component
+    setSavedEvents((currentSaved) => [
+      ...currentSaved,
+      event
+    ])
+  }
 
   const removeSavedEvent = (eventId: string) => {
     setSavedEvents((currentSaved) => currentSaved.filter(
@@ -46,6 +46,7 @@ function App() {
             <BrowseEvents
               events={events}
               setEvents={setEvents}
+              saveEvent={saveEvent}
             />
           }
         />
@@ -55,6 +56,7 @@ function App() {
             <BrowseEvents
               events={events}
               setEvents={setEvents}
+              saveEvent={saveEvent}
             />
           }
         />

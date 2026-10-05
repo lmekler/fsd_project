@@ -4,7 +4,11 @@ import type { Event } from "../../types/Event";
 import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";
 
-export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: React.Dispatch<React.SetStateAction<Event[]>>})
+export function BrowseEvents({events, setEvents, saveEvent} : {
+    events: Event[],
+    setEvents: React.Dispatch<React.SetStateAction<Event[]>>,
+    saveEvent: (event: Event) => void
+})
 {
     function handleSubmit(event: Event): void
     {
@@ -30,6 +34,12 @@ export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: 
                     (
                         <div className="surface-card flex h-full flex-col">
                             <EventCard key={event.title+event.date} event={event}/>
+                            <Button
+                                variant="secondary"
+                                size="sm"
+                                onClick={() => saveEvent(event)}>
+                                Save Event
+                            </Button>
                             <Button 
                                 variant="danger"
                                 size="sm"
