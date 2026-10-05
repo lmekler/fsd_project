@@ -92,7 +92,8 @@ function Organizers({
         return prefix + "0".repeat(zerosNeeded) + (organizers.length + 1).toString();
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLFormElement>): void => {
+    // const handleChange = (e: React.ChangeEvent<HTMLFormElement>): void => {
+    const handleChange = (e: any): void => {
         const {name, value} = e.target;
 
         if (name === "city" || name === "province") {
@@ -256,7 +257,8 @@ function Organizers({
                             City:
                             <input 
                                 name="city" 
-                                value={formData.city} 
+                                // value={formData.city} 
+                                value={formData.location.city} 
                                 onChange={handleChange}
                                 className="form-control"
                             />
