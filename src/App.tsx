@@ -19,7 +19,7 @@ import type { Organizer } from './components/types/Organizer'
 
 function App() {
   const [events, setEvents] = useState<Event[]>(eventData.events)
-  const [savedEvents, setSavedEvents] = useState<Event[]>(eventData.savedEvents); // Currently loading the sample data
+  const [savedEvents, setSavedEvents] = useState<Event[]>([]); // Currently loading the sample data
   const [organizers, setOrganizers] = useState<Organizer[]>(eventData.organizers);
 
   // Logic for saving and removing events
