@@ -1,5 +1,5 @@
 import { EventCard } from "../../common/event-card/EventCard"
-import type { Event } from "../../types/Event";
+import type { Event } from "../../../types/Event";
 
 import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";

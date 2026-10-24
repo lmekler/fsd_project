@@ -10,11 +10,11 @@ import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
 import SavedEvents from './components/pages/saved-events/SavedEvents'
 import Organizers from './components/pages/browse-organizers/BrowseOrganizers'
 import { useState } from 'react'
-import eventData from "./components/data/data.json"
+import eventData from "../src/data/data.json"
 
 // Type Imports
-import type { Event } from './components/types/Event'
-import type { Organizer } from './components/types/Organizer'
+import type { Event } from './types/Event'
+import type { Organizer } from './types/Organizer'
 
 
 function App() {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../../common/button/Button";
 import EventArticle from "../../common/event-article/EventArticle";
-import type { Event } from "../../types/Event";
+import type { Event } from "../../../types/Event";
 import SearchForm from "./saved-events-forms/SearchForm";
 import CategoryForm from "./saved-events-forms/CategoryForm";
 
