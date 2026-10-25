@@ -2,7 +2,7 @@ import type { SavedEvent } from "../types/Event";
 import type { SavedEventWithDetails } from "../types/Event";
 import * as savedEventsRepo from "../repositories/savedEventsRepo";
 
-// For Events
+// For Events - DELETE WHEN INTEGRATED
 import type { Event } from "../types/Event";
 import data from "../data/data.json";
 
