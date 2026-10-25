@@ -26,3 +26,13 @@ export interface Location
     province: string;
     postalCode: string;
 }
+
+export interface SavedEvent {
+    savedEventId: string;
+    userId: string;
+    eventId: string;
+}
+
+export interface SavedEventWithDetails extends SavedEvent {
+    event: Event
+}
