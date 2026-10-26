@@ -1,6 +1,6 @@
 import organizerData from "../components/data/data.json"
 import { useState } from "react";
-import type { Organizer } from "../components/types/Organizer";
+import type { Organizer, CreateOrganizer } from "../components/types/Organizer";
 
 const [organizers, setOrganizers] = useState(organizerData.organizers);
 
@@ -25,5 +25,29 @@ export const organizerRepository = {
             organizer: organizer.name
         }
     }
+  },
+
+  async add(input: CreateOrganizer): Promise<Organizer[]> {
+    const organizer: Organizer = {
+        id: nextId,
+        name: input.name,
+        description: input.description,
+        website: input.website,
+        email: input.email,
+        phone: input.phone,
+        location: {
+            city: input.location.city,
+            province: input.location.province,
+            country: "Canada"
+        },
+        image: ""
+    };
+
+    setOrganizers(prevOrganizers => [
+        ...prevOrganizers,
+        organizer
+    ])
+
+    return organizers;
   }
 };
