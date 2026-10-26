@@ -15,3 +15,19 @@ export function getSavedEventsByUser(userId: string): SavedEvent[] {
 
     return [...userSavedEvents];
 }
+
+export function addSavedEvent(savedEvent: SavedEvent): SavedEvent {
+    savedEvents = [...savedEvents, savedEvent];
+
+    return savedEvent;
+}
+
+export function removeSavedEvent(savedEventId: string): void {
+    const index: number = savedEvents.findIndex(
+        (savedEvent) => savedEvent.savedEventId === savedEventId
+    );
+
+    if (index !== -1) {
+        savedEvents.splice(index, 1);
+    }
+}
