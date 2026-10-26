@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import { useParams } from "react-router-dom";
-// import Button from "../../common/button/Button";
+import Button from "../../common/button/Button";
 import EventArticle from "../../common/event-article/EventArticle";
 // import type { Event } from "../../../types/Event";
 // import SearchForm from "./saved-events-forms/SearchForm";
@@ -10,7 +10,10 @@ import { useSavedEvents } from "../../../hooks/useSavedEvents";
 
 export default function SavedEvents() {
     const { userId } = useParams<{ userId: string }>();
-    const { savedEvents } = useSavedEvents(userId ?? "");
+    const { 
+        savedEvents,
+        removeSavedEvent
+    } = useSavedEvents(userId ?? "");
 
     // // Set States
     // const [searchTerm, setSearchTerm] = useState<string>("")
@@ -57,13 +60,13 @@ export default function SavedEvents() {
                                 endTime={event.event.endTime}
                                 location={event.event.location}
                             />
-                            {/* <Button
+                            <Button
                                 variant="danger"
                                 size="sm"
                                 onClick={() => removeSavedEvent(event.savedEventId)}
                             >
                                 Unsave
-                            </Button> */}
+                            </Button>
                         </div>
                     )}
 
