@@ -1,39 +1,38 @@
-import { useState } from "react";
-import Button from "../../common/button/Button";
+// import { useState } from "react";
+import { useParams } from "react-router-dom";
+// import Button from "../../common/button/Button";
 import EventArticle from "../../common/event-article/EventArticle";
-import type { Event } from "../../../types/Event";
-import SearchForm from "./saved-events-forms/SearchForm";
-import CategoryForm from "./saved-events-forms/CategoryForm";
+// import type { Event } from "../../../types/Event";
+// import SearchForm from "./saved-events-forms/SearchForm";
+// import CategoryForm from "./saved-events-forms/CategoryForm";
 
-export default function SavedEvents({
-    savedEvents,
-    removeSavedEvent
-}: {
-    savedEvents: Event[],
-    removeSavedEvent: (eventId: string) => void
-}) {
+import { useSavedEvents } from "../../../hooks/useSavedEvents";
 
-    // Set States
-    const [searchTerm, setSearchTerm] = useState<string>("")
-    const [categoryFilters, setCategoryFilters] = useState<string>("")
+export default function SavedEvents() {
+    const { userId } = useParams<{ userId: string }>();
+    const { savedEvents } = useSavedEvents(userId ?? "");
 
-    // Derive categories from saved events
-    const categories: (string | undefined)[] = [
-        ...new Set(savedEvents.map((savedEvent) => savedEvent.category))
-    ];
+    // // Set States
+    // const [searchTerm, setSearchTerm] = useState<string>("")
+    // const [categoryFilters, setCategoryFilters] = useState<string>("")
 
-    // Filtering logic
-    const filteredEvents: Event[] = savedEvents.filter((event) => {
+    // // Derive categories from saved events
+    // const categories: (string | undefined)[] = [
+    //     ...new Set(savedEvents.map((savedEvent) => savedEvent.category))
+    // ];
 
-        // Check if there is any filtering submitted from forms
-        const searchMatches: boolean = 
-            searchTerm === "" ||
-            event.title.toLowerCase().includes(searchTerm.toLowerCase());
+    // // Filtering logic
+    // const filteredEvents: Event[] = savedEvents.filter((event) => {
+
+    //     // Check if there is any filtering submitted from forms
+    //     const searchMatches: boolean = 
+    //         searchTerm === "" ||
+    //         event.title.toLowerCase().includes(searchTerm.toLowerCase());
         
-        const categoryMatches: boolean = categoryFilters === "" || event.category === categoryFilters;
+    //     const categoryMatches: boolean = categoryFilters === "" || event.category === categoryFilters;
         
-        return searchMatches && categoryMatches;
-    })
+    //     return searchMatches && categoryMatches;
+    // })
 
     return (
         <main className="page-container grid grid-cols-1 gap-8 py-8 md:grid-cols-[1fr_280px]">
@@ -45,31 +44,31 @@ export default function SavedEvents({
                     Saved Events
                 </h2>
                 <div className="flex flex-col gap-6">
-                    {filteredEvents.map((event) =>
+                    {savedEvents.map((event) =>
                         <div
-                            key={event.id}
+                            key={event.savedEventId}
                             className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between">
                             <EventArticle
-                                title={event.title}
-                                description={event.description}
-                                category={event.category}
-                                date={event.date}
-                                startTime={event.startTime}
-                                endTime={event.endTime}
-                                location={event.location}
+                                title={event.event.title}
+                                description={event.event.description}
+                                category={event.event.category}
+                                date={event.event.date}
+                                startTime={event.event.startTime}
+                                endTime={event.event.endTime}
+                                location={event.event.location}
                             />
-                            <Button
+                            {/* <Button
                                 variant="danger"
                                 size="sm"
-                                onClick={() => removeSavedEvent(event.id)}
+                                onClick={() => removeSavedEvent(event.savedEventId)}
                             >
                                 Unsave
-                            </Button>
+                            </Button> */}
                         </div>
                     )}
 
                     {/* No filter matches messaging */}
-                    {filteredEvents.length === 0 && (
+                    {savedEvents.length === 0 && (
                         <p className="muted-text">
                             No saved events match your filters.
                         </p>
@@ -78,7 +77,7 @@ export default function SavedEvents({
                 </div>
             </section>
 
-            {/* Filters Section */}
+            {/* Filters Section
             <aside className="surface-card h-fit p-6 md:sticky md:top-6">
                 <h3 className="subsection-title mb-6">
                     Filter Events
@@ -94,7 +93,7 @@ export default function SavedEvents({
                         onCategoryFilter={setCategoryFilters}
                     />
                 </div>
-            </aside>
+            </aside> */}
         </main>
     )
 }
