@@ -1,7 +1,7 @@
 import type { SavedEvent } from "../types/Event";
 import data from "../data/data.json";
 
-let savedEvents: SavedEvent[] = [...data.savedEvents];
+const savedEvents: SavedEvent[] = [...data.savedEvents];
 
 
 export function getAllSavedEvents(): SavedEvent[] {
@@ -16,15 +16,23 @@ export function getSavedEventsByUser(userId: string): SavedEvent[] {
     return [...userSavedEvents];
 }
 
+export function getSavedEventById(savedEventId: string): SavedEvent | undefined {
+    const fetchedSavedEvent: SavedEvent | undefined = savedEvents.find(
+        (event) => event.savedEventId === savedEventId
+    )
+
+    return fetchedSavedEvent;
+}
+
 export function addSavedEvent(savedEvent: SavedEvent): SavedEvent {
-    savedEvents = [...savedEvents, savedEvent];
+    savedEvents.push(savedEvent);
 
     return savedEvent;
 }
 
 export function removeSavedEvent(savedEventId: string): void {
     const index: number = savedEvents.findIndex(
-        (savedEvent) => savedEvent.savedEventId === savedEventId
+        (event) => event.savedEventId === savedEventId
     );
 
     if (index !== -1) {
