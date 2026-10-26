@@ -25,25 +25,23 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout/>}>
 
-        {/* <Route index element=
+        <Route index element=
           {
             <BrowseEvents
               events={events}
               setEvents={setEvents}
-              saveEvent={saveEvent}
             />
           }
-        /> */}
+        />
 
-        {/* <Route path="/browse-events" element=
+        <Route path="/browse-events" element=
           {
             <BrowseEvents
               events={events}
               setEvents={setEvents}
-              saveEvent={saveEvent}
             />
           }
-        /> */}
+        />
 
         <Route path="saved-events/:userId?" element={
           <SavedEvents />

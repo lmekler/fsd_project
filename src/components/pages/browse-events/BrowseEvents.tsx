@@ -3,13 +3,19 @@ import type { Event } from "../../../types/Event";
 
 import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";
+import { useSavedEvents } from "../../../hooks/useSavedEvents";
 
-export function BrowseEvents({events, setEvents, saveEvent} : {
+export function BrowseEvents({events, setEvents} : {
     events: Event[],
     setEvents: React.Dispatch<React.SetStateAction<Event[]>>,
-    saveEvent: (event: Event) => void
 })
 {
+    // Mocking user log in
+    const mockedUserId: string = "user_001";
+
+    // SavedEvent Hook
+    const { addSavedEvent } = useSavedEvents(mockedUserId);
+
     function handleSubmit(event: Event): void
     {
         setEvents(events =>
@@ -37,7 +43,7 @@ export function BrowseEvents({events, setEvents, saveEvent} : {
                             <Button
                                 variant="secondary"
                                 size="sm"
-                                onClick={() => saveEvent(event)}>
+                                onClick={() => addSavedEvent(event.id)}>
                                 Save Event
                             </Button>
                             <Button 
