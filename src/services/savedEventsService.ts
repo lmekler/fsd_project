@@ -60,6 +60,21 @@ export function filterSavedEvents(
     return filteredEvents;
 }
 
+export function addSavedEvent(userId: string, eventId: string): SavedEventWithDetails[] {
+    const savedEventId: string = `saved_${crypto.randomUUID()}`;
+
+    const savedEvent: SavedEvent = {
+        savedEventId,
+        userId,
+        eventId
+    }
+    savedEventsRepo.addSavedEvent(savedEvent)
+
+    const rerenderedArray: SavedEventWithDetails[] = getSavedEventsByUser(userId);
+
+    return rerenderedArray;
+}
+
 export function removeSavedEvent(userId: string, savedEventId: string): SavedEventWithDetails[] {
     const checkedSavedEvent: SavedEvent | undefined =
         savedEventsRepo.getSavedEventById(savedEventId);
