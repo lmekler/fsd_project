@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 
 // Common Component Imports
 import { Layout } from './components/common/layout/Layout'
+import NotFound from './components/pages/NotFound'
 
 // Feature Imports
 import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
@@ -44,7 +45,7 @@ function App() {
           }
         /> */}
 
-        <Route path=":userId/saved-events" element={
+        <Route path="saved-events/:userId" element={
           <SavedEvents />
         }/>
 
@@ -54,7 +55,8 @@ function App() {
               setOrganizers={setOrganizers}
             />}/>
         </Route>
-
+        
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
