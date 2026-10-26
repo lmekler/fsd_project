@@ -20,21 +20,6 @@ function App() {
   const [events, setEvents] = useState<Event[]>(eventData.events)
   const [organizers, setOrganizers] = useState<Organizer[]>(eventData.organizers);
 
-  // // Logic for saving and removing events
-  // const saveEvent = (event: Event) => {
-  //   // Using the setSavedEvents state here instead of the component
-  //   setSavedEvents((currentSaved) => [
-  //     ...currentSaved,
-  //     event
-  //   ])
-  // }
-
-  // const removeSavedEvent = (eventId: string) => {
-  //   setSavedEvents((currentSaved) => currentSaved.filter(
-  //     (event) => event.id !== eventId
-  //   ))
-  // }
-
   return (
     <Routes>
       <Route path="/" element={<Layout/>}>
