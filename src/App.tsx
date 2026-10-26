@@ -45,7 +45,7 @@ function App() {
           }
         /> */}
 
-        <Route path="saved-events/:userId" element={
+        <Route path="saved-events/:userId?" element={
           <SavedEvents />
         }/>
 

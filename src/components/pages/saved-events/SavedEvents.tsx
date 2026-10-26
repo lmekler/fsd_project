@@ -58,9 +58,12 @@ export default function SavedEvents() {
                     {/* Empty list messaging */}
                     {filteredSavedEvents.length === 0 && (
                         <p className="muted-text">
-                            {savedEvents.length === 0
-                                ? "You don't have any saved events."
-                                : "No saved events match your filters."
+                            {
+                                !userId 
+                                ? "You must be logged in to see saved events."
+                                : savedEvents.length === 0
+                                    ? "You don't have any saved events."
+                                    : "No saved events match your filters."
                             }
                         </p>
                     )}
