@@ -39,6 +39,27 @@ export function getSavedEventsByUser(userId: string): SavedEventWithDetails[] {
     return savedEventsWithDetails;
 }
 
+export function filterSavedEvents(
+    savedEvents: SavedEventWithDetails[],
+    searchTerm: string,
+    categoryFilters: string
+): SavedEventWithDetails[] {
+
+    const filteredEvents: SavedEventWithDetails[] = savedEvents.filter((event) => {
+
+        // Check if there is any filtering submitted from forms
+        const searchMatches: boolean = 
+            searchTerm === "" ||
+            event.event.title.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        const categoryMatches: boolean = categoryFilters === "" || event.event.category === categoryFilters;
+        
+        return searchMatches && categoryMatches;
+    })
+
+    return filteredEvents;
+}
+
 export function removeSavedEvent(userId: string, savedEventId: string): SavedEventWithDetails[] {
     const checkedSavedEvent: SavedEvent | undefined =
         savedEventsRepo.getSavedEventById(savedEventId);
@@ -48,6 +69,6 @@ export function removeSavedEvent(userId: string, savedEventId: string): SavedEve
     }
 
     const rerenderedArray: SavedEventWithDetails[] = getSavedEventsByUser(userId);
-    
+
     return rerenderedArray;
 }
