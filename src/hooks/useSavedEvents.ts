@@ -16,18 +16,26 @@ export function useSavedEvents(userId: string) {
         savedEvents,
         searchTerm,
         categoryFilters
-    )
+    );
+
+    const addSavedEvent = useCallback(
+        (eventId: string) =>
+            setSavedEvents(savedEventsService.addSavedEvent(userId, eventId)),
+        [userId]
+    );
+
     const removeSavedEvent = useCallback(
         (savedEventId: string) => 
             setSavedEvents(savedEventsService.removeSavedEvent(userId, savedEventId)),
         [userId]
-    )
+    );
 
     return {
         savedEvents,
         filteredSavedEvents,
         setSearchTerm,
         setCategoryFilters,
+        addSavedEvent,
         removeSavedEvent
     }
 }
