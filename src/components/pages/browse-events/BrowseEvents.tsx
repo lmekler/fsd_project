@@ -18,31 +18,35 @@ export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: 
     }
 
     return (
-        <main className="page-container">
-            <section>
+        <main className="page-container py-8">
+            <section className="flex flex-col gap-8">
                 <h2 className="page-title">Browsing Events in Winnipeg</h2>
+
                 <div>
                     <NewEventForm handleSubmit={handleSubmit}/>
                 </div>
+
                 <br></br>
                 <div className="browse-events-container">
                     {events.map((event) =>
                     (
                         <div className="surface-card flex h-full flex-col">
                             <EventCard key={event.title+event.date} event={event}/>
-                            <Button 
-                                variant="danger"
-                                size="sm"
-                                onClick=
-                                {
-                                    () => 
+                            <div className="mt-auto flex justify-end px-4 pb-4">
+                                <Button 
+                                    variant="danger"
+                                    size="sm"
+                                    onClick=
                                     {
-                                        setEvents((events) => events.filter(currentEvent => currentEvent.id !== event.id))
+                                        () => 
+                                        {
+                                            setEvents((events) => events.filter(currentEvent => currentEvent.id !== event.id))
+                                        }
                                     }
-                                }
-                            >
-                                Delete
-                            </Button>
+                                >
+                                    Delete
+                                </Button>
+                            </div>
                         </div>
                     ))}
                 </div>
