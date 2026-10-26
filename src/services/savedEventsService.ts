@@ -38,3 +38,16 @@ export function getSavedEventsByUser(userId: string): SavedEventWithDetails[] {
     
     return savedEventsWithDetails;
 }
+
+export function removeSavedEvent(userId: string, savedEventId: string): SavedEventWithDetails[] {
+    const checkedSavedEvent: SavedEvent | undefined =
+        savedEventsRepo.getSavedEventById(savedEventId);
+    
+    if (checkedSavedEvent && checkedSavedEvent.userId === userId) {
+        savedEventsRepo.removeSavedEvent(savedEventId);
+    }
+
+    const rerenderedArray: SavedEventWithDetails[] = getSavedEventsByUser(userId);
+    
+    return rerenderedArray;
+}
