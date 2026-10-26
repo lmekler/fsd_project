@@ -351,54 +351,54 @@
   ],
   "savedEvents" : [
     {
-      savedEventId: "saved_001",
-      userId: "user_001",
-      eventId: "event_001"
+      "savedEventId": "saved_001",
+      "userId": "user_001",
+      "eventId": "event_001"
     },
     {
-      savedEventId: "saved_002",
-      userId: "user_001",
-      eventId: "event_002"
+      "savedEventId": "saved_002",
+      "userId": "user_001",
+      "eventId": "event_002"
     },
     {
-      savedEventId: "saved_003",
-      userId: "user_001",
-      eventId: "event_003"
+      "savedEventId": "saved_003",
+      "userId": "user_001",
+      "eventId": "event_003"
     },
     {
-      savedEventId: "saved_004",
-      userId: "user_001",
-      eventId: "event_004"
+      "savedEventId": "saved_004",
+      "userId": "user_001",
+      "eventId": "event_004"
     },
     {
-      savedEventId: "saved_005",
-      userId: "user_001",
-      eventId: "event_005"
+      "savedEventId": "saved_005",
+      "userId": "user_001",
+      "eventId": "event_005"
     },
     {
-      savedEventId: "saved_006",
-      userId: "user_002",
-      eventId: "event_001",
+      "savedEventId": "saved_006",
+      "userId": "user_002",
+      "eventId": "event_001"
     },
     {
-      savedEventId: "saved_007",
-      userId: "user_002",
-      eventId: "event_006"
+      "savedEventId": "saved_007",
+      "userId": "user_002",
+      "eventId": "event_006"
     },
     {
-      savedEventId: "saved_008",
-      userId: "user_002",
-      eventId: "event_007"
+      "savedEventId": "saved_008",
+      "userId": "user_002",
+      "eventId": "event_007"
     },
     {
-      savedEventId: "saved_009",
-      userId: "user_002",
-      eventId: "event_008"
+      "savedEventId": "saved_009",
+      "userId": "user_002",
+      "eventId": "event_008"
     },
     {
-      savedEventId: "saved_010",
-      userId: "user_002",
-      eventId: "event_002"
+      "savedEventId": "saved_010",
+      "userId": "user_002",
+      "eventId": "event_002"
     }
   ]
 }
