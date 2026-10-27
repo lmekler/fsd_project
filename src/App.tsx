@@ -27,19 +27,13 @@ function App() {
 
         <Route index element=
           {
-            <BrowseEvents
-              events={events}
-              setEvents={setEvents}
-            />
+            <BrowseEvents/>
           }
         />
 
         <Route path="/browse-events" element=
           {
-            <BrowseEvents
-              events={events}
-              setEvents={setEvents}
-            />
+            <BrowseEvents/>
           }
         />
 

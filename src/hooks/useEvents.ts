@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { eventService } from "../services/EventService"
-import type { Event } from "../components/types/Event"
+import type { Event } from "../types/Event"
 
 export function useEvents() 
 {

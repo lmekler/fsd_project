@@ -1,5 +1,5 @@
-import eventData from "../components/data/data.json"
-import type { Event } from "../components/types/Event"
+import eventData from "../data/data.json"
+import type { Event } from "../types/Event"
 
 let events: Event[] = []
 

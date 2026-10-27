@@ -1,4 +1,4 @@
-import type { Event } from "../components/types/Event"
+import type { Event } from "../types/Event"
 import { eventRepository } from "../repositories/EventRepository"
 import { toTitle } from "../components/common/stringUtils"
 
