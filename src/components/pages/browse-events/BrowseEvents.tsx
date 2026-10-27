@@ -14,7 +14,7 @@ export function BrowseEvents({events, setEvents} : {
     const mockedUserId: string = "user_001";
 
     // SavedEvent Hook
-    const { addSavedEvent } = useSavedEvents(mockedUserId);
+    const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId);
 
     function handleSubmit(event: Event): void
     {
@@ -43,8 +43,9 @@ export function BrowseEvents({events, setEvents} : {
                             <Button
                                 variant="secondary"
                                 size="sm"
+                                disabled={isSaved(event.id)}
                                 onClick={() => addSavedEvent(event.id)}>
-                                Save Event
+                                {isSaved(event.id) ? "Saved": "Save Event"}
                             </Button>
                             <Button 
                                 variant="danger"

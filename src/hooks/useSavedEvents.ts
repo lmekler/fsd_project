@@ -24,6 +24,11 @@ export function useSavedEvents(userId: string) {
         [userId]
     );
 
+    const isSaved = useCallback(
+        (eventId: string) => savedEvents.some((event) => event.eventId === eventId),
+        [savedEvents]
+    )
+
     const removeSavedEvent = useCallback(
         (savedEventId: string) => 
             setSavedEvents(savedEventsService.removeSavedEvent(userId, savedEventId)),
@@ -36,6 +41,7 @@ export function useSavedEvents(userId: string) {
         setSearchTerm,
         setCategoryFilters,
         addSavedEvent,
+        isSaved,
         removeSavedEvent
     }
 }

@@ -61,14 +61,21 @@ export function filterSavedEvents(
 }
 
 export function addSavedEvent(userId: string, eventId: string): SavedEventWithDetails[] {
-    const savedEventId: string = `saved_${crypto.randomUUID()}`;
+    const alreadySaved = savedEventsRepo.getSavedEventsByUser(userId).some(
+        (savedEvent) => savedEvent.eventId === eventId
+    );
 
-    const savedEvent: SavedEvent = {
-        savedEventId,
-        userId,
-        eventId
+    if (!alreadySaved && getEventById(eventId)){
+        const savedEventId: string = `saved_${crypto.randomUUID()}`;
+    
+        const savedEvent: SavedEvent = {
+            savedEventId,
+            userId,
+            eventId
+        }
+
+        savedEventsRepo.addSavedEvent(savedEvent);
     }
-    savedEventsRepo.addSavedEvent(savedEvent)
 
     const rerenderedArray: SavedEventWithDetails[] = getSavedEventsByUser(userId);
 
