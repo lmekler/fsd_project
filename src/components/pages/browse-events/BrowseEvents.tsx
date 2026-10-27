@@ -1,20 +1,20 @@
 import { EventCard } from "../../common/event-card/EventCard"
 import type { Event } from "../../types/Event";
-
+import { useEvents } from "../../../hooks/useEvents";
 import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";
 
-export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: React.Dispatch<React.SetStateAction<Event[]>>})
+export function BrowseEvents()
 {
+    const {
+        events,
+        addEvent,
+        removeEvent
+    } = useEvents()
+
     function handleSubmit(event: Event): void
     {
-        setEvents(events =>
-        (
-            [
-                event,
-                ...events
-            ]
-        ))
+        addEvent(event)
     }
 
     return (
@@ -37,7 +37,7 @@ export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: 
                                 {
                                     () => 
                                     {
-                                        setEvents((events) => events.filter(currentEvent => currentEvent.id !== event.id))
+                                        removeEvent(event.id)
                                     }
                                 }
                             >
