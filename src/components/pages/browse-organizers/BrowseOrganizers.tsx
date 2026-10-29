@@ -32,6 +32,25 @@ function Organizers() {
 
     const [formData, setFormData] = useState(defaultOrganizer);
 
+    const handleChange = (e: any): void => {
+        const {name, value} = e.target;
+
+        if (name === "city" || name === "province") {
+            setFormData(prev => ({
+                ...prev,
+                location: {
+                    ...prev.location,
+                    [name]: value
+                }
+            }));
+        } else {
+            setFormData((prev) => ({
+                ...prev,
+                [name]: value
+            }));
+        }
+    }
+
     async function handleAddOrganizer(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
@@ -73,7 +92,8 @@ function Organizers() {
                             Name:
                             <input 
                                 name="name" 
-                                value={formData.name} 
+                                value={formData.name}
+                                onChange={handleChange} 
                                 className="form-control"
                                 required
                             />
@@ -84,6 +104,7 @@ function Organizers() {
                             <textarea 
                                 name="description" 
                                 value={formData.description} 
+                                onChange={handleChange}
                                 rows={5}
                                 cols={40}
                                 className="form-control"
@@ -96,6 +117,7 @@ function Organizers() {
                             <input 
                                 name="website" 
                                 value={formData.website} 
+                                onChange={handleChange}
                                 className="form-control"
                                 required
                             />
@@ -104,7 +126,8 @@ function Organizers() {
                             Email:
                             <input 
                                 name="email" 
-                                value={formData.email} 
+                                value={formData.email}
+                                onChange={handleChange}
                                 className="form-control"
                                 required
                             />
@@ -114,6 +137,7 @@ function Organizers() {
                             <input 
                                 name="phone" 
                                 value={formData.phone} 
+                                onChange={handleChange}
                                 className="form-control"
                                 required
                             />
@@ -123,9 +147,9 @@ function Organizers() {
                         <label className="form-label">
                             City:
                             <input 
-                                name="city" 
-                                // value={formData.city} 
+                                name="city"
                                 value={formData.location.city} 
+                                onChange={handleChange}
                                 className="form-control"
                                 required
                             />
@@ -136,6 +160,7 @@ function Organizers() {
                                 name="province" 
                                 id="province" 
                                 value={formData.location.province}
+                                onChange={handleChange}
                                 className="form-control"
                             >
                                 {provinces.map(p => {
