@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react"
+import { useState } from "react"
 import type { CreateOrganizer, Organizer } from "../../types/Organizer"
 import { provinces } from "../../types/Province";
 import Button from "../../common/button/Button";
@@ -29,17 +29,6 @@ function Organizers() {
         image: ''
     }
 
-    const organizerErrors = {
-        name: '',
-        description: '',
-        website: '',
-        email: '',
-        phone: '',
-        location: {
-            city: ''
-        }
-    }
-
     const [formData, setFormData] = useState(defaultOrganizer);
 
     async function handleAddOrganizer(e: React.FormEvent<HTMLFormElement>) {
@@ -57,7 +46,7 @@ function Organizers() {
             }
         }
 
-        const added = await addOrganizer(newOrganizer)
+        const added = await addOrganizer(newOrganizer);
 
         if (added) {
             setFormData(defaultOrganizer);

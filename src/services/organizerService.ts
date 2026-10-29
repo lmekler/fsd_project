@@ -32,7 +32,11 @@ function validateOrganizer(
 
     if (!input.location.city.trim()) {
         errors.push("City is required.");
-    }      
+    }    
+    
+    if (errors.length > 0) {
+        throw new Error(errors.join(" "));
+    }
 }
 
 export const organizerService = {
