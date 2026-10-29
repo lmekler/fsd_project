@@ -14,13 +14,11 @@ import eventData from "./components/data/data.json"
 
 // Type Imports
 import type { Event } from './components/types/Event'
-import type { Organizer } from './components/types/Organizer'
 
 
 function App() {
   const [events, setEvents] = useState<Event[]>(eventData.events)
   const [savedEvents, setSavedEvents] = useState<Event[]>(eventData.savedEvents); // Currently loading the sample data
-  const [organizers, setOrganizers] = useState<Organizer[]>(eventData.organizers);
 
   // Logic for saving and removing events
   // const saveEvent = (event: Event) => {
@@ -66,10 +64,9 @@ function App() {
         }/>
 
         <Route path="/organizers">
-          <Route index element={<Organizers
-              organizers={organizers}
-              setOrganizers={setOrganizers}
-            />}/>
+          <Route index element={
+            <Organizers/>
+          }/>
         </Route>
 
       </Route>

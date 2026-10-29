@@ -10,7 +10,8 @@ function Organizers() {
         organizers,
         loading,
         errors,
-        addOrganizer
+        addOrganizer,
+        removeOrganizer
     } = useOrganizer();
 
     // Defines organizer with default values
@@ -61,7 +62,7 @@ function Organizers() {
                 ) : (
                     <OrganizerList
                     organizers={organizers}
-                    removeOrganizer={}
+                    removeOrganizer={removeOrganizer}
                     />
                 )}
                 
