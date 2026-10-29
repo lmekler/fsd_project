@@ -63,5 +63,13 @@ export const organizerService = {
         validateOrganizer(organizerInput);
 
         return organizerRepository.add(organizerInput);
-    }
+    },
+
+    async removeOrganizer(id: string): Promise<void> {
+        const removed = await organizerRepository.remove(id);
+
+        if (!removed) {
+            throw new Error("Organizer not found.");
+        }
+    },
 };
