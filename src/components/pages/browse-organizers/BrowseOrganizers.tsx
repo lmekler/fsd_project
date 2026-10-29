@@ -1,16 +1,17 @@
 import { useState, type JSX } from "react"
-import type { Organizer } from "../../types/Organizer"
+import type { CreateOrganizer, Organizer } from "../../types/Organizer"
 import { provinces } from "../../types/Province";
 import Button from "../../common/button/Button";
+import { useOrganizer } from "../../../hooks/useOrganizer";
+import { OrganizerList } from "./OrganizerList";
 
-function Organizers({
+function Organizers() {
+    const {
         organizers,
-        setOrganizers
-    }:
-    {
-        organizers: Organizer[],
-        setOrganizers: React.Dispatch<React.SetStateAction<Organizer[]>>
-    }): JSX.Element {
+        loading,
+        errors,
+        addOrganizer
+    } = useOrganizer();
 
     // Defines organizer with default values
     const defaultOrganizer: Organizer = {
@@ -41,90 +42,10 @@ function Organizers({
 
     const [formData, setFormData] = useState(defaultOrganizer);
 
-    const [errors, setErrors] = useState(organizerErrors);
-
-    const validateForm = (): boolean => {
-        let isValid: boolean = true;
-        const newErrors = organizerErrors;
-
-        const websiteRegex = /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        const phoneRegex = /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-
-        if (formData.name.trim().length < 3) {
-            newErrors.name = "First name must be at least 3 characters long.";
-            isValid = false;
-        }
-
-        if (!formData.description.trim()) {
-            newErrors.description = "Description is required.";
-            isValid = false;
-        }
-
-        if (!websiteRegex.test(formData.website)) {
-            newErrors.website = "Website is invalid.";
-            isValid = false;
-        }
-
-        if (!emailRegex.test(formData.email)) {
-            newErrors.email = "Email is invalid.";
-            isValid = false;
-        }
-
-        if (!phoneRegex.test(formData.phone)) {
-            newErrors.phone = "Phone number is invalid.";
-            isValid = false;
-        }
-
-        if (!formData.location.city.trim()) {
-            newErrors.location.city = "City is required.";
-            isValid = false;
-        }
-
-        setErrors(newErrors);
-
-        return isValid;
-    }
-
-    function GenerateId (): string {
-        const prefix: string = "org-";
-        const zerosNeeded: number = Math.max(0, 3 - organizers.length.toString().length);
-
-        return prefix + "0".repeat(zerosNeeded) + (organizers.length + 1).toString();
-    }
-
-    // const handleChange = (e: React.ChangeEvent<HTMLFormElement>): void => {
-    const handleChange = (e: any): void => {
-        const {name, value} = e.target;
-
-        if (name === "city" || name === "province") {
-            setFormData(prev => ({
-                ...prev,
-                location: {
-                    ...prev.location,
-                    [name]: value
-                }
-            }));
-        } else {
-            setFormData((prev) => ({
-                ...prev,
-                [name]: value
-            }));
-        }
-
-        // Clears error once field is updated
-        if (errors[name as keyof typeof errors]) {
-            setErrors(prev => ({ ...prev, [name]: '' }));
-        };
-    }
-
-    const handleAddOrganizer = (e: React.FormEvent<HTMLFormElement>): void => {
+    async function handleAddOrganizer(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (!validateForm()) return;
-
-        const newOrganizer: Organizer = {
-            id: GenerateId(),
+        const newOrganizer: CreateOrganizer = {
             name: formData.name,
             description: formData.description,
             website: formData.website,
@@ -132,33 +53,28 @@ function Organizers({
             phone: formData.phone,
             location: {
                 city: formData.location.city,
-                province: formData.location.province,
-                country: formData.location.country
-            },
-            image: ""
+                province: formData.location.province
+            }
         }
 
-        setOrganizers(prevOrganizers => [
-            ...prevOrganizers,
-            newOrganizer
-        ])
+        const added = await addOrganizer(newOrganizer)
 
-        setFormData(defaultOrganizer);
-    }
-
-    const handleRemoveOrganizer = (id: string) => {
-        setOrganizers((prevOrganizers) => prevOrganizers.filter(
-            (organizer) => organizer.id !== id
-        ));
+        if (added) {
+            setFormData(defaultOrganizer);
+        }
     }
     
     return (
         <section className="page-container grid grid-cols-1 gap-8 py-8 ">
             <div className="flex flex-col gap-10">
-                <section className="flex flex-col gap-6">
-                    <h2 className="page-title mb-6">Event Organizers</h2>
-                    {organizerListItem}
-                </section>
+                {loading ? (
+                    <p>Loading organizers...</p>
+                ) : (
+                    <OrganizerList
+                    organizers={organizers}
+                    removeOrganizer={}
+                    />
+                )}
                 
                 <section className="surface-card v-fit p-6 md:sticky md:top-6">
                     <h3 className="subsection-title mb-6">Add New Organizer</h3>
@@ -168,8 +84,8 @@ function Organizers({
                             <input 
                                 name="name" 
                                 value={formData.name} 
-                                onChange={handleChange}
                                 className="form-control"
+                                required
                             />
                             {errors.name && <span className="form-error" style={{ color: 'red' }}>{errors.name}</span>}
                         </label>
@@ -179,10 +95,10 @@ function Organizers({
                             <textarea 
                                 name="description" 
                                 value={formData.description} 
-                                onChange={handleChange}
                                 rows={5}
                                 cols={40}
                                 className="form-control"
+                                required
                             />
                             {errors.description && <span className="form-error" style={{ color: 'red' }}>{errors.description}</span>}
                         </label>
@@ -192,8 +108,8 @@ function Organizers({
                             <input 
                                 name="website" 
                                 value={formData.website} 
-                                onChange={handleChange}
                                 className="form-control"
+                                required
                             />
                             {errors.website && <span className="form-error" style={{ color: 'red' }}>{errors.website}</span>}
                         </label>
@@ -202,8 +118,8 @@ function Organizers({
                             <input 
                                 name="email" 
                                 value={formData.email} 
-                                onChange={handleChange}
                                 className="form-control"
+                                required
                             />
                             {errors.email && <span className="form-error" style={{ color: 'red' }}>{errors.email}</span>}
                         </label>
@@ -212,8 +128,8 @@ function Organizers({
                             <input 
                                 name="phone" 
                                 value={formData.phone} 
-                                onChange={handleChange}
                                 className="form-control"
+                                required
                             />
                             {errors.phone && <span className="form-error" style={{ color: 'red' }}>{errors.phone}</span>}
                         </label>
@@ -225,8 +141,8 @@ function Organizers({
                                 name="city" 
                                 // value={formData.city} 
                                 value={formData.location.city} 
-                                onChange={handleChange}
                                 className="form-control"
+                                required
                             />
                             {errors.location.city && <span className="form-error" style={{ color: 'red' }}>{errors.location.city}</span>}
                         </label>
