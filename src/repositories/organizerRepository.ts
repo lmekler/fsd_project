@@ -27,7 +27,7 @@ export const organizerRepository = {
     }
   },
 
-  async add(input: CreateOrganizer): Promise<Organizer[]> {
+  async add(input: CreateOrganizer): Promise<Organizer> {
     const organizer: Organizer = {
         id: nextId,
         name: input.name,
@@ -48,6 +48,6 @@ export const organizerRepository = {
         organizer
     ])
 
-    return organizers;
+    return { ...organizer };
   }
 };

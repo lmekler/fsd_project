@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { Organizer } from "../components/types/Organizer";
+import type { CreateOrganizer, Organizer } from "../components/types/Organizer";
 import { organizerService } from "../services/organizerService";
 
 
@@ -37,9 +37,36 @@ export function useOrganizer() {
         };
     }, []);
 
+    async function addOrganizer(
+        input: CreateOrganizer,
+    ): Promise<boolean> {
+        setErrors(null);
+
+        try {
+            const organizer =
+                await organizerService.addOrganizer(input);
+
+            setOrganizers((current) => [
+                ...current,
+                organizer
+            ]);
+
+            return true;
+        } catch (error) {
+            setErrors(
+                error instanceof Error
+                ? error.message
+                : "Unable to add organizer.",
+            );
+
+            return false;
+        }
+    }
+
     return {
         organizers,
         loading,
-        errors
+        errors,
+        addOrganizer
     }
 }
