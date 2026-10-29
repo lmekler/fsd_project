@@ -1,8 +1,9 @@
 import organizerData from "../components/data/data.json"
-import { useState } from "react";
 import type { Organizer, CreateOrganizer } from "../components/types/Organizer";
 
-const [organizers, setOrganizers] = useState(organizerData.organizers);
+let organizers: Organizer[] = organizerData.organizers.map((organizer) => ({
+  ...organizer
+}));
 
 const prefix: string = "org-";
 const nextId: string = `${prefix + crypto.randomUUID()}`;
@@ -43,11 +44,21 @@ export const organizerRepository = {
         image: ""
     };
 
-    setOrganizers(prevOrganizers => [
-        ...prevOrganizers,
-        organizer
-    ])
+    organizers = [
+      ...organizers,
+      organizer
+    ]
 
     return { ...organizer };
-  }
+  },
+
+  async remove(id: string): Promise<boolean> {
+    const originalLength = organizers.length;
+
+    organizers = organizers.filter(
+      (organizer) => organizer.id !== id,
+    );
+
+    return organizers.length < originalLength;
+  },
 };
