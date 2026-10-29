@@ -24,7 +24,8 @@ function Organizers({
             city: '',
             province: 'Manitoba',
             country: 'Canada'
-        }
+        },
+        image: ''
     }
 
     const organizerErrors = {
@@ -133,7 +134,8 @@ function Organizers({
                 city: formData.location.city,
                 province: formData.location.province,
                 country: formData.location.country
-            }
+            },
+            image: ""
         }
 
         setOrganizers(prevOrganizers => [
