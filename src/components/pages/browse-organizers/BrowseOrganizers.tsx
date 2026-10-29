@@ -76,7 +76,6 @@ function Organizers() {
                                 className="form-control"
                                 required
                             />
-                            {errors.name && <span className="form-error" style={{ color: 'red' }}>{errors.name}</span>}
                         </label>
                         <hr />
                         <label className="form-label">
@@ -89,7 +88,6 @@ function Organizers() {
                                 className="form-control"
                                 required
                             />
-                            {errors.description && <span className="form-error" style={{ color: 'red' }}>{errors.description}</span>}
                         </label>
                         <hr />
                         <label className="form-label">
@@ -100,7 +98,6 @@ function Organizers() {
                                 className="form-control"
                                 required
                             />
-                            {errors.website && <span className="form-error" style={{ color: 'red' }}>{errors.website}</span>}
                         </label>
                         <label className="form-label">
                             Email:
@@ -110,7 +107,6 @@ function Organizers() {
                                 className="form-control"
                                 required
                             />
-                            {errors.email && <span className="form-error" style={{ color: 'red' }}>{errors.email}</span>}
                         </label>
                         <label className="form-label">
                             Phone Number:
@@ -120,7 +116,6 @@ function Organizers() {
                                 className="form-control"
                                 required
                             />
-                            {errors.phone && <span className="form-error" style={{ color: 'red' }}>{errors.phone}</span>}
                         </label>
                         <hr />
                         <p className="form-label">Location:</p>
@@ -133,7 +128,6 @@ function Organizers() {
                                 className="form-control"
                                 required
                             />
-                            {errors.location.city && <span className="form-error" style={{ color: 'red' }}>{errors.location.city}</span>}
                         </label>
                         <label className="form-label">
                             Province:
@@ -157,6 +151,7 @@ function Organizers() {
                             Add Organizer
                         </Button>
                     </form>
+                    {errors && <p className="errors" role="alert">{errors}</p>}
                 </section>
             </div>
         </section>
