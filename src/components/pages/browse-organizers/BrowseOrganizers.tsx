@@ -151,42 +151,6 @@ function Organizers({
             (organizer) => organizer.id !== id
         ));
     }
-
-    const organizerListItem: JSX.Element[] = organizers.map(organizer => {
-        return (
-            <section className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between" key={organizer.id}>
-                <article className="flex-1">
-                    <h3 className="section-title mb-4" key={organizer.id + "name"}>
-                        {organizer.name}
-                    </h3>
-
-                    <div className="muted-text mb-4 flex flex-col gap-1">
-                        <p className="font-medium text-text" key={organizer.id + "website"}>
-                            Website: <a href="#">{organizer.website}</a>
-                        </p>
-
-                        <p className="font-medium text-text" key={organizer.id + "email"}>Email: {organizer.email}</p>
-                        <p className="font-medium text-text" key={organizer.id + "phone"}>Phone Number: {organizer.phone}</p>
-                    </div>
-                    
-                    <p className="body-text mb-4 leading-relaxed" key={organizer.id + "description"}>
-                        {organizer.description}
-                    </p>
-
-                    <p className="muted-text mb-4 flex flex-col gap-1" key={organizer.id + "location"}>
-                        Location: {organizer.location.city}, {organizer.location.province}
-                    </p>
-                    <Button 
-                        variant="danger"
-                        size="sm"
-                        onClick={() => handleRemoveOrganizer(organizer.id)}
-                    >
-                        Remove
-                    </Button>
-                </article>
-            </section>
-        )
-    })
     
     return (
         <section className="page-container grid grid-cols-1 gap-8 py-8 ">
