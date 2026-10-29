@@ -3,7 +3,7 @@ import type { CreateOrganizer, Organizer } from "../../types/Organizer"
 import { provinces } from "../../types/Province";
 import Button from "../../common/button/Button";
 import { useOrganizer } from "../../../hooks/useOrganizer";
-import { OrganizerList } from "./OrganizerList";
+import { OrganizerList } from "./organizer-list/OrganizerList";
 
 function Organizers() {
     const {
