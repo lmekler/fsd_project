@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import type { CreateOrganizer, Organizer } from "../components/types/Organizer";
 import { organizerService } from "../services/organizerService";
 
-
 export function useOrganizer() {
     const [organizers, setOrganizers] = useState<Organizer[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -63,10 +62,37 @@ export function useOrganizer() {
         }
     }
 
+    async function removeOrganizer(
+        id: string,
+    ): Promise<boolean> {
+        setErrors(null);
+
+        try {
+            await organizerService.removeOrganizer(id);
+
+            setOrganizers((current) =>
+                current.filter(
+                    (organizer) => organizer.id !== id,
+                ),
+            );
+
+            return true;
+        } catch (error) {
+            setErrors(
+                error instanceof Error
+                ? error.message
+                : "Unable to remove organizer.",
+            );
+
+            return false;
+        }
+    }
+
     return {
         organizers,
         loading,
         errors,
-        addOrganizer
+        addOrganizer,
+        removeOrganizer
     }
 }
