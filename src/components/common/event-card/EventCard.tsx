@@ -1,5 +1,4 @@
-import './EventCard.css'
-import type { Event } from '../../types/Event'
+import type { Event } from '../../../types/Event'
 
 interface EventCardProps 
 {
@@ -9,9 +8,16 @@ interface EventCardProps
 export function EventCard({event} : EventCardProps)
 {
     return (
-        <article key={event.title}>
-            <img className="event-image" src={event.image} alt={event.title}/>
-             <p className="body-text">
+        <article
+            className="flex flex-col"
+            key={event.title}
+        >
+            <img 
+                className="event-image w-full rounded-t-lg object-cover" 
+                src={event.image} 
+                alt={event.title}
+            />
+             <p className="body-text p-3">
                 <span className="subsection-title">{event.title}</span>
                 <br></br>
                 <span className="event-date-time">
