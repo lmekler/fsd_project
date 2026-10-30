@@ -1,4 +1,4 @@
-import type { Organizer } from "../../../types/Organizer";
+import type { Organizer } from "../../../../types/Organizer";
 import Button from "../../../common/button/Button";
 
 interface OrganizerListItemProps {

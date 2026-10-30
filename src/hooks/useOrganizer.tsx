@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { CreateOrganizer, Organizer } from "../components/types/Organizer";
+import type { CreateOrganizer, Organizer } from "../types/Organizer";
 import { organizerService } from "../services/organizerService";
 
 export function useOrganizer() {

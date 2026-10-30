@@ -1,5 +1,5 @@
-import organizerData from "../components/data/data.json"
-import type { Organizer, CreateOrganizer } from "../components/types/Organizer";
+import organizerData from "../data/data.json"
+import type { Organizer, CreateOrganizer } from "../types/Organizer";
 
 let organizers: Organizer[] = organizerData.organizers.map((organizer) => ({
   ...organizer
