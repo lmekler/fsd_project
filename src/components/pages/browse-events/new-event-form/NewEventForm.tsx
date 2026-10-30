@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import "./NewEventForm.css"
+// import "./NewEventForm.css"
 import dropdown from "../../../../data/dropdown.json"
 import type { Event } from "../../../../types/Event"
 import Button from "../../../common/button/Button"
@@ -156,51 +156,60 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
     ]
     
     return (
-        <form className="event-form surface-card p-6">
+        <form className="
+            grid 
+            grid-cols-1 
+            gap-5 
+            md:grid-cols-6 
+            md:[grid-template-areas:'title_title_title_image_image_image'_'description_description_description_image_image_image'_'date_start-time_end-time_image_image_image'_'venue_venue_venue_address_address_address'_'city_city_province_province_postal-code_postal-code'_'category_category_price_price_capacity_capacity']"
+        >
             {eventFields.map((field) =>
             (
-                field.dropdown ? (
-                <div key={field.field + field.type} className={"event-" + toKebabCase(field.field)}>
-                    <label className="form-label">
+                <div 
+                    key={field.field + field.type} 
+                    className={"event-" + toKebabCase(field.field)}
+                    style={
+                        { 
+                            gridArea: toKebabCase(field.field)
+                        }
+                    }
+                >
+                    <label className="mb-2 block text-sm font-medium text-slate-700">
                         {toTitle(field.field)}
-                        <div>
-                            <select 
-                                className="form-control"
-                                name={toCamelCase(field.field)}
-                                value={field.value}
-                                onChange={(e) => handleChange(field, e)}
-                            >
-                                {
-                                    field.dropdown.map((value) =>
-                                    (
-                                        <option key={toKebabCase(field.field+" "+value)} value={value}>
-                                            {value}
-                                        </option>
-                                    ))   
-                                }
-                            </select>
-                        </div>
                     </label>
-                </div>
-                ) : (
-                <div key={field.field + field.type} className={"event-" + toKebabCase(field.field)}>
-                    <label className="form-label">
-                        {toTitle(field.field)}
-                        <div>
-                            <input 
-                                className="form-control"
-                                type={field.type}
-                                name={toCamelCase(field.field)}
-                                value={field.value} 
-                                placeholder={toCapitalized(field.field)}
-                                onChange={(e) => handleChange(field, e)}
-                                {...field.extraFields}
-                            />
-                        </div>
-                        <p className="form-error">{field.error}</p>
-                    </label>
+                {field.dropdown ? (
+                    <div>
+                        <select 
+                            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                            name={toCamelCase(field.field)}
+                            value={field.value}
+                            onChange={(e) => handleChange(field, e)}
+                        >
+                            {
+                                field.dropdown.map((value) =>
+                                (
+                                    <option key={toKebabCase(field.field+" "+value)} value={value}>
+                                        {value}
+                                    </option>
+                                ))   
+                            }
+                        </select>
                     </div>
-                )
+                ) : (
+                    <div>
+                        <input 
+                            className="form-control"
+                            type={field.type}
+                            name={toCamelCase(field.field)}
+                            value={field.value} 
+                            placeholder={toCapitalized(field.field)}
+                            onChange={(e) => handleChange(field, e)}
+                            {...field.extraFields}
+                        />
+                        <p className="mt-1 text-sm font-medium text-red-600">{field.error}</p>
+                    </div>
+                )}
+            </div>
             ))}
             {/* <div key="tags">
                 <label className="form-label">
