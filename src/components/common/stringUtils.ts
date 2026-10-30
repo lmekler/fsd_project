@@ -4,24 +4,24 @@
 
 // to use these functions, pass a string with words seperated by whitespace
 
-export function toCamelCase(string: string): string
+export function toCamelCase(name: string): string
 {
-    return string[0].toLowerCase() + toTitle(string).substring(1, string.length).replace(" ", "")
+    return name[0].toLowerCase() + toTitle(name).substring(1, name.length).replace(" ", "")
 }
 
-export function toCapitalized(string: string): string
+export function toCapitalized(name: string): string
 {
-    return string[0].toUpperCase() + string.substring(1, string.length)
+    return name[0].toUpperCase() + name.substring(1, name.length)
 }
 
-export function toKebabCase(string: string): string
+export function toKebabCase(name: string): string
 {
-    return (string.toLowerCase().replace(" ", "-").toString())
+    return (name.toLowerCase().replace(" ", "-").toString())
 }
 
-export function toTitle(string: string): string
+export function toTitle(name: string): string
 {
-    let words = string.split(" ")
+    let words = name.split(" ")
 
     words.forEach(word =>
     {

@@ -1,83 +1,13 @@
 import { useState } from "react"
 
-import dropdown from "../../../../data/dropdown.json"
-import type { Event } from "../../../../types/Event"
+import "./NewEventForm.css"
+import dropdown from "../../../data/dropdown.json"
+import type { Event } from "../../../types/Event"
 import Button from "../../../common/button/Button"
 import { toCamelCase, toCapitalized, toKebabCase, toTitle } from "../../../common/stringUtils"
-import { useFormInput } from "../../../../hooks/useFormInput"
 
 export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => void})
 {
-
-    function validateField(field: string, value: any): string | null
-    {
-        if (field === "image" && !value)
-        {
-            return "Image is required."
-        }
-
-        if (field === "title" && !value.trim())
-        {
-            return "Title is required."
-        }
-
-        if (field === "description" && value.length >= 500)
-        {
-            return "Description cannot exceed 500 characters."
-        }
-
-        if (field === "date")
-        {
-            if (!value)
-            {
-                return "Date is required."
-            }
-
-            if (new Date(value) < new Date())
-            {
-                return "Date must be in the future."
-            }
-        }
-
-        if (field === "address" && !value.trim())
-        {
-            return "Address is required."
-        }
-
-        if (field === "city" && !value.trim())
-        {
-            return "City is required."
-        }
-
-        if (field === "province" && !value.trim())
-        {
-            return "Province is required."
-        }
-
-        if (field === "postal code" && !value.trim())
-        {
-            return "Postal code is required."
-        }
-
-        return null
-    }
-
-    function validateForm(): boolean
-    {
-        let isValid = true
-
-        eventFields.forEach((field) =>
-        {
-            const valid = field.validate((value) => validateField(field.field, value))
-            if (!valid)
-            {
-                isValid = false
-            }
-        })
-
-        return isValid
-    }
-
     // default event fields
     const [event, setEvent] = useState<Event>
     (
@@ -108,10 +38,78 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
         }
     )
 
-    // updates the event with user input
-    const handleChange = (field: any, e: any) => 
+    // fields that require validation
+    interface Errors   
     {
-        field.setValue(e.target.value)
+        image?: string
+        title?: string
+        description?: string
+        date?: string
+        address?: string
+        city?: string
+        province?: string
+        postalCode?: string
+    }
+
+    const [errors, setErrors] = useState<Errors>({})
+
+    // sets error messages for invalid inputs and 
+    // returns whether the inputs are all valid or not
+    const formIsValid = (): boolean =>
+    {
+        let errors: Errors = {}
+
+        if (!event.image)
+        {
+            errors.image = "Image is required."
+        }
+        
+        if (!event.title) 
+        {
+            errors.title = "Title is required."
+        } 
+        
+        if (event.description && event.description.length >= 500) {
+            errors.description = "Description cannot exceed 500 characters."
+        }
+
+        if (!event.date) 
+        {
+            errors.date = "Date is required."
+        }
+        else if (new Date(event.date.toString()) < new Date)
+        {
+            errors.date = "Date must be in the future."
+        }
+
+        if (!event.location.address) 
+        {
+            errors.address = "Address is required."
+        }
+
+        if (!event.location.city) 
+        {
+            errors.city = "City is required."
+        }
+
+        if (!event.location.province) 
+        {
+            errors.province = "Province is required."
+        }
+
+        if (!event.location.postalCode) 
+        {
+            errors.postalCode = "Postal code is required."
+        }
+
+        setErrors(errors);
+        
+        return (Object.keys(errors).length === 0)
+    }
+
+    // updates the event with user input
+    const handleChange = (e: any) => 
+    {
         const { name, value } = e.target
 
         if (name in event.location)
@@ -119,7 +117,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
             setEvent(
             {
                 ...event,
-                "location":
+                "location": 
                 {
                     ...event.location,
                     [name]: value
@@ -138,77 +136,72 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
 
     const eventFields =
     [
-        useFormInput({field: "image", type: "file", extraFields: {accept: "image/*"}}),
-        useFormInput({field: "title", type: "text"}),
-        useFormInput({field: "description", type: "text"}),
-        useFormInput({field: "date", type: "date"}),
-        useFormInput({field: "start time", type: "dropdown", dropdown: dropdown.timeOptions}),
-        useFormInput({field: "end time", type: "dropdown", dropdown: dropdown.timeOptions}),
-        useFormInput({field: "venue", type: "text"}),
-        useFormInput({field: "address", type: "text"}),
-        useFormInput({field: "city", type: "text"}),
-        useFormInput({field: "province", type: "text"}),
-        useFormInput({field: "postal code", type: "text"}),
-        useFormInput({field: "price", type: "number", extraFields: {min: "0"}}),
-        useFormInput({field: "capacity", type: "number", extraFields: {min: "0"}}),
-        useFormInput({field: "category", type: "dropdown", dropdown: dropdown.categories})
+        {field: "image", type: "file", extraFields: {accept: "image/*"}},
+        {field: "title", type: "text"},
+        {field: "description", type: "text"},
+        {field: "date", type: "date"},
+        {field: "start time", type: "dropdown", dropdown: dropdown.timeOptions},
+        {field: "end time", type: "dropdown", dropdown: dropdown.timeOptions},
+        {field: "venue", type: "text"},
+        {field: "address", type: "text"},
+        {field: "city", type: "text"},
+        {field: "province", type: "text"},
+        {field: "postal code", type: "text"},
+        {field: "price", type: "number", extraFields: {min: "0"}},
+        {field: "capacity", type: "number", extraFields: {min: "0"}},
+        {field: "category", type: "dropdown", dropdown: dropdown.categories}
     ]
     
     return (
-        <form className="
-            grid 
-            grid-cols-1 
-            gap-5 
-            md:grid-cols-6 
-            md:[grid-template-areas:'title_title_title_image_image_image'_'description_description_description_image_image_image'_'date_start-time_end-time_image_image_image'_'venue_venue_venue_address_address_address'_'city_city_province_province_postal-code_postal-code'_'category_category_price_price_capacity_capacity']"
-        >
-            {eventFields.map((field) =>
+        <form className="event-form">
+            {eventFields.map(({field, type, extraFields, dropdown}) =>
             (
-                <div 
-                    key={field.field + field.type} 
-                    className={"event-" + toKebabCase(field.field)}
-                    style={
-                        { 
-                            gridArea: toKebabCase(field.field)
-                        }
-                    }
-                >
-                    <label className="mb-2 block text-sm font-medium text-slate-700">
-                        {toTitle(field.field)}
+                dropdown ? (
+                <div className={"event-" + toKebabCase(field)}>
+                    <label className="form-label">
+                        {toTitle(field)}
+                        <div>
+                            <select 
+                                className="form-control"
+                                name={toCamelCase(field)}
+                                value={event[toCamelCase(field) as keyof Event]?.toString()}
+                                onChange={handleChange}
+                            >
+                                {
+                                    dropdown.map((value) =>
+                                    (
+                                        <option key={toKebabCase(field+" "+value)} value={value}>
+                                            {value}
+                                        </option>
+                                    ))   
+                                }
+                            </select>
+                        </div>
                     </label>
-                {field.dropdown ? (
-                    <div>
-                        <select 
-                            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                            name={toCamelCase(field.field)}
-                            value={field.value}
-                            onChange={(e) => handleChange(field, e)}
-                        >
-                            {
-                                field.dropdown.map((value) =>
-                                (
-                                    <option key={toKebabCase(field.field+" "+value)} value={value}>
-                                        {value}
-                                    </option>
-                                ))   
-                            }
-                        </select>
-                    </div>
+                </div>
                 ) : (
-                    <div>
-                        <input 
-                            className="form-control"
-                            type={field.type}
-                            name={toCamelCase(field.field)}
-                            value={field.value} 
-                            placeholder={toCapitalized(field.field)}
-                            onChange={(e) => handleChange(field, e)}
-                            {...field.extraFields}
-                        />
-                        <p className="mt-1 text-sm font-medium text-red-600">{field.error}</p>
+                <div className={"event-" + toKebabCase(field)}>
+                    <label className="form-label">
+                        {toTitle(field)}
+                        <div>
+                            <input 
+                                className="form-control"
+                                type={type}
+                                name={toCamelCase(field)}
+                                value={event[toCamelCase(field) as keyof Event]?.toString()} 
+                                placeholder= {toCapitalized(field)}
+                                onChange={(e) => handleChange(e)}
+                                {...extraFields}
+                            />
+                        </div>
+                    </label>
+                    {
+                        errors[toCamelCase(field) as keyof Errors]?.toString() 
+                        &&
+                        <span className="form-error">{errors[toCamelCase(field) as keyof Errors]?.toString()}</span>
+                    }
                     </div>
-                )}
-            </div>
+                )
             ))}
             {/* <div key="tags">
                 <label className="form-label">
@@ -240,7 +233,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                         (e: any) => 
                         {
                             e.preventDefault()
-                            if (validateForm())
+                            if (formIsValid())
                             {
                                 handleSubmit(event)
                             }
