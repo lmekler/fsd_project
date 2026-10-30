@@ -21,7 +21,14 @@ export function BrowseEvents()
 
     function handleSubmit(event: Event): void
     {
-        addEvent(event)
+        try 
+        {
+            addEvent(event);
+        }
+        catch (error) 
+        {
+            console.log(error);
+        }
     }
 
     return (
@@ -35,7 +42,7 @@ export function BrowseEvents()
                 <div className="browse-events-container">
                     {events.map((event) =>
                     (
-                        <div className="surface-card flex h-full flex-col">
+                        <div key={event.title + event.date} className="surface-card flex h-full flex-col">
                             <EventCard key={event.title+event.date} event={event}/>
                             <Button
                                 variant="secondary"
