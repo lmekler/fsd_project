@@ -13,13 +13,12 @@ import { useState } from 'react'
 import eventData from "../src/data/data.json"
 
 // Type Imports
-import type { Event } from './types/Event'
-import type { Organizer } from './types/Organizer'
+import type { Event } from './components/types/Event'
 
 
 function App() {
   const [events, setEvents] = useState<Event[]>(eventData.events)
-  const [organizers, setOrganizers] = useState<Organizer[]>(eventData.organizers);
+  const [savedEvents, setSavedEvents] = useState<Event[]>(eventData.savedEvents); // Currently loading the sample data
 
   return (
     <Routes>
@@ -42,10 +41,9 @@ function App() {
         }/>
 
         <Route path="/organizers">
-          <Route index element={<Organizers
-              organizers={organizers}
-              setOrganizers={setOrganizers}
-            />}/>
+          <Route index element={
+            <Organizers/>
+          }/>
         </Route>
         
         <Route path="*" element={<NotFound />} />
