@@ -32,38 +32,42 @@ export function BrowseEvents()
     }
 
     return (
-        <main className="page-container">
-            <section>
+        <main className="page-container py-8">
+            <section className="flex flex-col gap-8">
                 <h2 className="page-title">Browsing Events in Winnipeg</h2>
+
                 <div>
                     <NewEventForm handleSubmit={handleSubmit}/>
                 </div>
+
                 <br></br>
                 <div className="browse-events-container">
                     {events.map((event) =>
                     (
                         <div key={event.title + event.date} className="surface-card flex h-full flex-col">
                             <EventCard key={event.title+event.date} event={event}/>
-                            <Button
-                                variant="secondary"
-                                size="sm"
-                                disabled={isSaved(event.id)}
-                                onClick={() => addSavedEvent(event.id)}>
-                                {isSaved(event.id) ? "Saved": "Save Event"}
-                            </Button>
-                            <Button 
-                                variant="danger"
-                                size="sm"
-                                onClick=
-                                {
-                                    () => 
+                            <div className="mt-auto flex flex-col items-end gap-2 px-4 pb-4">
+                                <Button
+                                    variant="secondary"
+                                    size="sm"
+                                    disabled={isSaved(event.id)}
+                                    onClick={() => addSavedEvent(event.id)}>
+                                    {isSaved(event.id) ? "Saved": "Save Event"}
+                                </Button>
+                                <Button 
+                                    variant="danger"
+                                    size="sm"
+                                    onClick=
                                     {
-                                        removeEvent(event.id)
+                                        () => 
+                                        {
+                                            removeEvent(event.id)
+                                        }
                                     }
-                                }
-                            >
-                                Delete
-                            </Button>
+                                >
+                                    Delete
+                                </Button>
+                            </div>
                         </div>
                     ))}
                 </div>

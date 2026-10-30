@@ -9,16 +9,9 @@ import NotFound from './components/pages/NotFound'
 import { BrowseEvents } from './components/pages/browse-events/BrowseEvents'
 import SavedEvents from './components/pages/saved-events/SavedEvents'
 import Organizers from './components/pages/browse-organizers/BrowseOrganizers'
-import { useState } from 'react'
-import eventData from "../src/data/data.json"
-
-// Type Imports
-import type { Event } from './components/types/Event'
 
 
 function App() {
-  const [events, setEvents] = useState<Event[]>(eventData.events)
-  const [savedEvents, setSavedEvents] = useState<Event[]>(eventData.savedEvents); // Currently loading the sample data
 
   return (
     <Routes>

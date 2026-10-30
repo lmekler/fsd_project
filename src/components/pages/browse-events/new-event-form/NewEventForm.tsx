@@ -156,7 +156,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
     ]
     
     return (
-        <form className="event-form">
+        <form className="event-form surface-card p-6">
             {eventFields.map((field) =>
             (
                 field.dropdown ? (
@@ -197,7 +197,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                                 {...field.extraFields}
                             />
                         </div>
-                        <p className="error">{field.error}</p>
+                        <p className="form-error">{field.error}</p>
                     </label>
                     </div>
                 )
