@@ -55,9 +55,92 @@
         "country": "Canada"
       },
       "image": "/images/organizers/sustainability-network.jpg"
+    },
+    {
+      "id": "org_005",
+      "name": "Manitoba Arts Guild",
+      "description": "Supporting local artists and creators through exhibitions, workshops, and community-driven cultural events.",
+      "email": "info@manitobaartsguild.ca",
+      "phone": "204-555-0142",
+      "website": "https://example.com/manitoba-arts-guild",
+      "location": {
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "image": "/images/organizers/arts-guild.jpg"
+    },
+    {
+      "id": "org_006",
+      "name": "River City Youth Sports",
+      "description": "Promoting physical health, teamwork, and leadership among youth in Winnipeg through accessible sports leagues and camps.",
+      "email": "contact@rivercitysports.ca",
+      "phone": "204-555-0189",
+      "website": "https://example.com/river-city-youth-sports",
+      "location": {
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "image": "/images/organizers/youth-sports.jpg"
+    },
+    {
+      "id": "org_007",
+      "name": "Prairie Green Environmental Initiative",
+      "description": "A volunteer-led group dedicated to urban greening, tree planting, and sustainability education across Winnipeg neighborhoods.",
+      "email": "hello@prairiegreen.ca",
+      "phone": "204-555-0234",
+      "website": "https://example.com/prairie-green",
+      "location": {
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "image": "/images/organizers/environmental-initiative.jpg"
+    },
+    {
+      "id": "org_008",
+      "name": "Winnipeg Heritage & History Society",
+      "description": "Preserving and sharing the rich multicultural history of Winnipeg through archives, walking tours, and public lectures.",
+      "email": "archives@winnipegheritage.ca",
+      "phone": "204-555-0311",
+      "website": "https://example.com/winnipeg-heritage-society",
+      "location": {
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "image": "/images/organizers/heritage-society.jpg"
+    },
+    {
+      "id": "org_009",
+      "name": "Assiniboine Food Security Network",
+      "description": "Working to ensure reliable access to nutritious, locally grown food for families and individuals in need across the city.",
+      "email": "support@assiniboinefood.ca",
+      "phone": "204-555-0456",
+      "website": "https://example.com/assiniboine-food-security",
+      "location": {
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "image": "/images/organizers/food-security.jpg"
+    },
+    {
+      "id": "org_010",
+      "name": "Red River Tech & Innovation Hub",
+      "description": "Empowering tech enthusiasts, entrepreneurs, and students with collaborative co-working spaces, coding workshops, and startup mentoring.",
+      "email": "connect@redrivertechhub.ca",
+      "phone": "204-555-0588",
+      "website": "https://example.com/red-river-tech-hub",
+      "location": {
+        "city": "Winnipeg",
+        "province": "Manitoba",
+        "country": "Canada"
+      },
+      "image": "/images/organizers/tech-hub.jpg"
     }
   ],
-
   "events": [
     {
       "id": "event_001",
@@ -351,90 +434,54 @@
   ],
   "savedEvents" : [
     {
-      "id": "event_001",
-      "organizerId": "org_001",
-      "title": "Community Cleanup Day",
-      "description": "Join neighbours for a morning of cleaning up local parks and public spaces. Supplies will be provided, and everyone is welcome.",
-      "category": "Community",
-      "date": "2026-09-19",
-      "startTime": "09:00",
-      "endTime": "12:00",
-      "location": {
-        "venue": "River Heights Community Centre",
-        "address": "1370 Grosvenor Avenue",
-        "city": "Winnipeg",
-        "province": "Manitoba",
-        "postalCode": "R3M 0Z8"
-      },
-      "image": "/images/events/community-cleanup.jpg",
-      "capacity": 100,
-      "registeredCount": 64,
-      "price": 0,
-      "isFree": true,
-      "isFeatured": true,
-      "tags": [
-        "volunteering",
-        "community",
-        "outdoors"
-      ]
+      "savedEventId": "saved_001",
+      "userId": "user_001",
+      "eventId": "event_001"
     },
     {
-      "id": "event_002",
-      "organizerId": "org_002",
-      "title": "Introduction to Watercolour",
-      "description": "Learn the fundamentals of watercolour painting in this beginner-friendly workshop led by a local artist.",
-      "category": "Arts & Culture",
-      "date": "2026-09-20",
-      "startTime": "13:00",
-      "endTime": "15:30",
-      "location": {
-        "venue": "Prairie Arts Studio",
-        "address": "455 Main Street",
-        "city": "Winnipeg",
-        "province": "Manitoba",
-        "postalCode": "R3B 1B7"
-      },
-      "image": "/images/events/watercolour.jpg",
-      "capacity": 20,
-      "registeredCount": 17,
-      "price": 25,
-      "isFree": false,
-      "isFeatured": true,
-      "tags": [
-        "art",
-        "painting",
-        "workshop",
-        "beginner"
-      ]
+      "savedEventId": "saved_002",
+      "userId": "user_001",
+      "eventId": "event_002"
     },
     {
-      "id": "event_010",
-      "organizerId": "org_002",
-      "title": "Introduction to Pottery",
-      "description": "Try your hand at pottery in this beginner workshop covering basic hand-building techniques.",
-      "category": "Arts & Culture",
-      "date": "2026-10-02",
-      "startTime": "18:00",
-      "endTime": "21:00",
-      "location": {
-        "venue": "Prairie Arts Studio",
-        "address": "455 Main Street",
-        "city": "Winnipeg",
-        "province": "Manitoba",
-        "postalCode": "R3B 1B7"
-      },
-      "image": "/images/events/pottery.jpg",
-      "capacity": 15,
-      "registeredCount": 12,
-      "price": 35,
-      "isFree": false,
-      "isFeatured": false,
-      "tags": [
-        "pottery",
-        "art",
-        "workshop",
-        "crafts"
-      ]
+      "savedEventId": "saved_003",
+      "userId": "user_001",
+      "eventId": "event_003"
+    },
+    {
+      "savedEventId": "saved_004",
+      "userId": "user_001",
+      "eventId": "event_004"
+    },
+    {
+      "savedEventId": "saved_005",
+      "userId": "user_001",
+      "eventId": "event_005"
+    },
+    {
+      "savedEventId": "saved_006",
+      "userId": "user_002",
+      "eventId": "event_001"
+    },
+    {
+      "savedEventId": "saved_007",
+      "userId": "user_002",
+      "eventId": "event_006"
+    },
+    {
+      "savedEventId": "saved_008",
+      "userId": "user_002",
+      "eventId": "event_007"
+    },
+    {
+      "savedEventId": "saved_009",
+      "userId": "user_002",
+      "eventId": "event_008"
+    },
+    {
+      "savedEventId": "saved_010",
+      "userId": "user_002",
+      "eventId": "event_002"
     }
   ]
 }
