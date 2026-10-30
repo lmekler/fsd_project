@@ -46,7 +46,7 @@ export function BrowseEvents()
                     (
                         <div key={event.title + event.date} className="surface-card flex h-full flex-col">
                             <EventCard key={event.title+event.date} event={event}/>
-                            <div className="mt-auto flex justify-end px-4 pb-4">
+                            <div className="mt-auto flex flex-col items-end gap-2 px-4 pb-4">
                                 <Button
                                     variant="secondary"
                                     size="sm"
