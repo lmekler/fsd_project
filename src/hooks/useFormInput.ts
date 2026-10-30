@@ -16,9 +16,9 @@ export function useFormInput(
     const [value, setValue] = useState<string | number | undefined>("")
     const [error, setError] = useState<string | null>(null)
 
-    function validate(validate: (value: string) => string | null): boolean
+    function validate(validate: (value: string | number | undefined) => string | null): boolean
     {
-        const errorMessage = validate(field)
+        const errorMessage = validate(value)
         setError(errorMessage)
 
         return errorMessage === null
