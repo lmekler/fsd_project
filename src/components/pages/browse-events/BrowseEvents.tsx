@@ -1,30 +1,34 @@
 import { EventCard } from "../../common/event-card/EventCard"
 import type { Event } from "../../../types/Event";
-
+import { useEvents } from "../../../hooks/useEvents";
 import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";
 import { useSavedEvents } from "../../../hooks/useSavedEvents";
 
-export function BrowseEvents({events, setEvents} : {
-    events: Event[],
-    setEvents: React.Dispatch<React.SetStateAction<Event[]>>,
-})
+export function BrowseEvents()
 {
     // Mocking user log in
-    const mockedUserId: string = "user_001";
+    const mockedUserId: string = "user_001"
 
     // SavedEvent Hook
-    const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId);
+    const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId)
+
+    const {
+        events,
+        addEvent,
+        removeEvent
+    } = useEvents()
 
     function handleSubmit(event: Event): void
     {
-        setEvents(events =>
-        (
-            [
-                event,
-                ...events
-            ]
-        ))
+        try 
+        {
+            addEvent(event);
+        }
+        catch (error) 
+        {
+            console.log(error);
+        }
     }
 
     return (
@@ -38,7 +42,7 @@ export function BrowseEvents({events, setEvents} : {
                 <div className="browse-events-container">
                     {events.map((event) =>
                     (
-                        <div className="surface-card flex h-full flex-col">
+                        <div key={event.title + event.date} className="surface-card flex h-full flex-col">
                             <EventCard key={event.title+event.date} event={event}/>
                             <Button
                                 variant="secondary"
@@ -54,7 +58,7 @@ export function BrowseEvents({events, setEvents} : {
                                 {
                                     () => 
                                     {
-                                        setEvents((events) => events.filter(currentEvent => currentEvent.id !== event.id))
+                                        removeEvent(event.id)
                                     }
                                 }
                             >
