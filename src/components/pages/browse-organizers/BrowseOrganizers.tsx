@@ -1,6 +1,6 @@
 import { useState, type JSX } from "react"
-import type { Organizer } from "../../types/Organizer"
-import { provinces } from "../../types/Province";
+import type { Organizer } from "../../../types/Organizer"
+import { provinces } from "../../../types/Province";
 import Button from "../../common/button/Button";
 
 function Organizers({
