@@ -197,7 +197,7 @@ export function NewEventForm({handleSubmit} : {handleSubmit: (event: Event) => v
                                 {...field.extraFields}
                             />
                         </div>
-                        <p className="error">{field.error}</p>
+                        <p className="form-error">{field.error}</p>
                     </label>
                     </div>
                 )
