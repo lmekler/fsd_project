@@ -1,6 +1,5 @@
 import { useState } from "react"
 
-// import "./NewEventForm.css"
 import dropdown from "../../../../data/dropdown.json"
 import type { Event } from "../../../../types/Event"
 import Button from "../../../common/button/Button"
