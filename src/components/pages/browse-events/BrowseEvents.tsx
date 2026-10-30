@@ -1,11 +1,21 @@
 import { EventCard } from "../../common/event-card/EventCard"
-import type { Event } from "../../types/Event";
+import type { Event } from "../../../types/Event";
 
 import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";
+import { useSavedEvents } from "../../../hooks/useSavedEvents";
 
-export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: React.Dispatch<React.SetStateAction<Event[]>>})
+export function BrowseEvents({events, setEvents} : {
+    events: Event[],
+    setEvents: React.Dispatch<React.SetStateAction<Event[]>>,
+})
 {
+    // Mocking user log in
+    const mockedUserId: string = "user_001";
+
+    // SavedEvent Hook
+    const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId);
+
     function handleSubmit(event: Event): void
     {
         setEvents(events =>
@@ -30,6 +40,13 @@ export function BrowseEvents({events, setEvents} : {events: Event[], setEvents: 
                     (
                         <div className="surface-card flex h-full flex-col">
                             <EventCard key={event.title+event.date} event={event}/>
+                            <Button
+                                variant="secondary"
+                                size="sm"
+                                disabled={isSaved(event.id)}
+                                onClick={() => addSavedEvent(event.id)}>
+                                {isSaved(event.id) ? "Saved": "Save Event"}
+                            </Button>
                             <Button 
                                 variant="danger"
                                 size="sm"
