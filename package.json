@@ -2,7 +2,7 @@
   "name": "fsd_project",
   "workspaces" : [
     "apps/*"
-  ]
+  ],
   "version": "1.0.0",
   "description": "- Patrick Arevalo\r - Leann Mekler\r - Chan Madut",
   "main": "index.js",
