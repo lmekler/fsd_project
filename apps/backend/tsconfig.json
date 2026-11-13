@@ -1,0 +1,17 @@
+{
+    // Use the root directory for configuration
+    // any overriding configs defined here
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "rootDir": "../../",
+      "ignoreDeprecations": "6.0",
+      "sourceMap": true,
+      "lib": ["ESNext"],
+      "types": ["node"]
+    },
+    "include": ["backend/**/*", "src/**/*", "tests/**/*", "prisma/**/*"],
+    "exclude": ["node_modules", "dist"]
+}
