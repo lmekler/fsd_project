@@ -1,6 +1,6 @@
 import { prisma } from "../db/prisma";
 
-import type { Event, Location, SavedEvent } from "@shared/types/Event";
+import type { Event, Location } from "@shared/types/Event";
 import type { DbOrganizer } from "./organizerRepository";
 
 import { toOrganizer } from "./organizerRepository";
