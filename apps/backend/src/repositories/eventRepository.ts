@@ -145,4 +145,18 @@ export const eventRepository = {
 
     return toEvent(event);
   },
+
+  async remove(id: number): Promise<boolean> {
+    const result = await prisma.$transaction(async (tx) => {
+      await tx.savedEvent.deleteMany({
+        where: { eventId: id },
+      });
+
+      return tx.event.deleteMany({
+        where: { id },
+      });
+    });
+
+    return result.count > 0;
+  },
 };
