@@ -96,4 +96,21 @@ export const eventRepository = {
 
     return events.map(toEvent);
   },
+
+  async getById(id: number): Promise<Event | null> {
+    const event = await prisma.event.findUnique({
+      where: { id },
+      include: {
+        location: true,
+        organizer: {
+          include: {
+            location: true,
+          },
+        },
+        users: true,
+      },
+    });
+
+    return event ? toEvent(event) : null;
+  },
 };
