@@ -113,4 +113,36 @@ export const eventRepository = {
 
     return event ? toEvent(event) : null;
   },
+
+  async add(input: Event): Promise<Event> {
+    const event = await prisma.event.create({
+      data: {
+        organizerId: input.organizerId,
+        title: input.title,
+        description: input.description ?? null,
+        category: input.category ?? null,
+        date: input.date,
+        startTime: input.startTime,
+        endTime: input.endTime ?? null,
+        locationId: input.locationId,
+        image: input.image ?? null,
+        capacity: input.capacity,
+        registeredCount: input.registeredCount,
+        price: input.price,
+        isFeatured: input.isFeatured,
+        tags: input.tags ?? [],
+      },
+      include: {
+        location: true,
+        organizer: {
+          include: {
+            location: true,
+          },
+        },
+        users: true,
+      },
+    });
+
+    return toEvent(event);
+  },
 };
