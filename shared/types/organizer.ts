@@ -1,28 +1,25 @@
-export interface Organizer {
-    id: string;
-    name: string;
-    description: string;
-    website: string;
-    email: string;
-    phone: string
-    location: Location;
-    image: string;
-}
+import { Location } from "./Event";
 
-interface Location {
-    city: string;
-    province: string;
-    country: string;
+export interface Organizer {
+  id: number;
+  name: string;
+  description: string;
+  website: string;
+  email?: string;
+  phone: string;
+  image: string;
+  locationId: number;
+  location: Location;
 }
 
 export interface CreateOrganizer {
-    name: string;
-    description: string;
-    website: string;
-    email: string;
-    phone: string
-    location: {
-        city: string;
-        province: string;
-    };
+  name: string;
+  description: string;
+  website: string;
+  email: string;
+  phone: string;
+  location: {
+    city: string;
+    province: string;
+  };
 }

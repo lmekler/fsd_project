@@ -22,17 +22,18 @@ export interface Event {
 }
 
 export interface Location {
+  id: number;
   venue?: string;
-  address: string;
+  address?: string;
   city: string;
   province: string;
-  postalCode: string;
+  postalCode?: string;
 }
 
 export interface SavedEvent {
-  savedEventId: string;
-  userId: string;
-  eventId: string;
+  savedEventId: number;
+  userId: number;
+  eventId: number;
 }
 
 export interface SavedEventWithDetails extends SavedEvent {
