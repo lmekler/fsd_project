@@ -1,6 +1,6 @@
 {
   "name": "fsd_project",
-  "workspaces" : [
+  "workspaces": [
     "apps/*"
   ],
   "version": "1.0.0",
@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/lmekler/fsd_project#readme",
   "devDependencies": {
-    "concurrently": "^10.0.7"
+    "concurrently": "^10.0.7",
+    "dotenv": "^18.0.10",
+    "prisma": "^8.0.0-rc.33"
   }
 }
