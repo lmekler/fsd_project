@@ -3,16 +3,12 @@ import express from "express";
 import cors from "cors";
 import type { Request, Response, NextFunction } from "express";
 
+import corsOptions from "../config/cors";
+
 const app = express();
 
-const frontendUrl = process.env.FRONTEND_URL;
-
-if (!frontendUrl) {
-  throw new Error("FRONTEND_URL is required");
-}
-
-app.use(cors({ origin: frontendUrl }));
 app.use(express.json());
+app.use(cors(corsOptions));
 
 // Central error handler
 app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
