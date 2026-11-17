@@ -1,7 +1,7 @@
 {
   "organizers": [
     {
-      "id": "org_001",
+      "id": 1,
       "name": "Winnipeg Community Centre",
       "description": "A local community organization focused on bringing residents together through social, educational, and recreational programs.",
       "email": "hello@winnipegcommunity.ca",
@@ -15,7 +15,7 @@
       "image": "/images/organizers/community-centre.jpg"
     },
     {
-      "id": "org_002",
+      "id": 2,
       "name": "Prairie Arts Collective",
       "description": "A group of local artists and creators who organize workshops, exhibitions, and cultural events.",
       "email": "info@prairiearts.ca",
@@ -29,7 +29,7 @@
       "image": "/images/organizers/prairie-arts.jpg"
     },
     {
-      "id": "org_003",
+      "id": 3,
       "name": "Neighbourhood Sports Association",
       "description": "A volunteer-run organization providing accessible sports and recreational activities for people of all ages.",
       "email": "contact@neighbourhoodsports.ca",
@@ -43,7 +43,7 @@
       "image": "/images/organizers/sports-association.jpg"
     },
     {
-      "id": "org_004",
+      "id": 4,
       "name": "Winnipeg Sustainability Network",
       "description": "A community network promoting environmental education, sustainable living, and local climate initiatives.",
       "email": "hello@wpgsustainability.ca",
@@ -57,7 +57,7 @@
       "image": "/images/organizers/sustainability-network.jpg"
     },
     {
-      "id": "org_005",
+      "id": 5,
       "name": "Manitoba Arts Guild",
       "description": "Supporting local artists and creators through exhibitions, workshops, and community-driven cultural events.",
       "email": "info@manitobaartsguild.ca",
@@ -71,7 +71,7 @@
       "image": "/images/organizers/arts-guild.jpg"
     },
     {
-      "id": "org_006",
+      "id": 6,
       "name": "River City Youth Sports",
       "description": "Promoting physical health, teamwork, and leadership among youth in Winnipeg through accessible sports leagues and camps.",
       "email": "contact@rivercitysports.ca",
@@ -85,7 +85,7 @@
       "image": "/images/organizers/youth-sports.jpg"
     },
     {
-      "id": "org_007",
+      "id": 7,
       "name": "Prairie Green Environmental Initiative",
       "description": "A volunteer-led group dedicated to urban greening, tree planting, and sustainability education across Winnipeg neighborhoods.",
       "email": "hello@prairiegreen.ca",
@@ -99,7 +99,7 @@
       "image": "/images/organizers/environmental-initiative.jpg"
     },
     {
-      "id": "org_008",
+      "id": 8,
       "name": "Winnipeg Heritage & History Society",
       "description": "Preserving and sharing the rich multicultural history of Winnipeg through archives, walking tours, and public lectures.",
       "email": "archives@winnipegheritage.ca",
@@ -113,7 +113,7 @@
       "image": "/images/organizers/heritage-society.jpg"
     },
     {
-      "id": "org_009",
+      "id": 9,
       "name": "Assiniboine Food Security Network",
       "description": "Working to ensure reliable access to nutritious, locally grown food for families and individuals in need across the city.",
       "email": "support@assiniboinefood.ca",
@@ -127,7 +127,7 @@
       "image": "/images/organizers/food-security.jpg"
     },
     {
-      "id": "org_010",
+      "id": 10,
       "name": "Red River Tech & Innovation Hub",
       "description": "Empowering tech enthusiasts, entrepreneurs, and students with collaborative co-working spaces, coding workshops, and startup mentoring.",
       "email": "connect@redrivertechhub.ca",
@@ -143,8 +143,8 @@
   ],
   "events": [
     {
-      "id": "event_001",
-      "organizerId": "org_001",
+      "id": 1,
+      "organizerId": 1,
       "title": "Community Cleanup Day",
       "description": "Join neighbours for a morning of cleaning up local parks and public spaces. Supplies will be provided, and everyone is welcome.",
       "category": "Community",
@@ -171,8 +171,8 @@
       ]
     },
     {
-      "id": "event_002",
-      "organizerId": "org_002",
+      "id": 2,
+      "organizerId": 2,
       "title": "Introduction to Watercolour",
       "description": "Learn the fundamentals of watercolour painting in this beginner-friendly workshop led by a local artist.",
       "category": "Arts & Culture",
@@ -200,8 +200,8 @@
       ]
     },
     {
-      "id": "event_003",
-      "organizerId": "org_003",
+      "id": 3,
+      "organizerId": 3,
       "title": "Community Pick-Up Soccer",
       "description": "A casual evening of pick-up soccer. Players of all skill levels are welcome.",
       "category": "Sports & Recreation",
@@ -229,8 +229,8 @@
       ]
     },
     {
-      "id": "event_004",
-      "organizerId": "org_004",
+      "id": 4,
+      "organizerId": 4,
       "title": "Urban Gardening Workshop",
       "description": "Discover practical ways to grow vegetables, herbs, and pollinator-friendly plants in small urban spaces.",
       "category": "Environment",
@@ -258,8 +258,8 @@
       ]
     },
     {
-      "id": "event_005",
-      "organizerId": "org_001",
+      "id": 5,
+      "organizerId": 1,
       "title": "Neighbourhood Potluck",
       "description": "Bring a favourite dish and meet people from the neighbourhood at this casual community dinner.",
       "category": "Food & Social",
@@ -287,8 +287,8 @@
       ]
     },
     {
-      "id": "event_006",
-      "organizerId": "org_002",
+      "id": 6,
+      "organizerId": 2,
       "title": "Local Artists Exhibition",
       "description": "Explore new work from emerging Winnipeg artists at this community exhibition featuring painting, photography, and mixed media.",
       "category": "Arts & Culture",
@@ -316,8 +316,8 @@
       ]
     },
     {
-      "id": "event_007",
-      "organizerId": "org_003",
+      "id": 7,
+      "organizerId": 3,
       "title": "Beginner Yoga in the Park",
       "description": "Start your weekend with a relaxed outdoor yoga session designed for beginners and all fitness levels.",
       "category": "Health & Wellness",
@@ -345,8 +345,8 @@
       ]
     },
     {
-      "id": "event_008",
-      "organizerId": "org_004",
+      "id": 8,
+      "organizerId": 4,
       "title": "Repair Café",
       "description": "Bring a small household item that needs fixing and work alongside volunteers to repair it instead of throwing it away.",
       "category": "Environment",
@@ -374,8 +374,8 @@
       ]
     },
     {
-      "id": "event_009",
-      "organizerId": "org_001",
+      "id": 9,
+      "organizerId": 1,
       "title": "Family Board Game Night",
       "description": "Bring the family for an evening of board games, snacks, and friendly competition. Games will be available for different age groups.",
       "category": "Family & Kids",
@@ -403,8 +403,8 @@
       ]
     },
     {
-      "id": "event_010",
-      "organizerId": "org_002",
+      "id": 10,
+      "organizerId": 2,
       "title": "Introduction to Pottery",
       "description": "Try your hand at pottery in this beginner workshop covering basic hand-building techniques.",
       "category": "Arts & Culture",
@@ -432,56 +432,56 @@
       ]
     }
   ],
-  "savedEvents" : [
+  "savedEvents": [
     {
       "savedEventId": "saved_001",
       "userId": "user_001",
-      "eventId": "event_001"
+      "eventId": "1"
     },
     {
       "savedEventId": "saved_002",
       "userId": "user_001",
-      "eventId": "event_002"
+      "eventId": "2"
     },
     {
       "savedEventId": "saved_003",
       "userId": "user_001",
-      "eventId": "event_003"
+      "eventId": "3"
     },
     {
       "savedEventId": "saved_004",
       "userId": "user_001",
-      "eventId": "event_004"
+      "eventId": "4"
     },
     {
       "savedEventId": "saved_005",
       "userId": "user_001",
-      "eventId": "event_005"
+      "eventId": "5"
     },
     {
       "savedEventId": "saved_006",
       "userId": "user_002",
-      "eventId": "event_001"
+      "eventId": "1"
     },
     {
       "savedEventId": "saved_007",
       "userId": "user_002",
-      "eventId": "event_006"
+      "eventId": "6"
     },
     {
       "savedEventId": "saved_008",
       "userId": "user_002",
-      "eventId": "event_007"
+      "eventId": "7"
     },
     {
       "savedEventId": "saved_009",
       "userId": "user_002",
-      "eventId": "event_008"
+      "eventId": "8"
     },
     {
       "savedEventId": "saved_010",
       "userId": "user_002",
-      "eventId": "event_002"
+      "eventId": "2"
     }
   ]
 }

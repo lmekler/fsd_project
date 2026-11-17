@@ -1,7 +1,7 @@
 export interface Event
 {
-    id: string
-    organizerId: string
+    id: number
+    organizerId: number
     title: string
     description?: string
     category?: string
