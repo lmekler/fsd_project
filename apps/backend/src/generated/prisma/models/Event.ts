@@ -32,6 +32,7 @@ export type EventAvgAggregateOutputType = {
   capacity: number | null
   registeredCount: number | null
   price: number | null
+  locationId: number | null
 }
 
 export type EventSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type EventSumAggregateOutputType = {
   capacity: number | null
   registeredCount: number | null
   price: number | null
+  locationId: number | null
 }
 
 export type EventMinAggregateOutputType = {
@@ -51,13 +53,12 @@ export type EventMinAggregateOutputType = {
   date: string | null
   startTime: string | null
   endTime: string | null
-  location: string | null
   image: string | null
   capacity: number | null
   registeredCount: number | null
   price: number | null
-  isFree: boolean | null
   isFeatured: boolean | null
+  locationId: number | null
 }
 
 export type EventMaxAggregateOutputType = {
@@ -69,13 +70,12 @@ export type EventMaxAggregateOutputType = {
   date: string | null
   startTime: string | null
   endTime: string | null
-  location: string | null
   image: string | null
   capacity: number | null
   registeredCount: number | null
   price: number | null
-  isFree: boolean | null
   isFeatured: boolean | null
+  locationId: number | null
 }
 
 export type EventCountAggregateOutputType = {
@@ -87,14 +87,13 @@ export type EventCountAggregateOutputType = {
   date: number
   startTime: number
   endTime: number
-  location: number
   image: number
   capacity: number
   registeredCount: number
   price: number
-  isFree: number
   isFeatured: number
   tags: number
+  locationId: number
   _all: number
 }
 
@@ -105,6 +104,7 @@ export type EventAvgAggregateInputType = {
   capacity?: true
   registeredCount?: true
   price?: true
+  locationId?: true
 }
 
 export type EventSumAggregateInputType = {
@@ -113,6 +113,7 @@ export type EventSumAggregateInputType = {
   capacity?: true
   registeredCount?: true
   price?: true
+  locationId?: true
 }
 
 export type EventMinAggregateInputType = {
@@ -124,13 +125,12 @@ export type EventMinAggregateInputType = {
   date?: true
   startTime?: true
   endTime?: true
-  location?: true
   image?: true
   capacity?: true
   registeredCount?: true
   price?: true
-  isFree?: true
   isFeatured?: true
+  locationId?: true
 }
 
 export type EventMaxAggregateInputType = {
@@ -142,13 +142,12 @@ export type EventMaxAggregateInputType = {
   date?: true
   startTime?: true
   endTime?: true
-  location?: true
   image?: true
   capacity?: true
   registeredCount?: true
   price?: true
-  isFree?: true
   isFeatured?: true
+  locationId?: true
 }
 
 export type EventCountAggregateInputType = {
@@ -160,14 +159,13 @@ export type EventCountAggregateInputType = {
   date?: true
   startTime?: true
   endTime?: true
-  location?: true
   image?: true
   capacity?: true
   registeredCount?: true
   price?: true
-  isFree?: true
   isFeatured?: true
   tags?: true
+  locationId?: true
   _all?: true
 }
 
@@ -266,14 +264,13 @@ export type EventGroupByOutputType = {
   date: string
   startTime: string
   endTime: string | null
-  location: string
   image: string | null
   capacity: number
   registeredCount: number
   price: number
-  isFree: boolean
   isFeatured: boolean
   tags: string[]
+  locationId: number
   _count: EventCountAggregateOutputType | null
   _avg: EventAvgAggregateOutputType | null
   _sum: EventSumAggregateOutputType | null
@@ -308,14 +305,16 @@ export type EventWhereInput = {
   date?: Prisma.StringFilter<"Event"> | string
   startTime?: Prisma.StringFilter<"Event"> | string
   endTime?: Prisma.StringNullableFilter<"Event"> | string | null
-  location?: Prisma.StringFilter<"Event"> | string
   image?: Prisma.StringNullableFilter<"Event"> | string | null
   capacity?: Prisma.IntFilter<"Event"> | number
   registeredCount?: Prisma.IntFilter<"Event"> | number
   price?: Prisma.IntFilter<"Event"> | number
-  isFree?: Prisma.BoolFilter<"Event"> | boolean
   isFeatured?: Prisma.BoolFilter<"Event"> | boolean
   tags?: Prisma.StringNullableListFilter<"Event">
+  locationId?: Prisma.IntFilter<"Event"> | number
+  location?: Prisma.XOR<Prisma.LocationScalarRelationFilter, Prisma.LocationWhereInput>
+  organizer?: Prisma.XOR<Prisma.OrganizerScalarRelationFilter, Prisma.OrganizerWhereInput>
+  users?: Prisma.SavedEventListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
@@ -327,14 +326,16 @@ export type EventOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrderInput | Prisma.SortOrder
-  location?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   capacity?: Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  isFree?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   tags?: Prisma.SortOrder
+  locationId?: Prisma.SortOrder
+  location?: Prisma.LocationOrderByWithRelationInput
+  organizer?: Prisma.OrganizerOrderByWithRelationInput
+  users?: Prisma.SavedEventOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -349,14 +350,16 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.StringFilter<"Event"> | string
   startTime?: Prisma.StringFilter<"Event"> | string
   endTime?: Prisma.StringNullableFilter<"Event"> | string | null
-  location?: Prisma.StringFilter<"Event"> | string
   image?: Prisma.StringNullableFilter<"Event"> | string | null
   capacity?: Prisma.IntFilter<"Event"> | number
   registeredCount?: Prisma.IntFilter<"Event"> | number
   price?: Prisma.IntFilter<"Event"> | number
-  isFree?: Prisma.BoolFilter<"Event"> | boolean
   isFeatured?: Prisma.BoolFilter<"Event"> | boolean
   tags?: Prisma.StringNullableListFilter<"Event">
+  locationId?: Prisma.IntFilter<"Event"> | number
+  location?: Prisma.XOR<Prisma.LocationScalarRelationFilter, Prisma.LocationWhereInput>
+  organizer?: Prisma.XOR<Prisma.OrganizerScalarRelationFilter, Prisma.OrganizerWhereInput>
+  users?: Prisma.SavedEventListRelationFilter
 }, "id">
 
 export type EventOrderByWithAggregationInput = {
@@ -368,14 +371,13 @@ export type EventOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrderInput | Prisma.SortOrder
-  location?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   capacity?: Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  isFree?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   tags?: Prisma.SortOrder
+  locationId?: Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _avg?: Prisma.EventAvgOrderByAggregateInput
   _max?: Prisma.EventMaxOrderByAggregateInput
@@ -395,32 +397,31 @@ export type EventScalarWhereWithAggregatesInput = {
   date?: Prisma.StringWithAggregatesFilter<"Event"> | string
   startTime?: Prisma.StringWithAggregatesFilter<"Event"> | string
   endTime?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
-  location?: Prisma.StringWithAggregatesFilter<"Event"> | string
   image?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
   capacity?: Prisma.IntWithAggregatesFilter<"Event"> | number
   registeredCount?: Prisma.IntWithAggregatesFilter<"Event"> | number
   price?: Prisma.IntWithAggregatesFilter<"Event"> | number
-  isFree?: Prisma.BoolWithAggregatesFilter<"Event"> | boolean
   isFeatured?: Prisma.BoolWithAggregatesFilter<"Event"> | boolean
   tags?: Prisma.StringNullableListFilter<"Event">
+  locationId?: Prisma.IntWithAggregatesFilter<"Event"> | number
 }
 
 export type EventCreateInput = {
-  organizerId: number
   title: string
   description?: string | null
   category?: string | null
   date: string
   startTime: string
   endTime?: string | null
-  location: string
   image?: string | null
   capacity: number
   registeredCount?: number
   price?: number
-  isFree?: boolean
   isFeatured?: boolean
   tags?: Prisma.EventCreatetagsInput | string[]
+  location: Prisma.LocationCreateNestedOneWithoutEventsInput
+  organizer: Prisma.OrganizerCreateNestedOneWithoutEventsInput
+  users?: Prisma.SavedEventCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateInput = {
@@ -432,32 +433,32 @@ export type EventUncheckedCreateInput = {
   date: string
   startTime: string
   endTime?: string | null
-  location: string
   image?: string | null
   capacity: number
   registeredCount?: number
   price?: number
-  isFree?: boolean
   isFeatured?: boolean
   tags?: Prisma.EventCreatetagsInput | string[]
+  locationId: number
+  users?: Prisma.SavedEventUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
-  organizerId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.StringFieldUpdateOperationsInput | string
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tags?: Prisma.EventUpdatetagsInput | string[]
+  location?: Prisma.LocationUpdateOneRequiredWithoutEventsNestedInput
+  organizer?: Prisma.OrganizerUpdateOneRequiredWithoutEventsNestedInput
+  users?: Prisma.SavedEventUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
@@ -469,14 +470,14 @@ export type EventUncheckedUpdateInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tags?: Prisma.EventUpdatetagsInput | string[]
+  locationId?: Prisma.IntFieldUpdateOperationsInput | number
+  users?: Prisma.SavedEventUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyInput = {
@@ -488,30 +489,26 @@ export type EventCreateManyInput = {
   date: string
   startTime: string
   endTime?: string | null
-  location: string
   image?: string | null
   capacity: number
   registeredCount?: number
   price?: number
-  isFree?: boolean
   isFeatured?: boolean
   tags?: Prisma.EventCreatetagsInput | string[]
+  locationId: number
 }
 
 export type EventUpdateManyMutationInput = {
-  organizerId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.StringFieldUpdateOperationsInput | string
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tags?: Prisma.EventUpdatetagsInput | string[]
 }
@@ -525,14 +522,23 @@ export type EventUncheckedUpdateManyInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  location?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
-  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tags?: Prisma.EventUpdatetagsInput | string[]
+  locationId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type EventListRelationFilter = {
+  every?: Prisma.EventWhereInput
+  some?: Prisma.EventWhereInput
+  none?: Prisma.EventWhereInput
+}
+
+export type EventOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -552,14 +558,13 @@ export type EventCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrder
-  location?: Prisma.SortOrder
   image?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  isFree?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   tags?: Prisma.SortOrder
+  locationId?: Prisma.SortOrder
 }
 
 export type EventAvgOrderByAggregateInput = {
@@ -568,6 +573,7 @@ export type EventAvgOrderByAggregateInput = {
   capacity?: Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  locationId?: Prisma.SortOrder
 }
 
 export type EventMaxOrderByAggregateInput = {
@@ -579,13 +585,12 @@ export type EventMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrder
-  location?: Prisma.SortOrder
   image?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  isFree?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
+  locationId?: Prisma.SortOrder
 }
 
 export type EventMinOrderByAggregateInput = {
@@ -597,13 +602,12 @@ export type EventMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrder
-  location?: Prisma.SortOrder
   image?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
-  isFree?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
+  locationId?: Prisma.SortOrder
 }
 
 export type EventSumOrderByAggregateInput = {
@@ -612,26 +616,100 @@ export type EventSumOrderByAggregateInput = {
   capacity?: Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  locationId?: Prisma.SortOrder
+}
+
+export type EventScalarRelationFilter = {
+  is?: Prisma.EventWhereInput
+  isNot?: Prisma.EventWhereInput
+}
+
+export type EventCreateNestedManyWithoutLocationInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutLocationInput, Prisma.EventUncheckedCreateWithoutLocationInput> | Prisma.EventCreateWithoutLocationInput[] | Prisma.EventUncheckedCreateWithoutLocationInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutLocationInput | Prisma.EventCreateOrConnectWithoutLocationInput[]
+  createMany?: Prisma.EventCreateManyLocationInputEnvelope
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+}
+
+export type EventUncheckedCreateNestedManyWithoutLocationInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutLocationInput, Prisma.EventUncheckedCreateWithoutLocationInput> | Prisma.EventCreateWithoutLocationInput[] | Prisma.EventUncheckedCreateWithoutLocationInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutLocationInput | Prisma.EventCreateOrConnectWithoutLocationInput[]
+  createMany?: Prisma.EventCreateManyLocationInputEnvelope
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+}
+
+export type EventUpdateManyWithoutLocationNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutLocationInput, Prisma.EventUncheckedCreateWithoutLocationInput> | Prisma.EventCreateWithoutLocationInput[] | Prisma.EventUncheckedCreateWithoutLocationInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutLocationInput | Prisma.EventCreateOrConnectWithoutLocationInput[]
+  upsert?: Prisma.EventUpsertWithWhereUniqueWithoutLocationInput | Prisma.EventUpsertWithWhereUniqueWithoutLocationInput[]
+  createMany?: Prisma.EventCreateManyLocationInputEnvelope
+  set?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  disconnect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  delete?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  update?: Prisma.EventUpdateWithWhereUniqueWithoutLocationInput | Prisma.EventUpdateWithWhereUniqueWithoutLocationInput[]
+  updateMany?: Prisma.EventUpdateManyWithWhereWithoutLocationInput | Prisma.EventUpdateManyWithWhereWithoutLocationInput[]
+  deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+}
+
+export type EventUncheckedUpdateManyWithoutLocationNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutLocationInput, Prisma.EventUncheckedCreateWithoutLocationInput> | Prisma.EventCreateWithoutLocationInput[] | Prisma.EventUncheckedCreateWithoutLocationInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutLocationInput | Prisma.EventCreateOrConnectWithoutLocationInput[]
+  upsert?: Prisma.EventUpsertWithWhereUniqueWithoutLocationInput | Prisma.EventUpsertWithWhereUniqueWithoutLocationInput[]
+  createMany?: Prisma.EventCreateManyLocationInputEnvelope
+  set?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  disconnect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  delete?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  update?: Prisma.EventUpdateWithWhereUniqueWithoutLocationInput | Prisma.EventUpdateWithWhereUniqueWithoutLocationInput[]
+  updateMany?: Prisma.EventUpdateManyWithWhereWithoutLocationInput | Prisma.EventUpdateManyWithWhereWithoutLocationInput[]
+  deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+}
+
+export type EventCreateNestedManyWithoutOrganizerInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutOrganizerInput, Prisma.EventUncheckedCreateWithoutOrganizerInput> | Prisma.EventCreateWithoutOrganizerInput[] | Prisma.EventUncheckedCreateWithoutOrganizerInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutOrganizerInput | Prisma.EventCreateOrConnectWithoutOrganizerInput[]
+  createMany?: Prisma.EventCreateManyOrganizerInputEnvelope
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+}
+
+export type EventUncheckedCreateNestedManyWithoutOrganizerInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutOrganizerInput, Prisma.EventUncheckedCreateWithoutOrganizerInput> | Prisma.EventCreateWithoutOrganizerInput[] | Prisma.EventUncheckedCreateWithoutOrganizerInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutOrganizerInput | Prisma.EventCreateOrConnectWithoutOrganizerInput[]
+  createMany?: Prisma.EventCreateManyOrganizerInputEnvelope
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+}
+
+export type EventUpdateManyWithoutOrganizerNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutOrganizerInput, Prisma.EventUncheckedCreateWithoutOrganizerInput> | Prisma.EventCreateWithoutOrganizerInput[] | Prisma.EventUncheckedCreateWithoutOrganizerInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutOrganizerInput | Prisma.EventCreateOrConnectWithoutOrganizerInput[]
+  upsert?: Prisma.EventUpsertWithWhereUniqueWithoutOrganizerInput | Prisma.EventUpsertWithWhereUniqueWithoutOrganizerInput[]
+  createMany?: Prisma.EventCreateManyOrganizerInputEnvelope
+  set?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  disconnect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  delete?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  update?: Prisma.EventUpdateWithWhereUniqueWithoutOrganizerInput | Prisma.EventUpdateWithWhereUniqueWithoutOrganizerInput[]
+  updateMany?: Prisma.EventUpdateManyWithWhereWithoutOrganizerInput | Prisma.EventUpdateManyWithWhereWithoutOrganizerInput[]
+  deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+}
+
+export type EventUncheckedUpdateManyWithoutOrganizerNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutOrganizerInput, Prisma.EventUncheckedCreateWithoutOrganizerInput> | Prisma.EventCreateWithoutOrganizerInput[] | Prisma.EventUncheckedCreateWithoutOrganizerInput[]
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutOrganizerInput | Prisma.EventCreateOrConnectWithoutOrganizerInput[]
+  upsert?: Prisma.EventUpsertWithWhereUniqueWithoutOrganizerInput | Prisma.EventUpsertWithWhereUniqueWithoutOrganizerInput[]
+  createMany?: Prisma.EventCreateManyOrganizerInputEnvelope
+  set?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  disconnect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  delete?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  connect?: Prisma.EventWhereUniqueInput | Prisma.EventWhereUniqueInput[]
+  update?: Prisma.EventUpdateWithWhereUniqueWithoutOrganizerInput | Prisma.EventUpdateWithWhereUniqueWithoutOrganizerInput[]
+  updateMany?: Prisma.EventUpdateManyWithWhereWithoutOrganizerInput | Prisma.EventUpdateManyWithWhereWithoutOrganizerInput[]
+  deleteMany?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
 }
 
 export type EventCreatetagsInput = {
   set: string[]
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
 }
 
 export type BoolFieldUpdateOperationsInput = {
@@ -643,6 +721,416 @@ export type EventUpdatetagsInput = {
   push?: string | string[]
 }
 
+export type EventCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutUsersInput
+  connect?: Prisma.EventWhereUniqueInput
+}
+
+export type EventUpdateOneRequiredWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutUsersInput
+  upsert?: Prisma.EventUpsertWithoutUsersInput
+  connect?: Prisma.EventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutUsersInput, Prisma.EventUpdateWithoutUsersInput>, Prisma.EventUncheckedUpdateWithoutUsersInput>
+}
+
+export type EventCreateWithoutLocationInput = {
+  title: string
+  description?: string | null
+  category?: string | null
+  date: string
+  startTime: string
+  endTime?: string | null
+  image?: string | null
+  capacity: number
+  registeredCount?: number
+  price?: number
+  isFeatured?: boolean
+  tags?: Prisma.EventCreatetagsInput | string[]
+  organizer: Prisma.OrganizerCreateNestedOneWithoutEventsInput
+  users?: Prisma.SavedEventCreateNestedManyWithoutEventInput
+}
+
+export type EventUncheckedCreateWithoutLocationInput = {
+  id?: number
+  organizerId: number
+  title: string
+  description?: string | null
+  category?: string | null
+  date: string
+  startTime: string
+  endTime?: string | null
+  image?: string | null
+  capacity: number
+  registeredCount?: number
+  price?: number
+  isFeatured?: boolean
+  tags?: Prisma.EventCreatetagsInput | string[]
+  users?: Prisma.SavedEventUncheckedCreateNestedManyWithoutEventInput
+}
+
+export type EventCreateOrConnectWithoutLocationInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutLocationInput, Prisma.EventUncheckedCreateWithoutLocationInput>
+}
+
+export type EventCreateManyLocationInputEnvelope = {
+  data: Prisma.EventCreateManyLocationInput | Prisma.EventCreateManyLocationInput[]
+  skipDuplicates?: boolean
+}
+
+export type EventUpsertWithWhereUniqueWithoutLocationInput = {
+  where: Prisma.EventWhereUniqueInput
+  update: Prisma.XOR<Prisma.EventUpdateWithoutLocationInput, Prisma.EventUncheckedUpdateWithoutLocationInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutLocationInput, Prisma.EventUncheckedCreateWithoutLocationInput>
+}
+
+export type EventUpdateWithWhereUniqueWithoutLocationInput = {
+  where: Prisma.EventWhereUniqueInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutLocationInput, Prisma.EventUncheckedUpdateWithoutLocationInput>
+}
+
+export type EventUpdateManyWithWhereWithoutLocationInput = {
+  where: Prisma.EventScalarWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateManyMutationInput, Prisma.EventUncheckedUpdateManyWithoutLocationInput>
+}
+
+export type EventScalarWhereInput = {
+  AND?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+  OR?: Prisma.EventScalarWhereInput[]
+  NOT?: Prisma.EventScalarWhereInput | Prisma.EventScalarWhereInput[]
+  id?: Prisma.IntFilter<"Event"> | number
+  organizerId?: Prisma.IntFilter<"Event"> | number
+  title?: Prisma.StringFilter<"Event"> | string
+  description?: Prisma.StringNullableFilter<"Event"> | string | null
+  category?: Prisma.StringNullableFilter<"Event"> | string | null
+  date?: Prisma.StringFilter<"Event"> | string
+  startTime?: Prisma.StringFilter<"Event"> | string
+  endTime?: Prisma.StringNullableFilter<"Event"> | string | null
+  image?: Prisma.StringNullableFilter<"Event"> | string | null
+  capacity?: Prisma.IntFilter<"Event"> | number
+  registeredCount?: Prisma.IntFilter<"Event"> | number
+  price?: Prisma.IntFilter<"Event"> | number
+  isFeatured?: Prisma.BoolFilter<"Event"> | boolean
+  tags?: Prisma.StringNullableListFilter<"Event">
+  locationId?: Prisma.IntFilter<"Event"> | number
+}
+
+export type EventCreateWithoutOrganizerInput = {
+  title: string
+  description?: string | null
+  category?: string | null
+  date: string
+  startTime: string
+  endTime?: string | null
+  image?: string | null
+  capacity: number
+  registeredCount?: number
+  price?: number
+  isFeatured?: boolean
+  tags?: Prisma.EventCreatetagsInput | string[]
+  location: Prisma.LocationCreateNestedOneWithoutEventsInput
+  users?: Prisma.SavedEventCreateNestedManyWithoutEventInput
+}
+
+export type EventUncheckedCreateWithoutOrganizerInput = {
+  id?: number
+  title: string
+  description?: string | null
+  category?: string | null
+  date: string
+  startTime: string
+  endTime?: string | null
+  image?: string | null
+  capacity: number
+  registeredCount?: number
+  price?: number
+  isFeatured?: boolean
+  tags?: Prisma.EventCreatetagsInput | string[]
+  locationId: number
+  users?: Prisma.SavedEventUncheckedCreateNestedManyWithoutEventInput
+}
+
+export type EventCreateOrConnectWithoutOrganizerInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutOrganizerInput, Prisma.EventUncheckedCreateWithoutOrganizerInput>
+}
+
+export type EventCreateManyOrganizerInputEnvelope = {
+  data: Prisma.EventCreateManyOrganizerInput | Prisma.EventCreateManyOrganizerInput[]
+  skipDuplicates?: boolean
+}
+
+export type EventUpsertWithWhereUniqueWithoutOrganizerInput = {
+  where: Prisma.EventWhereUniqueInput
+  update: Prisma.XOR<Prisma.EventUpdateWithoutOrganizerInput, Prisma.EventUncheckedUpdateWithoutOrganizerInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutOrganizerInput, Prisma.EventUncheckedCreateWithoutOrganizerInput>
+}
+
+export type EventUpdateWithWhereUniqueWithoutOrganizerInput = {
+  where: Prisma.EventWhereUniqueInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutOrganizerInput, Prisma.EventUncheckedUpdateWithoutOrganizerInput>
+}
+
+export type EventUpdateManyWithWhereWithoutOrganizerInput = {
+  where: Prisma.EventScalarWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateManyMutationInput, Prisma.EventUncheckedUpdateManyWithoutOrganizerInput>
+}
+
+export type EventCreateWithoutUsersInput = {
+  title: string
+  description?: string | null
+  category?: string | null
+  date: string
+  startTime: string
+  endTime?: string | null
+  image?: string | null
+  capacity: number
+  registeredCount?: number
+  price?: number
+  isFeatured?: boolean
+  tags?: Prisma.EventCreatetagsInput | string[]
+  location: Prisma.LocationCreateNestedOneWithoutEventsInput
+  organizer: Prisma.OrganizerCreateNestedOneWithoutEventsInput
+}
+
+export type EventUncheckedCreateWithoutUsersInput = {
+  id?: number
+  organizerId: number
+  title: string
+  description?: string | null
+  category?: string | null
+  date: string
+  startTime: string
+  endTime?: string | null
+  image?: string | null
+  capacity: number
+  registeredCount?: number
+  price?: number
+  isFeatured?: boolean
+  tags?: Prisma.EventCreatetagsInput | string[]
+  locationId: number
+}
+
+export type EventCreateOrConnectWithoutUsersInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput>
+}
+
+export type EventUpsertWithoutUsersInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutUsersInput, Prisma.EventUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutUsersInput, Prisma.EventUncheckedCreateWithoutUsersInput>
+  where?: Prisma.EventWhereInput
+}
+
+export type EventUpdateToOneWithWhereWithoutUsersInput = {
+  where?: Prisma.EventWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutUsersInput, Prisma.EventUncheckedUpdateWithoutUsersInput>
+}
+
+export type EventUpdateWithoutUsersInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.EventUpdatetagsInput | string[]
+  location?: Prisma.LocationUpdateOneRequiredWithoutEventsNestedInput
+  organizer?: Prisma.OrganizerUpdateOneRequiredWithoutEventsNestedInput
+}
+
+export type EventUncheckedUpdateWithoutUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizerId?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.EventUpdatetagsInput | string[]
+  locationId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type EventCreateManyLocationInput = {
+  id?: number
+  organizerId: number
+  title: string
+  description?: string | null
+  category?: string | null
+  date: string
+  startTime: string
+  endTime?: string | null
+  image?: string | null
+  capacity: number
+  registeredCount?: number
+  price?: number
+  isFeatured?: boolean
+  tags?: Prisma.EventCreatetagsInput | string[]
+}
+
+export type EventUpdateWithoutLocationInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.EventUpdatetagsInput | string[]
+  organizer?: Prisma.OrganizerUpdateOneRequiredWithoutEventsNestedInput
+  users?: Prisma.SavedEventUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateWithoutLocationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizerId?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.EventUpdatetagsInput | string[]
+  users?: Prisma.SavedEventUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateManyWithoutLocationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  organizerId?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.EventUpdatetagsInput | string[]
+}
+
+export type EventCreateManyOrganizerInput = {
+  id?: number
+  title: string
+  description?: string | null
+  category?: string | null
+  date: string
+  startTime: string
+  endTime?: string | null
+  image?: string | null
+  capacity: number
+  registeredCount?: number
+  price?: number
+  isFeatured?: boolean
+  tags?: Prisma.EventCreatetagsInput | string[]
+  locationId: number
+}
+
+export type EventUpdateWithoutOrganizerInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.EventUpdatetagsInput | string[]
+  location?: Prisma.LocationUpdateOneRequiredWithoutEventsNestedInput
+  users?: Prisma.SavedEventUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateWithoutOrganizerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.EventUpdatetagsInput | string[]
+  locationId?: Prisma.IntFieldUpdateOperationsInput | number
+  users?: Prisma.SavedEventUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateManyWithoutOrganizerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.StringFieldUpdateOperationsInput | string
+  endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.EventUpdatetagsInput | string[]
+  locationId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+
+/**
+ * Count Type EventCountOutputType
+ */
+
+export type EventCountOutputType = {
+  users: number
+}
+
+export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  users?: boolean | EventCountOutputTypeCountUsersArgs
+}
+
+/**
+ * EventCountOutputType without action
+ */
+export type EventCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventCountOutputType
+   */
+  select?: Prisma.EventCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EventCountOutputType without action
+ */
+export type EventCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavedEventWhereInput
+}
 
 
 export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -654,14 +1142,17 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   date?: boolean
   startTime?: boolean
   endTime?: boolean
-  location?: boolean
   image?: boolean
   capacity?: boolean
   registeredCount?: boolean
   price?: boolean
-  isFree?: boolean
   isFeatured?: boolean
   tags?: boolean
+  locationId?: boolean
+  location?: boolean | Prisma.LocationDefaultArgs<ExtArgs>
+  organizer?: boolean | Prisma.OrganizerDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Event$usersArgs<ExtArgs>
+  _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -673,14 +1164,15 @@ export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   date?: boolean
   startTime?: boolean
   endTime?: boolean
-  location?: boolean
   image?: boolean
   capacity?: boolean
   registeredCount?: boolean
   price?: boolean
-  isFree?: boolean
   isFeatured?: boolean
   tags?: boolean
+  locationId?: boolean
+  location?: boolean | Prisma.LocationDefaultArgs<ExtArgs>
+  organizer?: boolean | Prisma.OrganizerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -692,14 +1184,15 @@ export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   date?: boolean
   startTime?: boolean
   endTime?: boolean
-  location?: boolean
   image?: boolean
   capacity?: boolean
   registeredCount?: boolean
   price?: boolean
-  isFree?: boolean
   isFeatured?: boolean
   tags?: boolean
+  locationId?: boolean
+  location?: boolean | Prisma.LocationDefaultArgs<ExtArgs>
+  organizer?: boolean | Prisma.OrganizerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectScalar = {
@@ -711,21 +1204,38 @@ export type EventSelectScalar = {
   date?: boolean
   startTime?: boolean
   endTime?: boolean
-  location?: boolean
   image?: boolean
   capacity?: boolean
   registeredCount?: boolean
   price?: boolean
-  isFree?: boolean
   isFeatured?: boolean
   tags?: boolean
+  locationId?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizerId" | "title" | "description" | "category" | "date" | "startTime" | "endTime" | "location" | "image" | "capacity" | "registeredCount" | "price" | "isFree" | "isFeatured" | "tags", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizerId" | "title" | "description" | "category" | "date" | "startTime" | "endTime" | "image" | "capacity" | "registeredCount" | "price" | "isFeatured" | "tags" | "locationId", ExtArgs["result"]["event"]>
+export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  location?: boolean | Prisma.LocationDefaultArgs<ExtArgs>
+  organizer?: boolean | Prisma.OrganizerDefaultArgs<ExtArgs>
+  users?: boolean | Prisma.Event$usersArgs<ExtArgs>
+  _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type EventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  location?: boolean | Prisma.LocationDefaultArgs<ExtArgs>
+  organizer?: boolean | Prisma.OrganizerDefaultArgs<ExtArgs>
+}
+export type EventIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  location?: boolean | Prisma.LocationDefaultArgs<ExtArgs>
+  organizer?: boolean | Prisma.OrganizerDefaultArgs<ExtArgs>
+}
 
 export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Event"
-  objects: {}
+  objects: {
+    location: Prisma.$LocationPayload<ExtArgs>
+    organizer: Prisma.$OrganizerPayload<ExtArgs>
+    users: Prisma.$SavedEventPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     organizerId: number
@@ -735,14 +1245,13 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     date: string
     startTime: string
     endTime: string | null
-    location: string
     image: string | null
     capacity: number
     registeredCount: number
     price: number
-    isFree: boolean
     isFeatured: boolean
     tags: string[]
+    locationId: number
   }, ExtArgs["result"]["event"]>
   composites: {}
 }
@@ -1137,6 +1646,9 @@ readonly fields: EventFieldRefs;
  */
 export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  location<T extends Prisma.LocationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LocationDefaultArgs<ExtArgs>>): Prisma.Prisma__LocationClient<runtime.Types.Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  organizer<T extends Prisma.OrganizerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizerDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizerClient<runtime.Types.Result.GetResult<Prisma.$OrganizerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.Event$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1174,14 +1686,13 @@ export interface EventFieldRefs {
   readonly date: Prisma.FieldRef<"Event", 'String'>
   readonly startTime: Prisma.FieldRef<"Event", 'String'>
   readonly endTime: Prisma.FieldRef<"Event", 'String'>
-  readonly location: Prisma.FieldRef<"Event", 'String'>
   readonly image: Prisma.FieldRef<"Event", 'String'>
   readonly capacity: Prisma.FieldRef<"Event", 'Int'>
   readonly registeredCount: Prisma.FieldRef<"Event", 'Int'>
   readonly price: Prisma.FieldRef<"Event", 'Int'>
-  readonly isFree: Prisma.FieldRef<"Event", 'Boolean'>
   readonly isFeatured: Prisma.FieldRef<"Event", 'Boolean'>
   readonly tags: Prisma.FieldRef<"Event", 'String[]'>
+  readonly locationId: Prisma.FieldRef<"Event", 'Int'>
 }
     
 
@@ -1198,6 +1709,10 @@ export type EventFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Event
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
   /**
    * Filter, which Event to fetch.
    */
@@ -1217,6 +1732,10 @@ export type EventFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
+  /**
    * Filter, which Event to fetch.
    */
   where: Prisma.EventWhereUniqueInput
@@ -1234,6 +1753,10 @@ export type EventFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Event
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
   /**
    * Filter, which Event to fetch.
    */
@@ -1283,6 +1806,10 @@ export type EventFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
+  /**
    * Filter, which Event to fetch.
    */
   where?: Prisma.EventWhereInput
@@ -1330,6 +1857,10 @@ export type EventFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Event
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
   /**
    * Filter, which Events to fetch.
    */
@@ -1379,6 +1910,10 @@ export type EventCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
+  /**
    * The data needed to create a Event.
    */
   data: Prisma.XOR<Prisma.EventCreateInput, Prisma.EventUncheckedCreateInput>
@@ -1412,6 +1947,10 @@ export type EventCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    */
   data: Prisma.EventCreateManyInput | Prisma.EventCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1426,6 +1965,10 @@ export type EventUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Event
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
   /**
    * The data needed to update a Event.
    */
@@ -1478,6 +2021,10 @@ export type EventUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many Events to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1492,6 +2039,10 @@ export type EventUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Event
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
   /**
    * The filter to search for the Event to update in case it exists.
    */
@@ -1519,6 +2070,10 @@ export type EventDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
+  /**
    * Filter which Event to delete.
    */
   where: Prisma.EventWhereUniqueInput
@@ -1539,6 +2094,30 @@ export type EventDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Event.users
+ */
+export type Event$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SavedEvent
+   */
+  select?: Prisma.SavedEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SavedEvent
+   */
+  omit?: Prisma.SavedEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SavedEventInclude<ExtArgs> | null
+  where?: Prisma.SavedEventWhereInput
+  orderBy?: Prisma.SavedEventOrderByWithRelationInput | Prisma.SavedEventOrderByWithRelationInput[]
+  cursor?: Prisma.SavedEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SavedEventScalarFieldEnum | Prisma.SavedEventScalarFieldEnum[]
+}
+
+/**
  * Event without action
  */
 export type EventDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1550,4 +2129,8 @@ export type EventDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Event
    */
   omit?: Prisma.EventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventInclude<ExtArgs> | null
 }

@@ -8,5 +8,9 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Location'
+export type * from './models/Organizer'
 export type * from './models/Event'
+export type * from './models/User'
+export type * from './models/SavedEvent'
 export type * from './commonInputTypes'
