@@ -1,12 +1,10 @@
 import historicalData from "./data/data.json";
-import type { Event, Location, SavedEvent } from "@shared/types/event";
-import type { Organizer } from "@shared/types/organizer";
 import { prisma } from "../src/db/prisma";
 
-const locations: Location[] = historicalData.locations
-const events: Event[] = historicalData.events;
-const savedEvents: SavedEvent[] = historicalData.savedEvents;
-const organizers: Organizer[] = historicalData.organizers;
+const locations = historicalData.locations
+const events = historicalData.events;
+const savedEvents = historicalData.savedEvents;
+const organizers = historicalData.organizers;
 const users = historicalData.users;
 
 async function main() {

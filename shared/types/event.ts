@@ -24,7 +24,7 @@ export interface Event {
 export interface Location {
   id: number;
   venue?: string;
-  address?: string;
+  address: string;
   city: string;
   province: string;
   postalCode?: string;
