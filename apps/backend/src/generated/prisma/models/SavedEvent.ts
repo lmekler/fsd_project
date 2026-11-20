@@ -222,6 +222,7 @@ export type SavedEventOrderByWithRelationInput = {
 
 export type SavedEventWhereUniqueInput = Prisma.AtLeast<{
   savedEventId?: number
+  userId_eventId?: Prisma.SavedEventUserIdEventIdCompoundUniqueInput
   AND?: Prisma.SavedEventWhereInput | Prisma.SavedEventWhereInput[]
   OR?: Prisma.SavedEventWhereInput[]
   NOT?: Prisma.SavedEventWhereInput | Prisma.SavedEventWhereInput[]
@@ -229,7 +230,7 @@ export type SavedEventWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.IntFilter<"SavedEvent"> | number
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "savedEventId">
+}, "savedEventId" | "userId_eventId">
 
 export type SavedEventOrderByWithAggregationInput = {
   savedEventId?: Prisma.SortOrder
@@ -252,19 +253,17 @@ export type SavedEventScalarWhereWithAggregatesInput = {
 }
 
 export type SavedEventCreateInput = {
-  savedEventId: number
   event: Prisma.EventCreateNestedOneWithoutUsersInput
   user: Prisma.UserCreateNestedOneWithoutEventsInput
 }
 
 export type SavedEventUncheckedCreateInput = {
-  savedEventId: number
+  savedEventId?: number
   eventId: number
   userId: number
 }
 
 export type SavedEventUpdateInput = {
-  savedEventId?: Prisma.IntFieldUpdateOperationsInput | number
   event?: Prisma.EventUpdateOneRequiredWithoutUsersNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutEventsNestedInput
 }
@@ -276,13 +275,13 @@ export type SavedEventUncheckedUpdateInput = {
 }
 
 export type SavedEventCreateManyInput = {
-  savedEventId: number
+  savedEventId?: number
   eventId: number
   userId: number
 }
 
 export type SavedEventUpdateManyMutationInput = {
-  savedEventId?: Prisma.IntFieldUpdateOperationsInput | number
+
 }
 
 export type SavedEventUncheckedUpdateManyInput = {
@@ -299,6 +298,11 @@ export type SavedEventListRelationFilter = {
 
 export type SavedEventOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type SavedEventUserIdEventIdCompoundUniqueInput = {
+  userId: number
+  eventId: number
 }
 
 export type SavedEventCountOrderByAggregateInput = {
@@ -416,12 +420,11 @@ export type SavedEventUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type SavedEventCreateWithoutEventInput = {
-  savedEventId: number
   user: Prisma.UserCreateNestedOneWithoutEventsInput
 }
 
 export type SavedEventUncheckedCreateWithoutEventInput = {
-  savedEventId: number
+  savedEventId?: number
   userId: number
 }
 
@@ -461,12 +464,11 @@ export type SavedEventScalarWhereInput = {
 }
 
 export type SavedEventCreateWithoutUserInput = {
-  savedEventId: number
   event: Prisma.EventCreateNestedOneWithoutUsersInput
 }
 
 export type SavedEventUncheckedCreateWithoutUserInput = {
-  savedEventId: number
+  savedEventId?: number
   eventId: number
 }
 
@@ -497,12 +499,11 @@ export type SavedEventUpdateManyWithWhereWithoutUserInput = {
 }
 
 export type SavedEventCreateManyEventInput = {
-  savedEventId: number
+  savedEventId?: number
   userId: number
 }
 
 export type SavedEventUpdateWithoutEventInput = {
-  savedEventId?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneRequiredWithoutEventsNestedInput
 }
 
@@ -517,12 +518,11 @@ export type SavedEventUncheckedUpdateManyWithoutEventInput = {
 }
 
 export type SavedEventCreateManyUserInput = {
-  savedEventId: number
+  savedEventId?: number
   eventId: number
 }
 
 export type SavedEventUpdateWithoutUserInput = {
-  savedEventId?: Prisma.IntFieldUpdateOperationsInput | number
   event?: Prisma.EventUpdateOneRequiredWithoutUsersNestedInput
 }
 

@@ -191,7 +191,7 @@ export type LocationGroupByOutputType = {
   address: string
   city: string
   province: string
-  postalCode: string
+  postalCode: string | null
   _count: LocationCountAggregateOutputType | null
   _avg: LocationAvgAggregateOutputType | null
   _sum: LocationSumAggregateOutputType | null
@@ -223,7 +223,7 @@ export type LocationWhereInput = {
   address?: Prisma.StringFilter<"Location"> | string
   city?: Prisma.StringFilter<"Location"> | string
   province?: Prisma.StringFilter<"Location"> | string
-  postalCode?: Prisma.StringFilter<"Location"> | string
+  postalCode?: Prisma.StringNullableFilter<"Location"> | string | null
   organizers?: Prisma.OrganizerListRelationFilter
   events?: Prisma.EventListRelationFilter
 }
@@ -234,7 +234,7 @@ export type LocationOrderByWithRelationInput = {
   address?: Prisma.SortOrder
   city?: Prisma.SortOrder
   province?: Prisma.SortOrder
-  postalCode?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
   organizers?: Prisma.OrganizerOrderByRelationAggregateInput
   events?: Prisma.EventOrderByRelationAggregateInput
 }
@@ -248,7 +248,7 @@ export type LocationWhereUniqueInput = Prisma.AtLeast<{
   address?: Prisma.StringFilter<"Location"> | string
   city?: Prisma.StringFilter<"Location"> | string
   province?: Prisma.StringFilter<"Location"> | string
-  postalCode?: Prisma.StringFilter<"Location"> | string
+  postalCode?: Prisma.StringNullableFilter<"Location"> | string | null
   organizers?: Prisma.OrganizerListRelationFilter
   events?: Prisma.EventListRelationFilter
 }, "id">
@@ -259,7 +259,7 @@ export type LocationOrderByWithAggregationInput = {
   address?: Prisma.SortOrder
   city?: Prisma.SortOrder
   province?: Prisma.SortOrder
-  postalCode?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LocationCountOrderByAggregateInput
   _avg?: Prisma.LocationAvgOrderByAggregateInput
   _max?: Prisma.LocationMaxOrderByAggregateInput
@@ -276,7 +276,7 @@ export type LocationScalarWhereWithAggregatesInput = {
   address?: Prisma.StringWithAggregatesFilter<"Location"> | string
   city?: Prisma.StringWithAggregatesFilter<"Location"> | string
   province?: Prisma.StringWithAggregatesFilter<"Location"> | string
-  postalCode?: Prisma.StringWithAggregatesFilter<"Location"> | string
+  postalCode?: Prisma.StringNullableWithAggregatesFilter<"Location"> | string | null
 }
 
 export type LocationCreateInput = {
@@ -284,7 +284,7 @@ export type LocationCreateInput = {
   address: string
   city: string
   province: string
-  postalCode: string
+  postalCode?: string | null
   organizers?: Prisma.OrganizerCreateNestedManyWithoutLocationInput
   events?: Prisma.EventCreateNestedManyWithoutLocationInput
 }
@@ -295,7 +295,7 @@ export type LocationUncheckedCreateInput = {
   address: string
   city: string
   province: string
-  postalCode: string
+  postalCode?: string | null
   organizers?: Prisma.OrganizerUncheckedCreateNestedManyWithoutLocationInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
 }
@@ -305,7 +305,7 @@ export type LocationUpdateInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organizers?: Prisma.OrganizerUpdateManyWithoutLocationNestedInput
   events?: Prisma.EventUpdateManyWithoutLocationNestedInput
 }
@@ -316,7 +316,7 @@ export type LocationUncheckedUpdateInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organizers?: Prisma.OrganizerUncheckedUpdateManyWithoutLocationNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
 }
@@ -327,7 +327,7 @@ export type LocationCreateManyInput = {
   address: string
   city: string
   province: string
-  postalCode: string
+  postalCode?: string | null
 }
 
 export type LocationUpdateManyMutationInput = {
@@ -335,7 +335,7 @@ export type LocationUpdateManyMutationInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LocationUncheckedUpdateManyInput = {
@@ -344,7 +344,7 @@ export type LocationUncheckedUpdateManyInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LocationCountOrderByAggregateInput = {
@@ -436,7 +436,7 @@ export type LocationCreateWithoutOrganizersInput = {
   address: string
   city: string
   province: string
-  postalCode: string
+  postalCode?: string | null
   events?: Prisma.EventCreateNestedManyWithoutLocationInput
 }
 
@@ -446,7 +446,7 @@ export type LocationUncheckedCreateWithoutOrganizersInput = {
   address: string
   city: string
   province: string
-  postalCode: string
+  postalCode?: string | null
   events?: Prisma.EventUncheckedCreateNestedManyWithoutLocationInput
 }
 
@@ -471,7 +471,7 @@ export type LocationUpdateWithoutOrganizersInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   events?: Prisma.EventUpdateManyWithoutLocationNestedInput
 }
 
@@ -481,7 +481,7 @@ export type LocationUncheckedUpdateWithoutOrganizersInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   events?: Prisma.EventUncheckedUpdateManyWithoutLocationNestedInput
 }
 
@@ -490,7 +490,7 @@ export type LocationCreateWithoutEventsInput = {
   address: string
   city: string
   province: string
-  postalCode: string
+  postalCode?: string | null
   organizers?: Prisma.OrganizerCreateNestedManyWithoutLocationInput
 }
 
@@ -500,7 +500,7 @@ export type LocationUncheckedCreateWithoutEventsInput = {
   address: string
   city: string
   province: string
-  postalCode: string
+  postalCode?: string | null
   organizers?: Prisma.OrganizerUncheckedCreateNestedManyWithoutLocationInput
 }
 
@@ -525,7 +525,7 @@ export type LocationUpdateWithoutEventsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organizers?: Prisma.OrganizerUpdateManyWithoutLocationNestedInput
 }
 
@@ -535,7 +535,7 @@ export type LocationUncheckedUpdateWithoutEventsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   organizers?: Prisma.OrganizerUncheckedUpdateManyWithoutLocationNestedInput
 }
 
@@ -639,7 +639,7 @@ export type $LocationPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     address: string
     city: string
     province: string
-    postalCode: string
+    postalCode: string | null
   }, ExtArgs["result"]["location"]>
   composites: {}
 }
