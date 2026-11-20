@@ -51,7 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Event: 'Event'
+  Location: 'Location',
+  Organizer: 'Organizer',
+  Event: 'Event',
+  User: 'User',
+  SavedEvent: 'SavedEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -70,6 +74,32 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const LocationScalarFieldEnum = {
+  id: 'id',
+  venue: 'venue',
+  address: 'address',
+  city: 'city',
+  province: 'province',
+  postalCode: 'postalCode'
+} as const
+
+export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+
+
+export const OrganizerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  email: 'email',
+  phone: 'phone',
+  website: 'website',
+  image: 'image',
+  locationId: 'locationId'
+} as const
+
+export type OrganizerScalarFieldEnum = (typeof OrganizerScalarFieldEnum)[keyof typeof OrganizerScalarFieldEnum]
+
+
 export const EventScalarFieldEnum = {
   id: 'id',
   organizerId: 'organizerId',
@@ -79,17 +109,38 @@ export const EventScalarFieldEnum = {
   date: 'date',
   startTime: 'startTime',
   endTime: 'endTime',
-  location: 'location',
   image: 'image',
   capacity: 'capacity',
   registeredCount: 'registeredCount',
   price: 'price',
-  isFree: 'isFree',
   isFeatured: 'isFeatured',
-  tags: 'tags'
+  tags: 'tags',
+  locationId: 'locationId'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  userName: 'userName',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  passwordHash: 'passwordHash',
+  image: 'image'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const SavedEventScalarFieldEnum = {
+  savedEventId: 'savedEventId',
+  eventId: 'eventId',
+  userId: 'userId'
+} as const
+
+export type SavedEventScalarFieldEnum = (typeof SavedEventScalarFieldEnum)[keyof typeof SavedEventScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -1,18 +1,45 @@
-import historicalData from "../../frontend/src/data/data.json";
-import type { Event, SavedEvent } from "@shared/types/event";
+import historicalData from "./data/data.json";
+import type { Event, Location, SavedEvent } from "@shared/types/event";
 import type { Organizer } from "@shared/types/organizer";
-import { prisma } from "../src/db";
+import { prisma } from "../src/db/prisma";
 
+const locations: Location[] = historicalData.locations
 const events: Event[] = historicalData.events;
 const savedEvents: SavedEvent[] = historicalData.savedEvents;
 const organizers: Organizer[] = historicalData.organizers;
+const users = historicalData.users;
 
 async function main() {
     await prisma.$transaction(async (tx) => {
-        await tx.event.deleteMany();
         await tx.savedEvent.deleteMany();
+        await tx.user.deleteMany();
+        await tx.event.deleteMany();
         await tx.organizer.deleteMany();
         await tx.location.deleteMany();
+
+        for (const location of locations) {
+          await tx.location.create({ data: {
+            id: location.id,
+            venue: location.venue,
+            address: location.address,
+            city: location.city,
+            province: location.province,
+            postalCode: location.postalCode
+          }})
+        }
+
+        for (const organizer of organizers) {
+          await tx.organizer.create({ data: {
+            id: organizer.id,
+            name: organizer.name,
+            description: organizer.description,
+            email: organizer.email,
+            phone: organizer.phone,
+            website: organizer.website,
+            image: organizer.image,
+            locationId: organizer.locationId
+          }})
+        }
         
         for (const event of events) {
           await tx.event.create({ data: {
@@ -30,28 +57,27 @@ async function main() {
             price: event.price,
             isFeatured: event.isFeatured,
             tags: event.tags,
-            location: {
-              create: {
-                venue: event.location.venue,
-                address: event.location.address,
-                postalCode: event.location.postalCode,
-                city: event.location.city,
-                province: event.location.province
-              }
-            }
+            locationId: event.locationId
           }})
         }
 
-        for (const organizer of organizers) {
-          await tx.organizer.create({ data: {
-            id: organizer.id,
-            name: organizer.name,
-            description: organizer.description,
-            website: organizer.website,
-            email: organizer.email,
-            phone: organizer.phone,
-            image: organizer.image,
-            location: organizer.location
+        for (const user of users) {
+          await tx.user.create({ data: {
+            id: user.id,
+            userName: user.userName,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            passwordHash: user.passwordHash,
+            image: user.image
+          }})
+        }
+
+        for (const savedEvent of savedEvents) {
+          await tx.savedEvent.create({ data: {
+            savedEventId: savedEvent.savedEventId,
+            userId: savedEvent.userId,
+            eventId: savedEvent.eventId
           }})
         }
     })

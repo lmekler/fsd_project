@@ -11,7 +11,7 @@ export type DbLocation = {
   address: string;
   city: string;
   province: string;
-  postalCode: string | null;
+  postalCode: string;
 };
 
 type DbSavedEvent = {
@@ -44,11 +44,11 @@ type DbEvent = {
 export function toLocation(row: DbLocation): Location {
   return {
     id: row.id,
-    ...(row.venue !== null ? { venue: row.venue } : {}),
+    venue: row.venue,
     address: row.address,
     city: row.city,
     province: row.province,
-    ...(row.postalCode !== null ? { postalCode: row.postalCode } : {}),
+    postalCode: row.postalCode,
   };
 }
 

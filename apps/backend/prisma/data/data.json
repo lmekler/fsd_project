@@ -1,0 +1,627 @@
+{
+  "locations": [
+    {
+      "id": 1,
+      "venue": null,
+      "address": "125 Carlton Street",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3C 3H8"
+    },
+    {
+      "id": 2,
+      "venue": null,
+      "address": "615 Ellice Avenue",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3G 0A4"
+    },
+    {
+      "id": 3,
+      "venue": null,
+      "address": "975 Henderson Highway",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R2K 4L7"
+    },
+    {
+      "id": 4,
+      "venue": null,
+      "address": "135 Plaza Drive",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3T 6E8"
+    },
+    {
+      "id": 5,
+      "venue": null,
+      "address": "200 Isabel Street",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3A 1G9"
+    },
+    {
+      "id": 6,
+      "venue": null,
+      "address": "725 Kingsbury Avenue",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R2V 3H9"
+    },
+    {
+      "id": 7,
+      "venue": null,
+      "address": "280 Booth Drive",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3J 3R5"
+    },
+    {
+      "id": 8,
+      "venue": null,
+      "address": "748 Broadway",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3G 0X3"
+    },
+    {
+      "id": 9,
+      "venue": null,
+      "address": "510 King Street",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R2W 3Z5"
+    },
+    {
+      "id": 10,
+      "venue": null,
+      "address": "823 Ellice Avenue",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3G 0C3"
+    },
+    {
+      "id": 11,
+      "venue": "River Heights Community Centre",
+      "address": "1370 Grosvenor Avenue",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3M 0Z8"
+    },
+    {
+      "id": 12,
+      "venue": "Prairie Arts Studio",
+      "address": "455 Main Street",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3B 1B7"
+    },
+    {
+      "id": 13,
+      "venue": "Assiniboine Park Field",
+      "address": "2355 Corydon Avenue",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3P 2N6"
+    },
+    {
+      "id": 14,
+      "venue": "West Broadway Community Garden",
+      "address": "748 Broadway",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3G 0X3"
+    },
+    {
+      "id": 15,
+      "venue": "St. Vital Community Centre",
+      "address": "601 St. Mary's Road",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R2M 3L5"
+    },
+    {
+      "id": 16,
+      "venue": "Prairie Arts Gallery",
+      "address": "320 Portage Avenue",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3C 0C4"
+    },
+    {
+      "id": 17,
+      "venue": "Kildonan Park",
+      "address": "2015 Main Street",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R2V 2B9"
+    },
+    {
+      "id": 18,
+      "venue": "North End Community Centre",
+      "address": "1100 McPhillips Street",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R2X 2K8"
+    },
+    {
+      "id": 19,
+      "venue": "Charleswood Community Centre",
+      "address": "4910 Roblin Boulevard",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3R 0G7"
+    },
+    {
+      "id": 20,
+      "venue": "Prairie Arts Studio",
+      "address": "455 Main Street",
+      "city": "Winnipeg",
+      "province": "Manitoba",
+      "postalCode": "R3B 1B7"
+    }
+  ],
+  "organizers": [
+    {
+      "id": 1,
+      "name": "Winnipeg Community Centre",
+      "description": "A local community organization focused on bringing residents together through social, educational, and recreational programs.",
+      "email": "hello@winnipegcommunity.ca",
+      "phone": "204-555-0101",
+      "website": "https://example.com/winnipeg-community-centre",
+      "image": "/images/organizers/community-centre.jpg",
+      "locationId": 1
+    },
+    {
+      "id": 2,
+      "name": "Prairie Arts Collective",
+      "description": "A group of local artists and creators who organize workshops, exhibitions, and cultural events.",
+      "email": "info@prairiearts.ca",
+      "phone": "204-555-0102",
+      "website": "https://example.com/prairie-arts",
+      "image": "/images/organizers/prairie-arts.jpg",
+      "locationId": 2
+    },
+    {
+      "id": 3,
+      "name": "Neighbourhood Sports Association",
+      "description": "A volunteer-run organization providing accessible sports and recreational activities for people of all ages.",
+      "email": "contact@neighbourhoodsports.ca",
+      "phone": "204-555-0103",
+      "website": "https://example.com/neighbourhood-sports",
+      "image": "/images/organizers/sports-association.jpg",
+      "locationId": 3
+    },
+    {
+      "id": 4,
+      "name": "Winnipeg Sustainability Network",
+      "description": "A community network promoting environmental education, sustainable living, and local climate initiatives.",
+      "email": "hello@wpgsustainability.ca",
+      "phone": "204-555-0104",
+      "website": "https://example.com/winnipeg-sustainability",
+      "image": "/images/organizers/sustainability-network.jpg",
+      "locationId": 4
+    },
+    {
+      "id": 5,
+      "name": "Manitoba Arts Guild",
+      "description": "Supporting local artists and creators through exhibitions, workshops, and community-driven cultural events.",
+      "email": "info@manitobaartsguild.ca",
+      "phone": "204-555-0142",
+      "website": "https://example.com/manitoba-arts-guild",
+      "image": "/images/organizers/arts-guild.jpg",
+      "locationId": 5
+    },
+    {
+      "id": 6,
+      "name": "River City Youth Sports",
+      "description": "Promoting physical health, teamwork, and leadership among youth in Winnipeg through accessible sports leagues and camps.",
+      "email": "contact@rivercitysports.ca",
+      "phone": "204-555-0189",
+      "website": "https://example.com/river-city-youth-sports",
+      "image": "/images/organizers/youth-sports.jpg",
+      "locationId": 6
+    },
+    {
+      "id": 7,
+      "name": "Prairie Green Environmental Initiative",
+      "description": "A volunteer-led group dedicated to urban greening, tree planting, and sustainability education across Winnipeg neighborhoods.",
+      "email": "hello@prairiegreen.ca",
+      "phone": "204-555-0234",
+      "website": "https://example.com/prairie-green",
+      "image": "/images/organizers/environmental-initiative.jpg",
+      "locationId": 7
+    },
+    {
+      "id": 8,
+      "name": "Winnipeg Heritage & History Society",
+      "description": "Preserving and sharing the rich multicultural history of Winnipeg through archives, walking tours, and public lectures.",
+      "email": "archives@winnipegheritage.ca",
+      "phone": "204-555-0311",
+      "website": "https://example.com/winnipeg-heritage-society",
+      "image": "/images/organizers/heritage-society.jpg",
+      "locationId": 8
+    },
+    {
+      "id": 9,
+      "name": "Assiniboine Food Security Network",
+      "description": "Working to ensure reliable access to nutritious, locally grown food for families and individuals in need across the city.",
+      "email": "support@assiniboinefood.ca",
+      "phone": "204-555-0456",
+      "website": "https://example.com/assiniboine-food-security",
+      "image": "/images/organizers/food-security.jpg",
+      "locationId": 9
+    },
+    {
+      "id": 10,
+      "name": "Red River Tech & Innovation Hub",
+      "description": "Empowering tech enthusiasts, entrepreneurs, and students with collaborative co-working spaces, coding workshops, and startup mentoring.",
+      "email": "connect@redrivertechhub.ca",
+      "phone": "204-555-0588",
+      "website": "https://example.com/red-river-tech-hub",
+      "image": "/images/organizers/tech-hub.jpg",
+      "locationId": 10
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "organizerId": 1,
+      "title": "Community Cleanup Day",
+      "description": "Join neighbours for a morning of cleaning up local parks and public spaces. Supplies will be provided, and everyone is welcome.",
+      "category": "Community",
+      "isFeatured": true,
+      "tags": [
+        "volunteering",
+        "community",
+        "outdoors"
+      ],
+      "locationId": 11,
+      "date": "2026-12-05",
+      "startTime": "09:00",
+      "endTime": "12:00",
+      "image": "/images/events/community-cleanup.jpg",
+      "capacity": 80,
+      "registeredCount": 34,
+      "price": 0,
+      "users": [
+        {
+          "savedEventId": 1,
+          "eventId": 1,
+          "userId": 1
+        },
+        {
+          "savedEventId": 6,
+          "eventId": 1,
+          "userId": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "organizerId": 2,
+      "title": "Introduction to Watercolour",
+      "description": "Learn the fundamentals of watercolour painting in this beginner-friendly workshop led by a local artist.",
+      "category": "Arts & Culture",
+      "isFeatured": true,
+      "tags": [
+        "art",
+        "painting",
+        "workshop",
+        "beginner"
+      ],
+      "locationId": 12,
+      "date": "2026-12-10",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "image": "/images/events/watercolour-workshop.jpg",
+      "capacity": 20,
+      "registeredCount": 16,
+      "price": 35,
+      "users": [
+        {
+          "savedEventId": 2,
+          "eventId": 2,
+          "userId": 1
+        },
+        {
+          "savedEventId": 10,
+          "eventId": 2,
+          "userId": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "organizerId": 3,
+      "title": "Community Pick-Up Soccer",
+      "description": "A casual evening of pick-up soccer. Players of all skill levels are welcome.",
+      "category": "Sports & Recreation",
+      "isFeatured": false,
+      "tags": [
+        "soccer",
+        "sports",
+        "recreation",
+        "outdoors"
+      ],
+      "locationId": 13,
+      "date": "2026-12-12",
+      "startTime": "18:30",
+      "endTime": "20:00",
+      "image": "/images/events/pickup-soccer.jpg",
+      "capacity": 30,
+      "registeredCount": 18,
+      "price": 5,
+      "users": [
+        {
+          "savedEventId": 3,
+          "eventId": 3,
+          "userId": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "organizerId": 4,
+      "title": "Urban Gardening Workshop",
+      "description": "Discover practical ways to grow vegetables, herbs, and pollinator-friendly plants in small urban spaces.",
+      "category": "Environment",
+      "isFeatured": false,
+      "tags": [
+        "gardening",
+        "environment",
+        "sustainability",
+        "workshop"
+      ],
+      "locationId": 14,
+      "date": "2026-12-14",
+      "startTime": "13:00",
+      "endTime": "15:00",
+      "image": "/images/events/urban-gardening.jpg",
+      "capacity": 25,
+      "registeredCount": 12,
+      "price": 10,
+      "users": [
+        {
+          "savedEventId": 4,
+          "eventId": 4,
+          "userId": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "organizerId": 1,
+      "title": "Neighbourhood Potluck",
+      "description": "Bring a favourite dish and meet people from the neighbourhood at this casual community dinner.",
+      "category": "Food & Social",
+      "isFeatured": true,
+      "tags": [
+        "food",
+        "social",
+        "community",
+        "family"
+      ],
+      "locationId": 15,
+      "date": "2026-12-18",
+      "startTime": "18:00",
+      "endTime": "21:00",
+      "image": "/images/events/neighbourhood-potluck.jpg",
+      "capacity": 50,
+      "registeredCount": 29,
+      "price": 0,
+      "users": [
+        {
+          "savedEventId": 5,
+          "eventId": 5,
+          "userId": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "organizerId": 2,
+      "title": "Local Artists Exhibition",
+      "description": "Explore new work from emerging Winnipeg artists at this community exhibition featuring painting, photography, and mixed media.",
+      "category": "Arts & Culture",
+      "isFeatured": true,
+      "tags": [
+        "art",
+        "exhibition",
+        "culture",
+        "local-artists"
+      ],
+      "locationId": 16,
+      "date": "2027-01-09",
+      "startTime": "10:00",
+      "endTime": "17:00",
+      "image": "/images/events/local-artists-exhibition.jpg",
+      "capacity": 100,
+      "registeredCount": 42,
+      "price": 8,
+      "users": [
+        {
+          "savedEventId": 7,
+          "eventId": 6,
+          "userId": 2
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "organizerId": 3,
+      "title": "Beginner Yoga in the Park",
+      "description": "Start your weekend with a relaxed outdoor yoga session designed for beginners and all fitness levels.",
+      "category": "Health & Wellness",
+      "isFeatured": false,
+      "tags": [
+        "yoga",
+        "wellness",
+        "fitness",
+        "outdoors"
+      ],
+      "locationId": 17,
+      "date": "2027-01-16",
+      "startTime": "09:00",
+      "endTime": "10:00",
+      "image": "/images/events/beginner-yoga.jpg",
+      "capacity": 25,
+      "registeredCount": 19,
+      "price": 12,
+      "users": [
+        {
+          "savedEventId": 8,
+          "eventId": 7,
+          "userId": 2
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "organizerId": 4,
+      "title": "Repair Café",
+      "description": "Bring a small household item that needs fixing and work alongside volunteers to repair it instead of throwing it away.",
+      "category": "Environment",
+      "isFeatured": false,
+      "tags": [
+        "repair",
+        "sustainability",
+        "community",
+        "volunteering"
+      ],
+      "locationId": 18,
+      "date": "2027-01-23",
+      "startTime": "13:00",
+      "endTime": "16:00",
+      "image": "/images/events/repair-cafe.jpg",
+      "capacity": 35,
+      "registeredCount": 14,
+      "price": 0,
+      "users": [
+        {
+          "savedEventId": 9,
+          "eventId": 8,
+          "userId": 2
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "organizerId": 1,
+      "title": "Family Board Game Night",
+      "description": "Bring the family for an evening of board games, snacks, and friendly competition. Games will be available for different age groups.",
+      "category": "Family & Kids",
+      "isFeatured": false,
+      "tags": [
+        "family",
+        "games",
+        "kids",
+        "social"
+      ],
+      "locationId": 19,
+      "date": "2027-02-06",
+      "startTime": "17:30",
+      "endTime": "20:00",
+      "image": "/images/events/family-board-game-night.jpg",
+      "capacity": 40,
+      "registeredCount": 22,
+      "price": 5,
+      "users": []
+    },
+    {
+      "id": 10,
+      "organizerId": 2,
+      "title": "Introduction to Pottery",
+      "description": "Try your hand at pottery in this beginner workshop covering basic hand-building techniques.",
+      "category": "Arts & Culture",
+      "isFeatured": false,
+      "tags": [
+        "pottery",
+        "art",
+        "workshop",
+        "crafts"
+      ],
+      "locationId": 20,
+      "date": "2027-02-13",
+      "startTime": "14:00",
+      "endTime": "16:30",
+      "image": "/images/events/introduction-to-pottery.jpg",
+      "capacity": 18,
+      "registeredCount": 11,
+      "price": 40,
+      "users": []
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "userName": "user_001",
+      "firstName": "Test",
+      "lastName": null,
+      "email": "user001@example.test",
+      "passwordHash": "REPLACE_WITH_A_REAL_PASSWORD_HASH_BEFORE_AUTHENTICATION",
+      "image": ""
+    },
+    {
+      "id": 2,
+      "userName": "user_002",
+      "firstName": "Test",
+      "lastName": null,
+      "email": "user002@example.test",
+      "passwordHash": "REPLACE_WITH_A_REAL_PASSWORD_HASH_BEFORE_AUTHENTICATION",
+      "image": ""
+    }
+  ],
+  "savedEvents": [
+    {
+      "savedEventId": 1,
+      "eventId": 1,
+      "userId": 1
+    },
+    {
+      "savedEventId": 2,
+      "eventId": 2,
+      "userId": 1
+    },
+    {
+      "savedEventId": 3,
+      "eventId": 3,
+      "userId": 1
+    },
+    {
+      "savedEventId": 4,
+      "eventId": 4,
+      "userId": 1
+    },
+    {
+      "savedEventId": 5,
+      "eventId": 5,
+      "userId": 1
+    },
+    {
+      "savedEventId": 6,
+      "eventId": 1,
+      "userId": 2
+    },
+    {
+      "savedEventId": 7,
+      "eventId": 6,
+      "userId": 2
+    },
+    {
+      "savedEventId": 8,
+      "eventId": 7,
+      "userId": 2
+    },
+    {
+      "savedEventId": 9,
+      "eventId": 8,
+      "userId": 2
+    },
+    {
+      "savedEventId": 10,
+      "eventId": 2,
+      "userId": 2
+    }
+  ]
+}
