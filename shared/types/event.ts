@@ -8,19 +8,21 @@ export interface Event
     date: string
     startTime: string
     endTime?: string
-    location: Location
+    locationId: number
+    // location: Location
     image?: string
     capacity: number
     registeredCount: number
     price: number
-    isFree: boolean
+    // isFree: boolean
     isFeatured: boolean
     tags?: string[]
 }
 
 export interface Location 
 {
-    venue?: string;
+    id: number;
+    venue: string | null;
     address: string;
     city: string;
     province: string;
@@ -28,9 +30,9 @@ export interface Location
 }
 
 export interface SavedEvent {
-    savedEventId: string;
-    userId: string;
-    eventId: string;
+    savedEventId: number;
+    userId: number;
+    eventId: number;
 }
 
 export interface SavedEventWithDetails extends SavedEvent {
