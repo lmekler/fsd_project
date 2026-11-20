@@ -18,7 +18,7 @@ model Location {
   address    String
   city       String
   province   String
-  postalCode String?
+  postalCode String
   organizers Organizer[]
   events     Event[]
 }
