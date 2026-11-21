@@ -2,7 +2,7 @@ import type { Event } from "@shared/types/Event";
 import { eventRepository } from "../repositories/eventRepository";
 import { toTitle } from "@shared/utils/stringUtils";
 
-function validateEvent(event: Event): void {
+function validateEvent(event: Omit<Event, "id">): void {
   const errors: string[] = [];
 
   if (!event.image) {
@@ -13,7 +13,7 @@ function validateEvent(event: Event): void {
     errors.push("Title is required.");
   }
 
-  if (event.description && event.description.length >= 500) {
+  if (event.description && event.description.length > 500) {
     errors.push("Description cannot exceed 500 characters.");
   }
 
@@ -45,40 +45,25 @@ function validateEvent(event: Event): void {
 }
 
 export const eventService = {
-  getEvents(): Event[] {
+  async getEvents(): Promise<Event[]> {
     return eventRepository.getAll();
   },
 
-  getEventById(id: string): Event | null {
+  async getEventById(id: number): Promise<Event | null> {
     return eventRepository.getById(id);
   },
 
-  addEvent(input: Event): Event {
-    const event: Event = {
+  async addEvent(input: Omit<Event, "id">): Promise<Event> {
+    validateEvent(input);
+
+    return eventRepository.add({
       ...input,
-      organizerId: input.organizerId,
       title: toTitle(input.title),
-      description: input.description,
-      category: input.category,
-      date: input.date,
-      startTime: input.startTime,
-      endTime: input.endTime,
-      location: input.location,
-      image: input.image,
-      capacity: input.capacity,
-      registeredCount: input.registeredCount,
-      price: input.price,
-      isFree: input.isFree,
-      isFeatured: input.isFeatured,
-      tags: input.tags,
-    };
-
-    validateEvent(event);
-
-    return eventRepository.add(event);
+      registeredCount: 0,
+    });
   },
 
-  removeEvent(id: string): void {
-    eventRepository.remove(id);
+  async removeEvent(id: number): Promise<boolean> {
+    return eventRepository.remove(id);
   },
 };
