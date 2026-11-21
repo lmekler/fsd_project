@@ -113,7 +113,7 @@ export const eventRepository = {
     return event ? toEvent(event) : null;
   },
 
-  async add(input: Event): Promise<Event> {
+  async add(input: Omit<Event, "id">): Promise<Event> {
     const event = await prisma.event.create({
       data: {
         organizerId: input.organizerId,
