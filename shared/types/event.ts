@@ -21,6 +21,18 @@ export interface Event {
   users: SavedEvent[];
 }
 
+// What a new event form sends (an event, excluding server owned values)
+export type NewEventInput = Omit<
+  Event,
+  | "id"
+  | "organizerId"
+  | "organizer"
+  | "locationId"
+  | "registeredCount"
+  | "isFeatured"
+  | "users"
+>;
+
 export interface Location {
   id: number;
   venue?: string;
