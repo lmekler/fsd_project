@@ -1,5 +1,6 @@
 export type {
   Event,
+  NewEventInput,
   Location,
   SavedEvent,
   SavedEventWithDetails,

@@ -1,4 +1,4 @@
-import type { Event } from "../types/Event";
+import type { Event, NewEventInput } from "../types/Event";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const endpoint = `${baseUrl}/api/events`;
@@ -25,7 +25,7 @@ export const eventRepository = {
     return readJson<Event>(response);
   },
 
-  async add(input: Omit<Event, "id">): Promise<Event> {
+  async add(input: NewEventInput): Promise<Event> {
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {
