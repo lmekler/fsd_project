@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 import dropdown from "../../../../data/dropdown.json";
-import type { Event } from "../../../../types/Event";
+import { provinces } from "@shared/types/province";
+import type { Event, NewEventInput } from "../../../../types/Event";
 import Button from "../../../common/button/Button";
 import {
   toCamelCase,
@@ -14,45 +15,41 @@ import { useFormInput } from "../../../../hooks/useFormInput";
 export function NewEventForm({
   handleSubmit,
 }: {
-  handleSubmit: (event: Event) => void;
+  handleSubmit: (input: NewEventInput) => void;
 }) {
   function validateField(field: string, value: any): string | null {
-    if (field === "image" && !value) {
-      return "Image is required.";
-    }
+    if (field === "image" && !value) return "Image is required.";
 
-    if (field === "title" && !value.trim()) {
-      return "Title is required.";
-    }
+    if (field === "title" && !value.trim()) return "Title is required.";
 
-    if (field === "description" && value.length >= 500) {
+    if (field === "description" && value.length > 500)
       return "Description cannot exceed 500 characters.";
-    }
 
     if (field === "date") {
-      if (!value) {
-        return "Date is required.";
-      }
-
-      if (new Date(value) < new Date()) {
-        return "Date must be in the future.";
-      }
+      if (!value) return "Date is required.";
+      if (new Date(value) < new Date()) return "Date must be in the future.";
+    }
+    if (field === "address" && !value.trim()) return "Address is required.";
+    if (field === "city" && !value.trim()) return "City is required.";
+    if (field === "province" && !value.trim()) return "Province is required.";
+    if (field === "postal code") {
+      if (!value.trim()) return "Postal code is required.";
+      if (!/^[A-Z]\d[A-Z] ?\d[A-Z]\d$/i.test(value.trim()))
+        return "Postal code must look like A1A 1A1.";
     }
 
-    if (field === "address" && !value.trim()) {
-      return "Address is required.";
+    if (field === "price" && String(value).trim() !== "") {
+      const price = Number(value);
+      if (Number.isNaN(price)) return "Price must be numeric.";
+      if (price < 0) return "Price cannot be negative.";
     }
 
-    if (field === "city" && !value.trim()) {
-      return "City is required.";
-    }
-
-    if (field === "province" && !value.trim()) {
-      return "Province is required.";
-    }
-
-    if (field === "postal code" && !value.trim()) {
-      return "Postal code is required.";
+    if (field === "capacity" && String(value).trim() !== "") {
+      const capacity = Number(value);
+      if (Number.isNaN(capacity)) return "Capacity must be numeric.";
+      if (!Number.isInteger(capacity))
+        return "Capacity must be a whole number.";
+      if (capacity < 0) return "Capacity cannot be negative.";
     }
 
     return null;
@@ -142,7 +139,11 @@ export function NewEventForm({
     useFormInput({ field: "venue", type: "text" }),
     useFormInput({ field: "address", type: "text" }),
     useFormInput({ field: "city", type: "text" }),
-    useFormInput({ field: "province", type: "text" }),
+    useFormInput({
+      field: "province",
+      type: "dropdown",
+      dropdown: provinces,
+    }),
     useFormInput({ field: "postal code", type: "text" }),
     useFormInput({ field: "price", type: "number", extraFields: { min: "0" } }),
     useFormInput({

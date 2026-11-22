@@ -6,6 +6,8 @@ import type { Request, Response, NextFunction } from "express";
 
 import corsOptions from "../config/cors";
 
+import { eventRoutes } from "./routes/eventRoutes";
+
 const app = express();
 
 // Logging
@@ -23,5 +25,7 @@ app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
     error: "Unexpected server error",
   });
 });
+
+app.use("/api/events", eventRoutes);
 
 export default app;
