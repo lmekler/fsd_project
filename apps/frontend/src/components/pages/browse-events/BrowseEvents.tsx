@@ -1,5 +1,5 @@
 import { EventCard } from "../../common/event-card/EventCard";
-import type { Event } from "../../../types/Event";
+import type { NewEventInput } from "../../../types/Event";
 import { useEvents } from "../../../hooks/useEvents";
 import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";
@@ -10,13 +10,13 @@ export function BrowseEvents() {
   const mockedUserId: string = "user_001";
 
   // SavedEvent Hook
-  //   const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId);
+  const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId);
 
   const { events, addEvent, removeEvent } = useEvents();
 
-  function handleSubmit(event: Event): void {
+  function handleSubmit(input: NewEventInput): void {
     try {
-      addEvent(event);
+      addEvent(input);
     } catch (error) {
       console.log(error);
     }
@@ -52,11 +52,13 @@ export function BrowseEvents() {
                 </div>
 
                 <div className="mt-auto flex flex-wrap gap-3 border-t border-slate-200 pt-4">
-                  <Button variant="secondary" size="sm">
-                    save/saved
-                    {/* disabled={isSaved(event.id)}
-                                        onClick={() => addSavedEvent(event.id)}>
-                                        {isSaved(event.id) ? "Saved": "Save Event"} */}
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    disabled={isSaved(event.id)}
+                    onClick={() => addSavedEvent(event.id)}
+                  >
+                    {isSaved(event.id) ? "Saved" : "Save Event"}
                   </Button>
 
                   <Button
