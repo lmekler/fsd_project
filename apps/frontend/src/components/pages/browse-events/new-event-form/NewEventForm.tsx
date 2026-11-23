@@ -71,9 +71,7 @@ export function NewEventForm({
   }
 
   // default event fields
-  const [event, setEvent] = useState<Event>({
-    id: "",
-    organizerId: "",
+  const [event, setEvent] = useState<NewEventInput>({
     title: "",
     description: "",
     category: "",
