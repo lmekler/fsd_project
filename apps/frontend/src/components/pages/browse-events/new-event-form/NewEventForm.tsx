@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import dropdown from "../../../../data/dropdown.json";
 import { provinces } from "@shared/types/province";
-import type { Event, NewEventInput } from "../../../../types/event";
+import type { NewEventInput } from "../../../../types/event";
 import Button from "../../../common/button/Button";
 import {
   toCamelCase,
@@ -76,7 +76,7 @@ export function NewEventForm({
     description: "",
     category: "",
     date: new Date().toLocaleDateString(),
-    startTime: "12:00",
+    startTime: "",
     endTime: "",
     location: {
       venue: "",
@@ -87,10 +87,7 @@ export function NewEventForm({
     },
     image: "",
     capacity: 0,
-    registeredCount: 0,
     price: 0,
-    isFree: true,
-    isFeatured: false,
     tags: [],
   });
 
