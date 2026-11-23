@@ -34,7 +34,6 @@ export type NewEventInput = Omit<
 >;
 
 export interface Location {
-  id: number;
   venue?: string;
   address: string;
   city: string;

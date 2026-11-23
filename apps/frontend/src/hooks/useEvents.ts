@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { eventService } from "../services/eventService";
-import type { Event, NewEventInput } from "../types/Event";
+import type { Event, NewEventInput } from "../types/event";
 
 export function useEvents() {
   const [events, setEvents] = useState<Event[]>([]);

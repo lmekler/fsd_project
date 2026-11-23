@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import dropdown from "../../../../data/dropdown.json";
 import { provinces } from "@shared/types/province";
-import type { Event, NewEventInput } from "../../../../types/Event";
+import type { Event, NewEventInput } from "../../../../types/event";
 import Button from "../../../common/button/Button";
 import {
   toCamelCase,
@@ -71,9 +71,7 @@ export function NewEventForm({
   }
 
   // default event fields
-  const [event, setEvent] = useState<Event>({
-    id: "",
-    organizerId: "",
+  const [event, setEvent] = useState<NewEventInput>({
     title: "",
     description: "",
     category: "",

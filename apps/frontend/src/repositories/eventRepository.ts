@@ -1,4 +1,4 @@
-import type { Event, NewEventInput } from "../types/Event";
+import type { Event, NewEventInput } from "../types/event";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const endpoint = `${baseUrl}/api/events`;

@@ -1,4 +1,4 @@
-import type { Event, NewEventInput } from "../types/Event";
+import type { Event, NewEventInput } from "../types/event";
 import { eventRepository } from "../repositories/eventRepository";
 import { toTitle } from "@shared/utils/stringUtils";
 
