@@ -8,7 +8,7 @@ import { useSavedEvents } from "../../../hooks/useSavedEvents";
 export function BrowseEvents()
 {
     // Mocking user log in
-    const mockedUserId: string = "user_001"
+    const mockedUserId: number = 1;
 
     // SavedEvent Hook
     const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId)
