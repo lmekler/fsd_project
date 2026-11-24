@@ -1,7 +1,7 @@
 import type { SavedEventWithDetails } from "@shared/types/Event";
 import { BASE_URL, readJson } from "./apiHandler";
 
-export const savedEventsService = {
+export const savedEventsRepo = {
     async getByUser(userId: number): Promise<SavedEventWithDetails[]> {
         const res: Response = await fetch(`${BASE_URL}/saved-events/${userId}`);
 
