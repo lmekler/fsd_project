@@ -1,9 +1,6 @@
 import type { Request, Response } from "express";
-import type { Event } from "@shared/types/Event";
+import type { NewEventInput } from "@shared/types/event";
 import { eventService } from "../services/eventService";
-
-// temporary organizer id for sprint 4, replace with the authenticated user's id once auth exists
-const TEMP_ORGANIZER_ID = 1;
 
 export const eventController = {
   async getAll(_req: Request, res: Response) {
@@ -24,8 +21,7 @@ export const eventController = {
 
   async add(req: Request, res: Response) {
     const event = await eventService.addEvent(
-      req.body as Omit<Event, "id">,
-      TEMP_ORGANIZER_ID,
+      req.body as NewEventInput
     );
 
     res.status(201).json(event);
