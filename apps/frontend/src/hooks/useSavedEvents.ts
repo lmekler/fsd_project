@@ -1,15 +1,24 @@
 import { useCallback, useEffect, useState } from "react";
-import * as savedEventsService from "../services/savedEventsService";
-import type { SavedEventWithDetails } from "../types/Event";
+import type { SavedEventWithDetails } from "@shared/types/Event";
+import { savedEventsService } from "../services/savedEventsService";
 
-export function useSavedEvents(userId: string) {
+export function useSavedEvents(userId: number | undefined) {
     // Set States
     const [savedEvents, setSavedEvents] = useState<SavedEventWithDetails[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("")
     const [categoryFilters, setCategoryFilters] = useState<string>("")
 
     useEffect(() => {
-        setSavedEvents(savedEventsService.getSavedEventsByUser(userId));
+        if (userId === undefined) {
+            setSavedEvents([]);
+            return;
+        }
+
+        savedEventsService
+            .getByUser(userId)
+            .then(setSavedEvents)
+            .catch(console.error);
+    
     }, [userId]);
 
     const filteredSavedEvents = savedEventsService.filterSavedEvents(
@@ -19,20 +28,49 @@ export function useSavedEvents(userId: string) {
     );
 
     const addSavedEvent = useCallback(
-        (eventId: string) =>
-            setSavedEvents(savedEventsService.addSavedEvent(userId, eventId)),
-        [userId]
+        async (eventId: number): Promise<void> => {
+            if (userId === undefined) return;
+
+            try {
+                const saved: SavedEventWithDetails = 
+                    await savedEventsService.add(userId, eventId);
+                
+                // Only adds new event if it's not already there
+                setSavedEvents((prev) => {
+                    const alreadyInList = prev.some(
+                        (item) => item.savedEventId === saved.savedEventId
+                    );
+
+                    if (alreadyInList) {
+                        return prev;
+                    }
+
+                    return [...prev, saved]
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }, [userId]
     );
 
     const isSaved = useCallback(
-        (eventId: string) => savedEvents.some((event) => event.eventId === eventId),
+        (eventId: number) => savedEvents.some((event) => event.eventId === eventId),
         [savedEvents]
     )
 
     const removeSavedEvent = useCallback(
-        (savedEventId: string) => 
-            setSavedEvents(savedEventsService.removeSavedEvent(userId, savedEventId)),
-        [userId]
+        async (savedEventId: number): Promise<void> => {
+            if (userId === undefined) return;
+
+            try {
+                await savedEventsService.remove(userId, savedEventId);
+                setSavedEvents((prev) =>
+                    prev.filter((item) => item.savedEventId !== savedEventId)
+                );
+            } catch (err) {
+                console.error(err);
+            }
+        }, [userId]
     );
 
     return {

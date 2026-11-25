@@ -1,4 +1,4 @@
-import type { Location } from "../../../types/Event";
+import type { Location } from "@shared/types/Event";
 
 interface EventArticleProps {
     title: string;

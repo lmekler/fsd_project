@@ -5,9 +5,10 @@ import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";
 import { useSavedEvents } from "../../../hooks/useSavedEvents";
 
-export function BrowseEvents() {
-  // Mocking user log in
-  const mockedUserId: string = "user_001";
+export function BrowseEvents()
+{
+    // Mocking user log in
+    const mockedUserId: number = 1;
 
   // SavedEvent Hook
   const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId);
