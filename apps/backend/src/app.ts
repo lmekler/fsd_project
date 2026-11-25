@@ -7,7 +7,7 @@ import corsOptions from "../config/cors";
 import errorHandler from "./api/middleware/errorHandler";
 import savedEventRoutes from "./api/routes/savedEventsRoutes";
 
-import { eventRoutes } from "./routes/eventRoutes";
+import { eventRoutes } from "./api/routes/eventRoutes";
 
 const app = express();
 

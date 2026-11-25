@@ -2,7 +2,7 @@ import type { RequestHandler } from "express";
 import { z } from "zod";
 
 import { locationSchema } from "./locationValidation";
-import { categories, timeOptions } from "../../../frontend/src/data/dropdown";
+import { categories, timeOptions } from "../../../../frontend/src/data/dropdown";
 
 const createEventSchema = z
   .object({
