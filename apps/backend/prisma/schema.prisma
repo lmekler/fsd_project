@@ -47,7 +47,7 @@ model Event {
   startTime       String
   endTime         String?
   image           String?
-  capacity        Int
+  capacity        Int?
   registeredCount Int      @default(0)
   price           Int      @default(0)
   isFeatured      Boolean  @default(false)

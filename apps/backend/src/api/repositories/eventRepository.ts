@@ -15,7 +15,7 @@ type DbEvent = {
   startTime: string;
   endTime: string | null;
   image: string | null;
-  capacity: number;
+  capacity: number | null;
   registeredCount: number;
   price: number;
   isFeatured: boolean;
@@ -24,16 +24,14 @@ type DbEvent = {
 };
 
 async function toEvent(row: DbEvent): Promise<Event> {
-  const location = await locationRepository.getById(row.locationId);
-
-  if (!location) {
-    throw new Error("Event location not found");
-  }
-
   const organizer = await organizerRepository.getById(row.organizerId);
+  const location = await locationRepository.getById(row.locationId);
 
   if (!organizer) {
     throw new Error("Event organizer not found");
+  }
+  if (!location) {
+    throw new Error("Event location not found");
   }
 
   return {
@@ -49,7 +47,7 @@ async function toEvent(row: DbEvent): Promise<Event> {
     locationId: row.locationId,
     location: location,
     image: row.image ?? undefined,
-    capacity: row.capacity,
+    capacity: row.capacity || undefined,
     registeredCount: row.registeredCount,
     price: row.price,
     isFeatured: row.isFeatured,
@@ -59,65 +57,45 @@ async function toEvent(row: DbEvent): Promise<Event> {
 
 export const eventRepository = {
   async getAll(): Promise<Event[]> {
-    const events = await prisma.event.findMany({
+    const dbEvents = await prisma.event.findMany({
       orderBy: { id: "asc" },
-      include: {
-        location: true,
-        organizer: {
-          include: {
-            location: true,
-          },
-        },
-        users: true,
-      },
     });
 
-    return events.map(toEvent);
+    const events: Event[] = [];
+
+    for (const record of dbEvents) {
+      const event = await toEvent(record);
+      events.push(event);
+    }
+
+    return events;
   },
 
   async getById(id: number): Promise<Event | null> {
     const event = await prisma.event.findUnique({
       where: { id },
-      include: {
-        location: true,
-        organizer: {
-          include: {
-            location: true,
-          },
-        },
-        users: true,
-      },
     });
 
     return event ? toEvent(event) : null;
   },
 
- async add(input: Omit<Event, "id">): Promise<Event> {
+ async add(input: NewEventInput): Promise<Event> {
     const event = await prisma.event.create({
       data: {
-        organizerId: input.organizerId,
+        organizerId: 1, // temporary organizer id given to all events until we add users
         title: input.title,
         description: input.description ?? null,
         category: input.category ?? null,
         date: input.date,
         startTime: input.startTime,
         endTime: input.endTime ?? null,
-        locationId: input.locationId,
+        location: input.location,
         image: input.image ?? null,
-        capacity: input.capacity,
-        registeredCount: input.registeredCount,
-        price: input.price,
-        isFeatured: input.isFeatured,
+        capacity: input.capacity || null,
+        registeredCount: 0,
+        price: input.price || 0,
+        isFeatured: false,
         tags: input.tags ?? [],
-      },
-      include: {
-        location: true,
-        organizer: {
-          include: {
-            location: true,
-          },
-        },
-        users: true,
       },
     });
 
