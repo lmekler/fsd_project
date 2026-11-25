@@ -1,5 +1,3 @@
-import { DbLocation } from "./event";
-
 export type DbOrganizer = {
   id: number;
   name: string;
@@ -9,5 +7,4 @@ export type DbOrganizer = {
   website: string;
   image: string;
   locationId: number;
-  location: DbLocation;
 };

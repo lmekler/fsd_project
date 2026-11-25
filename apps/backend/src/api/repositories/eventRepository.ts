@@ -1,27 +1,10 @@
 import { prisma } from "../../db/prisma";
 
-import type { Event, Location, NewEventInput } from "@shared/types/event";
+import type { Event, NewEventInput } from "@shared/types/event";
+import type { DbEvent } from "../types/event"
 
 import { locationRepository } from "./locationRepository";
 import { organizerRepository } from "./organizerRepository";
-
-type DbEvent = {
-  id: number;
-  organizerId: number;
-  title: string;
-  description: string | null;
-  category: string | null;
-  date: string;
-  startTime: string;
-  endTime: string | null;
-  image: string | null;
-  capacity: number | null;
-  registeredCount: number;
-  price: number;
-  isFeatured: boolean;
-  tags: string[];
-  locationId: number;
-};
 
 async function toEvent(row: DbEvent): Promise<Event> {
   const organizer = await organizerRepository.getById(row.organizerId);

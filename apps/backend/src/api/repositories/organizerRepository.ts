@@ -1,19 +1,9 @@
 import { prisma } from "../../db/prisma";
 
 import type { Organizer } from "@shared/types/organizer";
+import type { DbOrganizer } from "../types/organizer";
 
 import { locationRepository } from "./locationRepository"
-
-export type DbOrganizer = {
-  id: number;
-  name: string;
-  description: string;
-  email: string | null;
-  phone: string;
-  website: string;
-  image: string;
-  locationId: number;
-};
 
 export async function toOrganizer(row: DbOrganizer): Promise<Organizer> {
   const location = await locationRepository.getById(row.locationId);
