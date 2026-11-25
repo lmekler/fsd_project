@@ -21,6 +21,7 @@ export function toLocation(row: DbLocation): Location {
     postalCode: row.postalCode
   };
 }
+
 export const locationRepository = {
   async getById(id: number): Promise<Location | null> {
     const location = await prisma.location.findUnique({

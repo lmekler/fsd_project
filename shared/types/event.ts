@@ -1,4 +1,4 @@
-import { Organizer } from "./organizer";
+import type { Organizer } from "./organizer";
 
 export interface Event {
   id: number;

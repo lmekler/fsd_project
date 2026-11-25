@@ -1,4 +1,4 @@
-import { Location } from "./event";
+import type { Location } from "./event"
 
 export interface Organizer {
   id: number;

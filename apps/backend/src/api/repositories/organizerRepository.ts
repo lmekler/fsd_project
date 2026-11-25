@@ -2,9 +2,7 @@ import { prisma } from "../../db/prisma";
 
 import type { Organizer } from "@shared/types/organizer";
 
-import type { Location } from "@shared/types/event";
-import type { DbLocation } from "./eventRepository";
-import { toLocation } from "./eventRepository";
+import { locationRepository } from "./locationRepository"
 
 export type DbOrganizer = {
   id: number;
@@ -17,7 +15,13 @@ export type DbOrganizer = {
   locationId: number;
 };
 
-export function toOrganizer(row: DbOrganizer): Organizer {
+export async function toOrganizer(row: DbOrganizer): Promise<Organizer> {
+  const location = await locationRepository.getById(row.locationId);
+
+  if (!location) {
+    throw new Error("Organizer location not found");
+  }
+
   return {
     id: row.id,
     name: row.name,
@@ -27,7 +31,7 @@ export function toOrganizer(row: DbOrganizer): Organizer {
     website: row.website,
     image: row.image,
     locationId: row.locationId,
-    // location: toLocation(row.location),
+    location: location,
   };
 }
 
