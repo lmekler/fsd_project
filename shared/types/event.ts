@@ -18,7 +18,7 @@ export interface Event {
   price: number;
   isFeatured: boolean;
   tags?: string[];
-  users: SavedEvent[];
+  savedBy: SavedEvent[];
 }
 
 // What a new event form sends (an event, excluding server owned values)
@@ -30,15 +30,16 @@ export type NewEventInput = Omit<
   | "locationId"
   | "registeredCount"
   | "isFeatured"
-  | "users"
+  | "savedBy"
 >;
 
 export interface Location {
+  id: number;
   venue?: string;
   address: string;
   city: string;
   province: string;
-  postalCode?: string;
+  postalCode: string;
 }
 
 export interface SavedEvent {

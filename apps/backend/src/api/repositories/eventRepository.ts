@@ -1,8 +1,9 @@
 import { prisma } from "../../db/prisma";
 
-import type { Event, Location } from "@shared/types/event";
+import type { Event, Location, NewEventInput } from "@shared/types/event";
 import type { DbOrganizer } from "./organizerRepository";
 import { toOrganizer } from "./organizerRepository";
+import { SavedEvent } from "../../generated/prisma/client";
 
 export type DbLocation = {
   id: number;
@@ -10,7 +11,7 @@ export type DbLocation = {
   address: string;
   city: string;
   province: string;
-  postalCode: string | null;
+  postalCode: string;
 };
 
 type DbSavedEvent = {
@@ -22,7 +23,7 @@ type DbSavedEvent = {
 type DbEvent = {
   id: number;
   organizerId: number;
-  organizer: DbOrganizer;
+  // organizer: DbOrganizer;
   title: string;
   description: string | null;
   category: string | null;
@@ -36,8 +37,8 @@ type DbEvent = {
   isFeatured: boolean;
   tags: string[];
   locationId: number;
-  location: DbLocation;
-  users: DbSavedEvent[];
+  // location: DbLocation;
+  // savedBy: DbSavedEvent[];
 };
 
 export function toLocation(row: DbLocation): Location {
@@ -47,7 +48,15 @@ export function toLocation(row: DbLocation): Location {
     address: row.address,
     city: row.city,
     province: row.province,
-    ...(row.postalCode !== null ? { postalCode: row.postalCode } : {}),
+    postalCode: row.postalCode
+  };
+}
+
+export function toSavedEvent(row: DbSavedEvent): SavedEvent {
+  return {
+    savedEventId: row.savedEventId,
+    eventId: row.eventId,
+    userId: row.userId,
   };
 }
 
@@ -55,26 +64,22 @@ function toEvent(row: DbEvent): Event {
   return {
     id: row.id,
     organizerId: row.organizerId,
-    organizer: toOrganizer(row.organizer),
+    // organizer: toOrganizer(row.organizer),
     title: row.title,
-    ...(row.description !== null ? { description: row.description } : {}),
-    ...(row.category !== null ? { category: row.category } : {}),
+    description: row.description ?? undefined,
+    category: row.category ?? undefined,
     date: row.date,
     startTime: row.startTime,
-    ...(row.endTime !== null ? { endTime: row.endTime } : {}),
-    ...(row.image !== null ? { image: row.image } : {}),
+    endTime: row.endTime ?? undefined,
+    locationId: row.locationId,
+    // location: toLocation(row.location),
+    image: row.image ?? undefined,
     capacity: row.capacity,
     registeredCount: row.registeredCount,
     price: row.price,
     isFeatured: row.isFeatured,
     tags: row.tags,
-    locationId: row.locationId,
-    location: toLocation(row.location),
-    users: row.users.map((user) => ({
-      savedEventId: user.savedEventId,
-      userId: user.userId,
-      eventId: user.eventId,
-    })),
+    // savedBy: row.users.map(toSavedEvent),
   };
 }
 
@@ -113,7 +118,7 @@ export const eventRepository = {
     return event ? toEvent(event) : null;
   },
 
-  async add(input: Omit<Event, "id">): Promise<Event> {
+ async add(input: Omit<Event, "id">): Promise<Event> {
     const event = await prisma.event.create({
       data: {
         organizerId: input.organizerId,
