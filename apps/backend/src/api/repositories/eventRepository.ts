@@ -1,29 +1,13 @@
 import { prisma } from "../../db/prisma";
 
 import type { Event, Location, NewEventInput } from "@shared/types/event";
-import type { DbOrganizer } from "./organizerRepository";
-import { toOrganizer } from "./organizerRepository";
-import { SavedEvent } from "../../generated/prisma/client";
 
-export type DbLocation = {
-  id: number;
-  venue: string | null;
-  address: string;
-  city: string;
-  province: string;
-  postalCode: string;
-};
-
-type DbSavedEvent = {
-  savedEventId: number;
-  eventId: number;
-  userId: number;
-};
+import { locationRepository } from "./locationRepository";
+import { organizerRepository } from "./organizerRepository";
 
 type DbEvent = {
   id: number;
   organizerId: number;
-  // organizer: DbOrganizer;
   title: string;
   description: string | null;
   category: string | null;
@@ -37,34 +21,25 @@ type DbEvent = {
   isFeatured: boolean;
   tags: string[];
   locationId: number;
-  // location: DbLocation;
-  // savedBy: DbSavedEvent[];
 };
 
-export function toLocation(row: DbLocation): Location {
-  return {
-    id: row.id,
-    ...(row.venue !== null ? { venue: row.venue } : {}),
-    address: row.address,
-    city: row.city,
-    province: row.province,
-    postalCode: row.postalCode
-  };
-}
+async function toEvent(row: DbEvent): Promise<Event> {
+  const location = await locationRepository.getById(row.locationId);
 
-export function toSavedEvent(row: DbSavedEvent): SavedEvent {
-  return {
-    savedEventId: row.savedEventId,
-    eventId: row.eventId,
-    userId: row.userId,
-  };
-}
+  if (!location) {
+    throw new Error("Event location not found");
+  }
 
-function toEvent(row: DbEvent): Event {
+  const organizer = await organizerRepository.getById(row.organizerId);
+
+  if (!organizer) {
+    throw new Error("Event organizer not found");
+  }
+
   return {
     id: row.id,
     organizerId: row.organizerId,
-    // organizer: toOrganizer(row.organizer),
+    organizer: organizer,
     title: row.title,
     description: row.description ?? undefined,
     category: row.category ?? undefined,
@@ -72,7 +47,7 @@ function toEvent(row: DbEvent): Event {
     startTime: row.startTime,
     endTime: row.endTime ?? undefined,
     locationId: row.locationId,
-    // location: toLocation(row.location),
+    location: location,
     image: row.image ?? undefined,
     capacity: row.capacity,
     registeredCount: row.registeredCount,
