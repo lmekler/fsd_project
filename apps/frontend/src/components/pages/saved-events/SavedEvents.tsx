@@ -7,14 +7,17 @@ import CategoryForm from "./saved-events-forms/CategoryForm";
 import { useSavedEvents } from "../../../hooks/useSavedEvents";
 
 export default function SavedEvents() {
-    const { userId } = useParams<{ userId: string }>();
+    // Convert userId into a number
+    const { userId: userIdParam } = useParams<{ userId: string }>();
+    const userId: number | undefined = userIdParam ? Number(userIdParam) : undefined;
+
     const { 
         savedEvents,
         filteredSavedEvents,
         setSearchTerm,
         setCategoryFilters,
         removeSavedEvent
-    } = useSavedEvents(userId ?? "");
+    } = useSavedEvents(userId);
 
     // Derive categories from saved events
     const categories: (string | undefined)[] = [
