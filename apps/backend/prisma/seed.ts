@@ -78,7 +78,23 @@ async function main() {
             eventId: savedEvent.eventId
           }})
         }
-    })
+
+        // Sync the ID counters to the seeded data
+        await tx.$executeRawUnsafe(`
+          SELECT setval(pg_get_serial_sequence('"Location"', 'id'),
+                        (SELECT MAX(id) FROM "Location"));
+        `);
+        await tx.$executeRawUnsafe(`
+          SELECT setval(pg_get_serial_sequence('"Event"', 'id'),
+                        (SELECT MAX(id) FROM "Event"));
+        `);
+        await tx.$executeRawUnsafe(`
+          SELECT setval(pg_get_serial_sequence('"SavedEvent"', 'savedEventId'),
+                        (SELECT MAX("savedEventId") FROM "SavedEvent"));
+        `);
+    }, {
+      timeout: 30000,
+    });
 }
 
 main()
