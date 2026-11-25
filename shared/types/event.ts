@@ -27,9 +27,12 @@ export type NewEventInput = Omit<
   | "organizerId"
   | "organizer"
   | "locationId"
+  | "location"
   | "registeredCount"
   | "isFeatured"
->;
+> & {
+  location: Omit<Location, "id">;
+};
 
 export interface Location {
   id: number;

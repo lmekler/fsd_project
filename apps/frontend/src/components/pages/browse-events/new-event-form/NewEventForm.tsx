@@ -96,8 +96,9 @@ export function NewEventForm({
     field.setValue(e.target.value);
     const { name, value } = e.target;
 
-    const parsedValue = ((name === "price" || name === "capacity") ? Number(value) : value);
-    
+    const parsedValue =
+      name === "price" || name === "capacity" ? Number(value) : value;
+
     if (name in event.location) {
       setEvent({
         ...event,
