@@ -6,7 +6,7 @@ import type { Request, Response, NextFunction } from "express";
 
 import corsOptions from "../config/cors";
 
-import { eventRoutes } from "./routes/eventRoutes";
+import { eventRoutes } from "./api/routes/eventRoutes";
 
 const app = express();
 
