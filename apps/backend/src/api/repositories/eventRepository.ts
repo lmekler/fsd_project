@@ -54,7 +54,6 @@ async function toEvent(row: DbEvent): Promise<Event> {
     price: row.price,
     isFeatured: row.isFeatured,
     tags: row.tags,
-    // savedBy: row.users.map(toSavedEvent),
   };
 }
 
