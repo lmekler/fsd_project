@@ -1,4 +1,4 @@
-import type { Event } from "@shared/types/Event";
+import type { Event, NewEventInput } from "@shared/types/event";
 import { eventRepository } from "../repositories/eventRepository";
 import { toTitle } from "@shared/utils/stringUtils";
 
@@ -11,16 +11,10 @@ export const eventService = {
     return eventRepository.getById(id);
   },
 
-  async addEvent(
-    input: Omit<Event, "id">,
-    organizerId: number,
-  ): Promise<Event> {
+  async addEvent(input: NewEventInput): Promise<Event> {
     return eventRepository.add({
       ...input,
-      title: toTitle(input.title),
-      organizerId: organizerId,
-      registeredCount: 0,
-      isFeatured: false,
+      title: toTitle(input.title)
     });
   },
 

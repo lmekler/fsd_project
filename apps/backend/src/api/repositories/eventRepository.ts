@@ -64,7 +64,7 @@ export const eventRepository = {
 
   async add(input: NewEventInput): Promise<Event> {
     const location = await locationRepository.getOrCreate(input.location)
-    
+
     const event = await prisma.event.create({
       data: {
         organizerId: 1, // temporary organizer id given to all events until we add users
@@ -77,9 +77,6 @@ export const eventRepository = {
         locationId: location.id,
         image: input.image ?? null,
         capacity: input.capacity ?? null,
-        registeredCount: 0,
-        price: input.price || 0,
-        isFeatured: false,
         tags: input.tags ?? [],
       },
     });
