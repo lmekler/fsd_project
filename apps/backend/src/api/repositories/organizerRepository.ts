@@ -1,4 +1,8 @@
-import type { Organizer } from "@shared/types/Organizer";
+import { prisma } from "../../db/prisma";
+
+import type { Organizer } from "@shared/types/organizer";
+
+import type { Location } from "@shared/types/event";
 import type { DbLocation } from "./eventRepository";
 import { toLocation } from "./eventRepository";
 
@@ -11,7 +15,6 @@ export type DbOrganizer = {
   website: string;
   image: string;
   locationId: number;
-  location: DbLocation;
 };
 
 export function toOrganizer(row: DbOrganizer): Organizer {
@@ -19,11 +22,24 @@ export function toOrganizer(row: DbOrganizer): Organizer {
     id: row.id,
     name: row.name,
     description: row.description,
-    ...(row.email !== null ? { email: row.email } : {}),
+    email: row.email ?? undefined,
     phone: row.phone,
     website: row.website,
     image: row.image,
     locationId: row.locationId,
-    location: toLocation(row.location),
+    // location: toLocation(row.location),
   };
+}
+
+export const organizerRepository = {
+  async getById(id: number): Promise<Organizer | null> {
+    const organizer = await prisma.organizer.findUnique({
+      where: { id },
+      include: {
+        location: true,
+      },
+    });
+
+    return organizer ? toOrganizer(organizer) : null;
+  },
 }
