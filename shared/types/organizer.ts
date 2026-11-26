@@ -18,8 +18,5 @@ export interface CreateOrganizer {
   website: string;
   email: string;
   phone: string;
-  location: {
-    city: string;
-    province: string;
-  };
+  location: Location;
 }
