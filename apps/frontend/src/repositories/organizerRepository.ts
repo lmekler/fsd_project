@@ -5,8 +5,7 @@ let organizers: Organizer[] = organizerData.organizers.map((organizer) => ({
   ...organizer
 }));
 
-const prefix: string = "org-";
-const nextId: string = `${prefix + crypto.randomUUID()}`;
+const nextId: number = crypto.randomUUID();
 
 export const organizerRepository = {
   async getAll(): Promise<Organizer[]> {
@@ -52,7 +51,7 @@ export const organizerRepository = {
     return { ...organizer };
   },
 
-  async remove(id: string): Promise<boolean> {
+  async remove(id: number): Promise<boolean> {
     const originalLength = organizers.length;
 
     organizers = organizers.filter(

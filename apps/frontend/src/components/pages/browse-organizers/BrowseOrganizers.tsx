@@ -1,5 +1,5 @@
 import { useState } from "react"
-import type { CreateOrganizer, Organizer } from "../../../types/Organizer"
+import type { CreateOrganizer } from "../../../types/Organizer"
 import { provinces } from "../../../types/Province";
 import Button from "../../common/button/Button";
 import { useOrganizer } from "../../../hooks/useOrganizer";
@@ -15,17 +15,17 @@ function Organizers() {
     } = useOrganizer();
 
     // Defines organizer with default values
-    const defaultOrganizer: Organizer = {
-        id: '',
+    const defaultOrganizer: CreateOrganizer = {
         name: '',
         description: '',
         website: '',
         email: '',
         phone: '',
         location: {
+            address: '',
             city: '',
             province: 'Manitoba',
-            country: 'Canada'
+            postalCode: ''
         },
         image: ''
     }
@@ -35,7 +35,10 @@ function Organizers() {
     const handleChange = (e: any): void => {
         const {name, value} = e.target;
 
-        if (name === "city" || name === "province") {
+        if (name === "address" 
+        || name === "city"
+        || name === "province"
+        || name === "postalCode") {
             setFormData(prev => ({
                 ...prev,
                 location: {
@@ -60,9 +63,12 @@ function Organizers() {
             website: formData.website,
             email: formData.email,
             phone: formData.phone,
+            image: formData.image,
             location: {
+                address: formData.location.address,
                 city: formData.location.city,
-                province: formData.location.province
+                province: formData.location.province,
+                postalCode: formData.location.postalCode
             }
         }
 
@@ -145,6 +151,16 @@ function Organizers() {
                         <hr />
                         <p className="form-label">Location:</p>
                         <label className="form-label">
+                            Address:
+                            <input 
+                                name="address"
+                                value={formData.location.address} 
+                                onChange={handleChange}
+                                className="form-control"
+                                required
+                            />
+                        </label>
+                        <label className="form-label">
                             City:
                             <input 
                                 name="city"
@@ -167,6 +183,16 @@ function Organizers() {
                                     return <option key={p} value={p}>{p}</option>
                                 })};
                             </select>
+                        </label>
+                        <label className="form-label">
+                            Postal Code:
+                            <input 
+                                name="postalCode"
+                                value={formData.location.postalCode} 
+                                onChange={handleChange}
+                                className="form-control"
+                                required
+                            />
                         </label>
                         <hr />
                         <Button

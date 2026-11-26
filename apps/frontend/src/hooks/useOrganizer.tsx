@@ -63,7 +63,7 @@ export function useOrganizer() {
     }
 
     async function removeOrganizer(
-        id: string,
+        id: number,
     ): Promise<boolean> {
         setErrors(null);
 

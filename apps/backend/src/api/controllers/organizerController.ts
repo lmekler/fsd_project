@@ -24,9 +24,9 @@ export async function add(
     next: NextFunction
 ): Promise<void> {
     try {
-        const { organizerId } = req.body as { organizerId: number };
+        const organizer = req.body as Organizer;
         const newOrganizer: Organizer = 
-            await organizerService.add(organizerId);
+            await organizerService.add(organizer);
 
         res.status(HTTP_STATUS.CREATED).json(successResponse(newOrganizer, "Organizer created"));
     } catch (error) {

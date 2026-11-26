@@ -22,7 +22,7 @@ function validateOrganizer(
         errors.push("Website is invalid.");
     }
 
-    if (!emailRegex.test(input.email)) {
+    if (!emailRegex.test(input.email || '')) {
         errors.push("Email is invalid.");
     }
 
@@ -48,16 +48,7 @@ export const organizerService = {
         input: CreateOrganizer
     ): Promise<Organizer> {
         const organizerInput: CreateOrganizer = {
-            ...input,
-            name: input.name.trim(),
-            description: input.description.trim(),
-            website: input.website.trim(),
-            phone: input.phone.trim(),
-            email: input.email.trim(),
-            location: {
-                city: input.location.city.trim(),
-                province: input.location.province
-            }
+            ...input
         }
 
         validateOrganizer(organizerInput);
@@ -65,7 +56,7 @@ export const organizerService = {
         return organizerRepository.add(organizerInput);
     },
 
-    async removeOrganizer(id: string): Promise<void> {
+    async removeOrganizer(id: number): Promise<void> {
         const removed = await organizerRepository.remove(id);
 
         if (!removed) {
