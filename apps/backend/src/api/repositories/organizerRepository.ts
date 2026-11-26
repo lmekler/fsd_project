@@ -37,7 +37,6 @@ export const organizerRepository = {
 
     const organizer = await prisma.organizer.create({
       data: {
-        id: Guid.create,
         name: input.name,
         description: input.description,
         website: input.website,

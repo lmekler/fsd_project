@@ -27,7 +27,7 @@ export interface Location {
   address: string;
   city: string;
   province: string;
-  postalCode?: string;
+  postalCode: string;
 }
 
 export interface SavedEvent {
