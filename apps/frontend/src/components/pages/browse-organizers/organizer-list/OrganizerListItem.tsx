@@ -3,7 +3,7 @@ import Button from "../../../common/button/Button";
 
 interface OrganizerListItemProps {
   organizer: Organizer;
-  removeOrganizer: (id: string) => Promise<boolean>;
+  removeOrganizer: (id: number) => Promise<boolean>;
 }
 
 export function OrganizerListItem({
@@ -13,24 +13,24 @@ export function OrganizerListItem({
     return (
         <section className="surface-card flex flex-col gap-4 p-6 sm:flex-row sm:items-start sm:justify-between" key={organizer.id}>
             <article className="flex-1">
-                <h3 className="section-title mb-4" key={organizer.id + "name"}>
+                <h3 className="section-title mb-4" key={organizer.id.toString + "name"}>
                     {organizer.name}
                 </h3>
 
                 <div className="muted-text mb-4 flex flex-col gap-1">
-                    <p className="font-medium text-text" key={organizer.id + "website"}>
+                    <p className="font-medium text-text" key={organizer.id.toString + "website"}>
                         Website: <a href="#">{organizer.website}</a>
                     </p>
 
-                    <p className="font-medium text-text" key={organizer.id + "email"}>Email: {organizer.email}</p>
-                    <p className="font-medium text-text" key={organizer.id + "phone"}>Phone Number: {organizer.phone}</p>
+                    <p className="font-medium text-text" key={organizer.id.toString + "email"}>Email: {organizer.email}</p>
+                    <p className="font-medium text-text" key={organizer.id.toString + "phone"}>Phone Number: {organizer.phone}</p>
                 </div>
                 
-                <p className="body-text mb-4 leading-relaxed" key={organizer.id + "description"}>
+                <p className="body-text mb-4 leading-relaxed" key={organizer.id.toString + "description"}>
                     {organizer.description}
                 </p>
 
-                <p className="muted-text mb-4 flex flex-col gap-1" key={organizer.id + "location"}>
+                <p className="muted-text mb-4 flex flex-col gap-1" key={organizer.id.toString + "location"}>
                     Location: {organizer.location.city}, {organizer.location.province}
                 </p>
                 <Button 
