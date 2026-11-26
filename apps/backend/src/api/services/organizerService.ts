@@ -1,37 +1,63 @@
-import { toOrganizer } from "../repositories/organizerRepository";
-import type { 
-    Organizer
-} from "@shared/types/organizer";
-import type {
-    DbOrganizer
-} from "../types/organizer";
-
+import type { CreateOrganizer, Organizer } from "@shared/types/organizer";
 import { organizerRepository } from "../repositories/organizerRepository";
-import { NotFoundError } from "../errors/errors";
 
-// Service Functions
-export const organizerService = {
-    async getAll(): Promise<Organizer[]> {
-        const organizers: DbOrganizer[] =
-            await organizerRepository.getAll();
-        
-        return organizers.map(toOrganizer);
-    },
+function validateOrganizer(
+    input: CreateOrganizer
+): void {
+    const errors: string[] = [];
 
-    async add(): Promise<Organizer> {
-        const newOrganizer: DbOrganizer = 
-            await organizerRepository.add();
-        
-        return toOrganizer(newOrganizer);
-    },
+    const websiteRegex = /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const phoneRegex = /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
 
-    async remove(
-        organizerId: number
-    ): Promise<void> {
-        const removedOrganizer: boolean = await organizerRepository.remove(organizerId);
+    if (input.name.trim().length < 3) {
+        errors.push("First name must be at least 3 characters long.");
+    }
 
-        if (!removedOrganizer) {
-            throw new NotFoundError("Organizer not found.");
-        }
+    if (!input.description.trim()) {
+        errors.push("Description is required.");
+    }
+
+    if (!websiteRegex.test(input.website)) {
+        errors.push("Website is invalid.");
+    }
+
+    if (!emailRegex.test(input.email || '')) {
+        errors.push("Email is invalid.");
+    }
+
+    if (!phoneRegex.test(input.phone)) {
+        errors.push("Phone number is invalid.");
+    }
+
+    if (!input.location.city.trim()) {
+        errors.push("City is required.");
+    }    
+    
+    if (errors.length > 0) {
+        throw new Error(errors.join(" "));
     }
 }
+
+export const organizerService = {
+    async getOrganizers(): Promise<Organizer[]> {
+        return organizerRepository.getAll();
+    },
+
+    async addOrganizer(
+        input: CreateOrganizer
+    ): Promise<Organizer> {
+
+        validateOrganizer(input);
+
+        return organizerRepository.add(input);
+    },
+
+    async removeOrganizer(id: number): Promise<void> {
+        const removed = await organizerRepository.remove(id);
+
+        if (!removed) {
+            throw new Error("Organizer not found.");
+        }
+    },
+};

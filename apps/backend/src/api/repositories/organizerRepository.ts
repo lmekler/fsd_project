@@ -1,30 +1,22 @@
-import type { Organizer } from "@shared/types/organizer";
+import type { CreateOrganizer, Organizer } from "@shared/types/organizer";
 import { prisma } from "../../db/prisma";
-import type {
-    Location
-} from "@shared/types/event";
-import type {
-    DbLocation
-} from "../types/event";
 import type {
     DbOrganizer
 } from "../types/organizer";
-
-export function toLocation(loc: DbLocation): Location {
-    return { ...loc, venue: loc.venue ?? undefined };
-}
+import { locationRepository } from "./locationRepository";
 
 export function toOrganizer(organizer: DbOrganizer): Organizer {
+    if (!organizer.location) {
+      throw new Error("Location not found");
+    }
+
     return {
         ...organizer,
-        name: organizer.name,
-        description: organizer.description,
-        website: organizer.website,
-        phone: organizer.phone,
         email: organizer.email ?? undefined,
-        image: organizer.image,
-        locationId: organizer.locationId,
-        location: toLocation(organizer.location),
+        location: {
+          ...organizer.location,
+          venue: organizer.location.venue ?? undefined
+        }
     };
 }
 
@@ -40,17 +32,19 @@ export const organizerRepository = {
     return organizers.map(toOrganizer);
   },
 
-  async add(input: Organizer): Promise<Organizer> {
+  async add(input: CreateOrganizer): Promise<Organizer> {
+    const location = await locationRepository.getOrCreate(input.location);
+
     const organizer = await prisma.organizer.create({
       data: {
-        id: input.id,
+        id: Guid.create,
         name: input.name,
         description: input.description,
         website: input.website,
         phone: input.phone,
         email: input.email ?? null,
-        locationId: input.locationId,
-        image: input.image
+        image: input.image,
+        locationId: location.id
       },
       include: {
         location: true
@@ -61,10 +55,8 @@ export const organizerRepository = {
   },
 
   async remove(id: number): Promise<boolean> {
-    const result = await prisma.$transaction(async (tx) => {
-      return tx.organizer.deleteMany({
-        where: { id },
-      });
+    const result = await prisma.organizer.deleteMany({
+      where: { id },
     });
 
     return result.count > 0;
