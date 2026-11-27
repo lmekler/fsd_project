@@ -5,15 +5,14 @@ import { NewEventForm } from "./new-event-form/NewEventForm";
 import Button from "../../common/button/Button";
 import { useSavedEvents } from "../../../hooks/useSavedEvents";
 
-export function BrowseEvents()
-{
-    // Mocking user log in
-    const mockedUserId: number = 1;
+export function BrowseEvents() {
+  // Mocking user log in
+  const mockedUserId: number = 1;
 
   // SavedEvent Hook
   const { addSavedEvent, isSaved } = useSavedEvents(mockedUserId);
 
-  const { events, addEvent, removeEvent } = useEvents();
+  const { events, loading, addEvent, removeEvent } = useEvents();
 
   function handleSubmit(input: NewEventInput): void {
     try {
@@ -41,6 +40,8 @@ export function BrowseEvents()
 
         <section>
           <h2 className="page-title mb-6">Upcoming Events</h2>
+
+          {loading && <p className="muted-text">Loading events...</p>}
 
           <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => (
@@ -76,7 +77,7 @@ export function BrowseEvents()
             ))}
           </div>
 
-          {events.length === 0 && (
+          {!loading && events.length === 0 && (
             <p className="muted-text">No events are available right now.</p>
           )}
         </section>
