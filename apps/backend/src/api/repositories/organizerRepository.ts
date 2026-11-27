@@ -1,31 +1,44 @@
+import type { CreateOrganizer, Organizer } from "@shared/types/organizer";
 import { prisma } from "../../db/prisma";
+import type {
+    DbOrganizer
+} from "../types/organizer";
+import { locationRepository } from "./locationRepository";
 
-import type { Organizer } from "@shared/types/organizer";
-import type { DbOrganizer } from "../types/organizer";
+async function toOrganizer(organizer: DbOrganizer): Promise<Organizer> {
+    const location = await locationRepository.getById(organizer.locationId);
 
-import { locationRepository } from "./locationRepository"
+    if (!location) {
+      throw new Error("Location not found");
+    }
 
-export async function toOrganizer(row: DbOrganizer): Promise<Organizer> {
-  const location = await locationRepository.getById(row.locationId);
-
-  if (!location) {
-    throw new Error("Organizer location not found");
-  }
-
-  return {
-    id: row.id,
-    name: row.name,
-    description: row.description,
-    email: row.email ?? undefined,
-    phone: row.phone,
-    website: row.website,
-    image: row.image,
-    locationId: row.locationId,
-    location: location,
-  };
+    return {
+        ...organizer,
+        id: organizer.id,
+        email: organizer.email ?? undefined,
+        location: location
+    };
 }
 
 export const organizerRepository = {
+  async getAll(): Promise<Organizer[]> {
+    const dbOrganizers = await prisma.organizer.findMany({
+      orderBy: { id: "asc" },
+      include: {
+        location: true
+      },
+    });
+
+    const organizers: Organizer[] = [];
+    
+    for (const record of dbOrganizers) {
+      const organizer = await toOrganizer(record);
+      organizers.push(organizer);
+    }
+
+    return organizers;
+  },
+
   async getById(id: number): Promise<Organizer | null> {
     const organizer = await prisma.organizer.findUnique({
       where: { id },
@@ -36,4 +49,50 @@ export const organizerRepository = {
 
     return organizer ? toOrganizer(organizer) : null;
   },
+
+  async add(input: CreateOrganizer): Promise<Organizer> {
+    const location = await locationRepository.getOrCreate(input.location);
+
+    const organizer = await prisma.organizer.create({
+      data: {
+        name: input.name,
+        description: input.description,
+        website: input.website,
+        phone: input.phone,
+        email: input.email ?? null,
+        image: input.image,
+        locationId: location.id
+      },
+      include: {
+        location: true
+      },
+    });
+
+    return toOrganizer(organizer);
+  },
+
+  async remove(id: number): Promise<boolean> {
+    const organizer = await prisma.organizer.findUnique({
+      where: { id },
+      include: {
+        events: true
+      }
+    });
+
+    if (!organizer) {
+      return false;
+    }
+
+    if (organizer.events.length > 0) {
+      throw new Error(
+        "Cannot delete organizer because they have associated events."
+      );
+    }
+
+    await prisma.organizer.delete({
+      where: { id }
+    });
+
+    return true;
+  }
 }

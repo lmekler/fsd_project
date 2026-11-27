@@ -12,14 +12,12 @@ export interface Organizer {
   location: Location;
 }
 
-export interface CreateOrganizer {
-  name: string;
-  description: string;
-  website: string;
-  email: string;
-  phone: string;
-  location: {
-    city: string;
-    province: string;
-  };
+export type CreateOrganizer = Omit<
+  Organizer,
+  | "id"
+  | "locationId"
+  | "location"
+> & {
+  location: Omit<Location, "id">
 }
+

@@ -24,7 +24,7 @@ model Location {
 }
 
 model Organizer {
-  id          Int     @id
+  id          Int     @id @default(autoincrement())
   name        String
   description String
   email       String? @unique

@@ -1,9 +1,9 @@
-import type { Organizer } from "../../../../types/organizer";
+import type { Organizer } from "@shared/types/organizer";
 import { OrganizerListItem } from "./OrganizerListItem";
 
 interface OrganizerListProps {
   organizers: Organizer[];
-  removeOrganizer: (id: string) => Promise<boolean>;
+  removeOrganizer: (id: number) => Promise<boolean>;
 }
 
 export function OrganizerList({

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { CreateOrganizer, Organizer } from "../types/organizer";
+import type { CreateOrganizer, Organizer } from "@shared/types/organizer";
 import { organizerService } from "../services/organizerService";
 
 export function useOrganizer() {
@@ -63,7 +63,7 @@ export function useOrganizer() {
     }
 
     async function removeOrganizer(
-        id: string,
+        id: number,
     ): Promise<boolean> {
         setErrors(null);
 

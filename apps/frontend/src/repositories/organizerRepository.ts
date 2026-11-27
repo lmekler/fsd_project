@@ -1,64 +1,43 @@
-import organizerData from "../data/data.json"
-import type { Organizer, CreateOrganizer } from "../types/organizer";
+import type { Organizer, CreateOrganizer } from "../types/Organizer";
 
-let organizers: Organizer[] = organizerData.organizers.map((organizer) => ({
-  ...organizer
-}));
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+const endpoint = `${baseUrl}/api/organizers`;
 
-const prefix: string = "org-";
-const nextId: string = `${prefix + crypto.randomUUID()}`;
+async function readJson<T>(response: Response): Promise<T> {
+  if (!response.ok) {
+    throw new Error(`API error: ${response.status}`);
+  }
+
+  return (await response.json()) as T;
+}
 
 export const organizerRepository = {
   async getAll(): Promise<Organizer[]> {
-    return organizers.map((organizer) => ({
-      ...organizer,
-    }));
-  },
-
-  async getById(id: string): Promise<unknown | undefined> {
-    const organizer = organizers.find(
-        organizer => organizer.id === id
-    );
-
-    if (organizer) {
-        return {
-            ...organizer,
-            organizer: organizer.name
-        }
-    }
+    const response = await fetch(endpoint);
+    return readJson<Organizer[]>(response);
   },
 
   async add(input: CreateOrganizer): Promise<Organizer> {
-    const organizer: Organizer = {
-        id: nextId,
-        name: input.name,
-        description: input.description,
-        website: input.website,
-        email: input.email,
-        phone: input.phone,
-        location: {
-            city: input.location.city,
-            province: input.location.province,
-            country: "Canada"
-        },
-        image: ""
-    };
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(input),
+    });
 
-    organizers = [
-      ...organizers,
-      organizer
-    ]
-
-    return { ...organizer };
+    return readJson<Organizer>(response);
   },
 
-  async remove(id: string): Promise<boolean> {
-    const originalLength = organizers.length;
+  async remove(id: number): Promise<void> {
+    const response = await fetch(`${endpoint}/${id}`, {
+      method: "DELETE",
+    });
 
-    organizers = organizers.filter(
-      (organizer) => organizer.id !== id,
-    );
+    if (!response.ok) {
+      const data = await response.json();
 
-    return organizers.length < originalLength;
+      throw new Error(data.message || "Failed to delete organizer.");
+    }
   },
 };

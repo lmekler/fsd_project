@@ -308,7 +308,6 @@ export type OrganizerScalarWhereWithAggregatesInput = {
 }
 
 export type OrganizerCreateInput = {
-  id: number
   name: string
   description: string
   email?: string | null
@@ -320,7 +319,7 @@ export type OrganizerCreateInput = {
 }
 
 export type OrganizerUncheckedCreateInput = {
-  id: number
+  id?: number
   name: string
   description: string
   email?: string | null
@@ -332,7 +331,6 @@ export type OrganizerUncheckedCreateInput = {
 }
 
 export type OrganizerUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -356,7 +354,7 @@ export type OrganizerUncheckedUpdateInput = {
 }
 
 export type OrganizerCreateManyInput = {
-  id: number
+  id?: number
   name: string
   description: string
   email?: string | null
@@ -367,7 +365,6 @@ export type OrganizerCreateManyInput = {
 }
 
 export type OrganizerUpdateManyMutationInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -502,7 +499,6 @@ export type OrganizerUpdateOneRequiredWithoutEventsNestedInput = {
 }
 
 export type OrganizerCreateWithoutLocationInput = {
-  id: number
   name: string
   description: string
   email?: string | null
@@ -513,7 +509,7 @@ export type OrganizerCreateWithoutLocationInput = {
 }
 
 export type OrganizerUncheckedCreateWithoutLocationInput = {
-  id: number
+  id?: number
   name: string
   description: string
   email?: string | null
@@ -564,7 +560,6 @@ export type OrganizerScalarWhereInput = {
 }
 
 export type OrganizerCreateWithoutEventsInput = {
-  id: number
   name: string
   description: string
   email?: string | null
@@ -575,7 +570,7 @@ export type OrganizerCreateWithoutEventsInput = {
 }
 
 export type OrganizerUncheckedCreateWithoutEventsInput = {
-  id: number
+  id?: number
   name: string
   description: string
   email?: string | null
@@ -602,7 +597,6 @@ export type OrganizerUpdateToOneWithWhereWithoutEventsInput = {
 }
 
 export type OrganizerUpdateWithoutEventsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -624,7 +618,7 @@ export type OrganizerUncheckedUpdateWithoutEventsInput = {
 }
 
 export type OrganizerCreateManyLocationInput = {
-  id: number
+  id?: number
   name: string
   description: string
   email?: string | null
@@ -634,7 +628,6 @@ export type OrganizerCreateManyLocationInput = {
 }
 
 export type OrganizerUpdateWithoutLocationInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
