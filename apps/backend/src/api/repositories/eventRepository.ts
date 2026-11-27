@@ -1,145 +1,83 @@
 import { prisma } from "../../db/prisma";
 
-import type { Event, Location } from "@shared/types/event";
-import type { DbOrganizer } from "./organizerRepository";
+import type { Event, NewEventInput } from "@shared/types/event";
+import type { DbEvent } from "../types/event"
 
-import { toOrganizer } from "./organizerRepository";
+import { locationRepository } from "./locationRepository";
+import { organizerRepository } from "./organizerRepository";
 
-export type DbLocation = {
-  id: number;
-  venue: string | null;
-  address: string;
-  city: string;
-  province: string;
-  postalCode: string | null;
-};
+async function toEvent(row: DbEvent): Promise<Event> {
+  const organizer = await organizerRepository.getById(row.organizerId);
+  const location = await locationRepository.getById(row.locationId);
 
-type DbSavedEvent = {
-  savedEventId: number;
-  eventId: number;
-  userId: number;
-};
+  if (!organizer) {
+    throw new Error("Event organizer not found");
+  }
+  if (!location) {
+    throw new Error("Event location not found");
+  }
 
-type DbEvent = {
-  id: number;
-  organizerId: number;
-  organizer: DbOrganizer;
-  title: string;
-  description: string | null;
-  category: string | null;
-  date: string;
-  startTime: string;
-  endTime: string | null;
-  image: string | null;
-  capacity: number;
-  registeredCount: number;
-  price: number;
-  isFeatured: boolean;
-  tags: string[];
-  locationId: number;
-  location: DbLocation;
-  users: DbSavedEvent[];
-};
-
-export function toLocation(row: DbLocation): Location {
-  return {
-    id: row.id,
-    ...(row.venue !== null ? { venue: row.venue } : {}),
-    address: row.address,
-    city: row.city,
-    province: row.province,
-    ...(row.postalCode !== null ? { postalCode: row.postalCode } : {}),
-  };
-}
-
-function toEvent(row: DbEvent): Event {
   return {
     id: row.id,
     organizerId: row.organizerId,
-    organizer: toOrganizer(row.organizer),
+    organizer: organizer,
     title: row.title,
-    ...(row.description !== null ? { description: row.description } : {}),
-    ...(row.category !== null ? { category: row.category } : {}),
+    description: row.description ?? undefined,
+    category: row.category ?? undefined,
     date: row.date,
     startTime: row.startTime,
-    ...(row.endTime !== null ? { endTime: row.endTime } : {}),
-    ...(row.image !== null ? { image: row.image } : {}),
-    capacity: row.capacity,
+    endTime: row.endTime ?? undefined,
+    locationId: row.locationId,
+    location: location,
+    image: row.image ?? undefined,
+    capacity: row.capacity || undefined,
     registeredCount: row.registeredCount,
     price: row.price,
     isFeatured: row.isFeatured,
     tags: row.tags,
-    locationId: row.locationId,
-    location: toLocation(row.location),
-    users: row.users.map((user) => ({
-      savedEventId: user.savedEventId,
-      userId: user.userId,
-      eventId: user.eventId,
-    })),
   };
 }
 
 export const eventRepository = {
   async getAll(): Promise<Event[]> {
-    const events = await prisma.event.findMany({
+    const dbEvents = await prisma.event.findMany({
       orderBy: { id: "asc" },
-      include: {
-        location: true,
-        organizer: {
-          include: {
-            location: true,
-          },
-        },
-        users: true,
-      },
     });
 
-    return events.map(toEvent);
+    const events: Event[] = [];
+
+    for (const record of dbEvents) {
+      const event = await toEvent(record);
+      events.push(event);
+    }
+
+    return events;
   },
 
   async getById(id: number): Promise<Event | null> {
     const event = await prisma.event.findUnique({
       where: { id },
-      include: {
-        location: true,
-        organizer: {
-          include: {
-            location: true,
-          },
-        },
-        users: true,
-      },
     });
 
     return event ? toEvent(event) : null;
   },
 
-  async add(input: Event): Promise<Event> {
+  async add(input: NewEventInput): Promise<Event> {
+    const location = await locationRepository.getOrCreate(input.location)
+
     const event = await prisma.event.create({
       data: {
-        organizerId: input.organizerId,
+        organizerId: 1, // temporary organizer id given to all events until we add users
         title: input.title,
         description: input.description ?? null,
         category: input.category ?? null,
         date: input.date,
         startTime: input.startTime,
         endTime: input.endTime ?? null,
-        locationId: input.locationId,
+        locationId: location.id,
         image: input.image ?? null,
-        capacity: input.capacity,
-        registeredCount: input.registeredCount,
-        price: input.price,
-        isFeatured: input.isFeatured,
+        capacity: input.capacity ?? null,
         tags: input.tags ?? [],
-      },
-      include: {
-        location: true,
-        organizer: {
-          include: {
-            location: true,
-          },
-        },
-        users: true,
       },
     });
 

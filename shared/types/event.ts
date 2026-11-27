@@ -20,13 +20,27 @@ export interface Event {
   tags?: string[];
 }
 
+// What a new event form sends (an event, excluding server owned values)
+export type NewEventInput = Omit<
+  Event,
+  | "id"
+  | "organizerId"
+  | "organizer"
+  | "locationId"
+  | "location"
+  | "registeredCount"
+  | "isFeatured"
+> & {
+  location: Omit<Location, "id">;
+};
+
 export interface Location {
   id: number;
   venue?: string;
   address: string;
   city: string;
   province: string;
-  postalCode?: string;
+  postalCode: string;
 }
 
 export interface SavedEvent {

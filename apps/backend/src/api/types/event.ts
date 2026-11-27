@@ -1,5 +1,3 @@
-import type { DbOrganizer } from "./organizer";
-
 export type DbEvent = {
   id: number;
   organizerId: number;
