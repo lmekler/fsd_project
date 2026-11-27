@@ -72,11 +72,27 @@ export const organizerRepository = {
   },
 
   async remove(id: number): Promise<boolean> {
-    const result = await prisma.organizer.deleteMany({
+    const organizer = await prisma.organizer.findUnique({
       where: { id },
+      include: {
+        events: true
+      }
     });
 
-    return result.count > 0;
-  },
-};
+    if (!organizer) {
+      return false;
+    }
 
+    if (organizer.events.length > 0) {
+      throw new Error(
+        "Cannot delete organizer because they have associated events."
+      );
+    }
+
+    await prisma.organizer.delete({
+      where: { id }
+    });
+
+    return true;
+  }
+}

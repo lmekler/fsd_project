@@ -1,4 +1,4 @@
-import type { Organizer } from "../../../../types/organizer";
+import type { Organizer } from "@shared/types/organizer";
 import Button from "../../../common/button/Button";
 
 interface OrganizerListItemProps {

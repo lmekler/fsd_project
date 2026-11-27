@@ -29,17 +29,15 @@ export const organizerRepository = {
     return readJson<Organizer>(response);
   },
 
-  async remove(id: number): Promise<boolean> {
+  async remove(id: number): Promise<void> {
     const response = await fetch(`${endpoint}/${id}`, {
       method: "DELETE",
     });
 
-    if (response.status === 404) return false;
-
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
-    }
+      const data = await response.json();
 
-    return true;
+      throw new Error(data.message || "Failed to delete organizer.");
+    }
   },
 };

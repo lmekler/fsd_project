@@ -82,6 +82,8 @@ function Organizers() {
     return (
         <section className="page-container grid grid-cols-1 gap-8 py-8 ">
             <div className="flex flex-col gap-10">
+                {errors && <p className="errors" role="alert">{errors}</p>}
+
                 {loading ? (
                     <p>Loading organizers...</p>
                 ) : (

@@ -35,8 +35,7 @@ export async function add(
 
 export async function remove(
     req: Request,
-    res: Response,
-    next: NextFunction
+    res: Response
 ): Promise<void> {
     try {
         const organizerId: number = Number(req.params.id);
@@ -44,6 +43,10 @@ export async function remove(
 
         res.status(HTTP_STATUS.NO_CONTENT).send();
     } catch (error) {
-        next(error);
+        res.status(400).json({
+            message: error instanceof Error
+                ? error.message
+                : "Unable to delete organizer."
+        }).send();
     }
 }

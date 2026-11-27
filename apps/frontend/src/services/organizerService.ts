@@ -1,4 +1,4 @@
-import type { CreateOrganizer, Organizer } from "../types/organizer";
+import type { CreateOrganizer, Organizer } from "@shared/types/organizer";
 import { organizerRepository } from "../repositories/organizerRepository";
 
 function validateOrganizer(
@@ -57,10 +57,6 @@ export const organizerService = {
     },
 
     async removeOrganizer(id: number): Promise<void> {
-        const removed = await organizerRepository.remove(id);
-
-        if (!removed) {
-            throw new Error("Organizer not found.");
-        }
+        return await organizerRepository.remove(id);
     },
 };
