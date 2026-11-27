@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import type { CreateOrganizer, Organizer } from "@shared/types/organizer";
 import { organizerService } from "../services/organizerService";
-import { successResponse } from "../models/responseModel";
 import { HTTP_STATUS } from "../constants/httpConstants";
 
 export async function getAll(
@@ -12,7 +11,7 @@ export async function getAll(
     try {
         const organizers: Organizer[] = await organizerService.getOrganizers();
 
-        res.status(HTTP_STATUS.OK).json(successResponse(organizers));
+        res.status(HTTP_STATUS.OK).json(organizers);
     } catch (error) {
         next(error);
     }
@@ -28,7 +27,7 @@ export async function add(
         const newOrganizer: Organizer = 
             await organizerService.addOrganizer(organizer);
 
-        res.status(HTTP_STATUS.CREATED).json(successResponse(newOrganizer, "Organizer created"));
+        res.status(HTTP_STATUS.CREATED).json(newOrganizer);
     } catch (error) {
         next(error);
     }

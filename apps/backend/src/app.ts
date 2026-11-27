@@ -21,7 +21,7 @@ app.use(express.json());
 
 // Routes
 app.use("/saved-events", savedEventRoutes);
-app.use("/organizers", organizerRoutes)
+app.use("/api/organizers", organizerRoutes)
 
 // Central error handler
 app.use(errorHandler);

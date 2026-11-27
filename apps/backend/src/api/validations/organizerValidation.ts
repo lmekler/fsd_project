@@ -12,11 +12,10 @@ const organizerSchema = z
       .string("Website is required.")
       .regex(/^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/, "Website must be in a valid format."),
     phone: z
-      .string("Website is required.")
+      .string("Phone number is required.")
       .regex(/^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, "Phone number must be in a valid format"),
     email: z
       .string()
-      .regex(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, "Phone number must be in a valid format")
       .optional(),
     image: z.string().trim()
   })
