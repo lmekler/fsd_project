@@ -5,6 +5,7 @@ import { successResponse } from "../models/responseModel";
 import { HTTP_STATUS } from "../constants/httpConstants";
 
 export async function getAll(
+    req: Request,
     res: Response,
     next: NextFunction
 ): Promise<void> {

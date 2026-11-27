@@ -1,28 +1,23 @@
 import { Router } from "express";
-import { validateRequest } from "../middleware/validate";
 import * as organizerController from "../controllers/organizerController";
-import { organizerSchemas } from "../validations/organizerValidation";
+import { validateOrganizer, validateOrganizerId } from "../validations/organizerValidation";
 
 const router = Router();
 
-// GET
 router.get(
     "/",
-    validateRequest(organizerSchemas.getByUser),
-    organizerController.getAllByUser
+    organizerController.getAll
 )
 
-// POST
 router.post(
     "/",
-    validateRequest(organizerSchemas.add),
+    validateOrganizer,
     organizerController.add
 );
 
-// DELETE
 router.delete(
     "/:organizerId",
-    validateRequest(organizerSchemas.remove),
+    validateOrganizerId,
     organizerController.remove
 )
 
