@@ -68,7 +68,7 @@ function Organizers() {
                 address: formData.location.address,
                 city: formData.location.city,
                 province: formData.location.province,
-                postalCode: formData.location.postalCode
+                postalCode: formData.location.postalCode.toUpperCase()
             }
         }
 
