@@ -1,4 +1,4 @@
-import type { SavedEventWithDetails } from "@shared/types/Event";
+import type { SavedEventWithDetails } from "@shared/types/event";
 import { savedEventsRepo } from "../repositories/savedEventsRepo";
 import { ApiError } from "../repositories/apiHandler";
 

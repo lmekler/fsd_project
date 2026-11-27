@@ -1,4 +1,4 @@
-import type { Location } from "./event";
+import type { Location } from "./Event";
 
 export interface Organizer {
   id: number;
@@ -14,10 +14,7 @@ export interface Organizer {
 
 export type CreateOrganizer = Omit<
   Organizer,
-  | "id"
-  | "locationId"
-  | "location"
+  "id" | "locationId" | "location"
 > & {
-  location: Omit<Location, "id">
-}
-
+  location: Omit<Location, "id">;
+};

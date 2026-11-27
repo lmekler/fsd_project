@@ -1,4 +1,4 @@
-import type { Organizer, CreateOrganizer } from "../types/Organizer";
+import type { Organizer, CreateOrganizer } from "../types/organizer";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const endpoint = `${baseUrl}/api/organizers`;

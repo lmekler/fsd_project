@@ -1,4 +1,4 @@
-import { DbOrganizer } from "./organizer";
+import { DbOrganizer } from "./dbOrganizer";
 
 export type DbEvent = {
   id: number;
@@ -37,7 +37,7 @@ export type DbSavedEvent = {
 export type DbEventWithRelations = DbEvent & {
   organizer: DbOrganizer & { location: DbLocation };
   location: DbLocation;
-}
+};
 
 // Attaching complete DbEvent Entry in Saved Event DB entry
 export type DbSavedEventWithDetails = DbSavedEvent & {
