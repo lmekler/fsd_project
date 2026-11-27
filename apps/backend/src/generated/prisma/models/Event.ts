@@ -265,7 +265,7 @@ export type EventGroupByOutputType = {
   startTime: string
   endTime: string | null
   image: string | null
-  capacity: number
+  capacity: number | null
   registeredCount: number
   price: number
   isFeatured: boolean
@@ -306,7 +306,7 @@ export type EventWhereInput = {
   startTime?: Prisma.StringFilter<"Event"> | string
   endTime?: Prisma.StringNullableFilter<"Event"> | string | null
   image?: Prisma.StringNullableFilter<"Event"> | string | null
-  capacity?: Prisma.IntFilter<"Event"> | number
+  capacity?: Prisma.IntNullableFilter<"Event"> | number | null
   registeredCount?: Prisma.IntFilter<"Event"> | number
   price?: Prisma.IntFilter<"Event"> | number
   isFeatured?: Prisma.BoolFilter<"Event"> | boolean
@@ -327,7 +327,7 @@ export type EventOrderByWithRelationInput = {
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
-  capacity?: Prisma.SortOrder
+  capacity?: Prisma.SortOrderInput | Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
@@ -351,7 +351,7 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   startTime?: Prisma.StringFilter<"Event"> | string
   endTime?: Prisma.StringNullableFilter<"Event"> | string | null
   image?: Prisma.StringNullableFilter<"Event"> | string | null
-  capacity?: Prisma.IntFilter<"Event"> | number
+  capacity?: Prisma.IntNullableFilter<"Event"> | number | null
   registeredCount?: Prisma.IntFilter<"Event"> | number
   price?: Prisma.IntFilter<"Event"> | number
   isFeatured?: Prisma.BoolFilter<"Event"> | boolean
@@ -372,7 +372,7 @@ export type EventOrderByWithAggregationInput = {
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
-  capacity?: Prisma.SortOrder
+  capacity?: Prisma.SortOrderInput | Prisma.SortOrder
   registeredCount?: Prisma.SortOrder
   price?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
@@ -398,7 +398,7 @@ export type EventScalarWhereWithAggregatesInput = {
   startTime?: Prisma.StringWithAggregatesFilter<"Event"> | string
   endTime?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
   image?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
-  capacity?: Prisma.IntWithAggregatesFilter<"Event"> | number
+  capacity?: Prisma.IntNullableWithAggregatesFilter<"Event"> | number | null
   registeredCount?: Prisma.IntWithAggregatesFilter<"Event"> | number
   price?: Prisma.IntWithAggregatesFilter<"Event"> | number
   isFeatured?: Prisma.BoolWithAggregatesFilter<"Event"> | boolean
@@ -414,7 +414,7 @@ export type EventCreateInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -434,7 +434,7 @@ export type EventUncheckedCreateInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -451,7 +451,7 @@ export type EventUpdateInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -471,7 +471,7 @@ export type EventUncheckedUpdateInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -490,7 +490,7 @@ export type EventCreateManyInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -506,7 +506,7 @@ export type EventUpdateManyMutationInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -523,7 +523,7 @@ export type EventUncheckedUpdateManyInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -712,6 +712,14 @@ export type EventCreatetagsInput = {
   set: string[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -743,7 +751,7 @@ export type EventCreateWithoutLocationInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -762,7 +770,7 @@ export type EventUncheckedCreateWithoutLocationInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -809,7 +817,7 @@ export type EventScalarWhereInput = {
   startTime?: Prisma.StringFilter<"Event"> | string
   endTime?: Prisma.StringNullableFilter<"Event"> | string | null
   image?: Prisma.StringNullableFilter<"Event"> | string | null
-  capacity?: Prisma.IntFilter<"Event"> | number
+  capacity?: Prisma.IntNullableFilter<"Event"> | number | null
   registeredCount?: Prisma.IntFilter<"Event"> | number
   price?: Prisma.IntFilter<"Event"> | number
   isFeatured?: Prisma.BoolFilter<"Event"> | boolean
@@ -825,7 +833,7 @@ export type EventCreateWithoutOrganizerInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -843,7 +851,7 @@ export type EventUncheckedCreateWithoutOrganizerInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -886,7 +894,7 @@ export type EventCreateWithoutUsersInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -905,7 +913,7 @@ export type EventUncheckedCreateWithoutUsersInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -937,7 +945,7 @@ export type EventUpdateWithoutUsersInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -956,7 +964,7 @@ export type EventUncheckedUpdateWithoutUsersInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -974,7 +982,7 @@ export type EventCreateManyLocationInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -989,7 +997,7 @@ export type EventUpdateWithoutLocationInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1008,7 +1016,7 @@ export type EventUncheckedUpdateWithoutLocationInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1026,7 +1034,7 @@ export type EventUncheckedUpdateManyWithoutLocationInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1042,7 +1050,7 @@ export type EventCreateManyOrganizerInput = {
   startTime: string
   endTime?: string | null
   image?: string | null
-  capacity: number
+  capacity?: number | null
   registeredCount?: number
   price?: number
   isFeatured?: boolean
@@ -1058,7 +1066,7 @@ export type EventUpdateWithoutOrganizerInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1076,7 +1084,7 @@ export type EventUncheckedUpdateWithoutOrganizerInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1094,7 +1102,7 @@ export type EventUncheckedUpdateManyWithoutOrganizerInput = {
   startTime?: Prisma.StringFieldUpdateOperationsInput | string
   endTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   registeredCount?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.IntFieldUpdateOperationsInput | number
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1246,7 +1254,7 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     startTime: string
     endTime: string | null
     image: string | null
-    capacity: number
+    capacity: number | null
     registeredCount: number
     price: number
     isFeatured: boolean

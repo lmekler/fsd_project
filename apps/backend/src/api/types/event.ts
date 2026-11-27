@@ -1,9 +1,8 @@
-import type { DbOrganizer } from "./organizer";
+import { DbOrganizer } from "./organizer";
 
 export type DbEvent = {
   id: number;
   organizerId: number;
-  organizer: DbOrganizer;
   title: string;
   description: string | null;
   category: string | null;
@@ -11,14 +10,12 @@ export type DbEvent = {
   startTime: string;
   endTime: string | null;
   image: string | null;
-  capacity: number;
+  capacity: number | null;
   registeredCount: number;
   price: number;
   isFeatured: boolean;
   tags: string[];
   locationId: number;
-  location: DbLocation;
-  users: DbSavedEvent[];
 };
 
 export type DbLocation = {
@@ -36,9 +33,13 @@ export type DbSavedEvent = {
   userId: number;
 };
 
-// For queries that don't include `users`
-export type DbEventWithoutUsers = Omit<DbEvent, "users">;
+// Includes the database relations for organizer and location
+export type DbEventWithRelations = DbEvent & {
+  organizer: DbOrganizer;
+  location: DbLocation;
+}
 
+// Attaching complete DbEvent Entry in Saved Event DB entry
 export type DbSavedEventWithDetails = DbSavedEvent & {
-  event: DbEventWithoutUsers;
+  event: DbEventWithRelations;
 };

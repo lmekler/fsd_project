@@ -164,11 +164,7 @@
       "price": 0,
       "isFree": true,
       "isFeatured": true,
-      "tags": [
-        "volunteering",
-        "community",
-        "outdoors"
-      ]
+      "tags": ["volunteering", "community", "outdoors"]
     },
     {
       "id": 2,
@@ -192,12 +188,7 @@
       "price": 25,
       "isFree": false,
       "isFeatured": true,
-      "tags": [
-        "art",
-        "painting",
-        "workshop",
-        "beginner"
-      ]
+      "tags": ["art", "painting", "workshop", "beginner"]
     },
     {
       "id": 3,
@@ -221,12 +212,7 @@
       "price": 0,
       "isFree": true,
       "isFeatured": false,
-      "tags": [
-        "soccer",
-        "sports",
-        "recreation",
-        "outdoors"
-      ]
+      "tags": ["soccer", "sports", "recreation", "outdoors"]
     },
     {
       "id": 4,
@@ -250,12 +236,7 @@
       "price": 10,
       "isFree": false,
       "isFeatured": false,
-      "tags": [
-        "gardening",
-        "environment",
-        "sustainability",
-        "workshop"
-      ]
+      "tags": ["gardening", "environment", "sustainability", "workshop"]
     },
     {
       "id": 5,
@@ -279,12 +260,7 @@
       "price": 0,
       "isFree": true,
       "isFeatured": true,
-      "tags": [
-        "food",
-        "social",
-        "community",
-        "family"
-      ]
+      "tags": ["food", "social", "community", "family"]
     },
     {
       "id": 6,
@@ -308,12 +284,7 @@
       "price": 0,
       "isFree": true,
       "isFeatured": true,
-      "tags": [
-        "art",
-        "exhibition",
-        "culture",
-        "local-artists"
-      ]
+      "tags": ["art", "exhibition", "culture", "local-artists"]
     },
     {
       "id": 7,
@@ -337,12 +308,7 @@
       "price": 5,
       "isFree": false,
       "isFeatured": false,
-      "tags": [
-        "yoga",
-        "wellness",
-        "fitness",
-        "outdoors"
-      ]
+      "tags": ["yoga", "wellness", "fitness", "outdoors"]
     },
     {
       "id": 8,
@@ -366,12 +332,7 @@
       "price": 0,
       "isFree": true,
       "isFeatured": false,
-      "tags": [
-        "repair",
-        "sustainability",
-        "community",
-        "volunteering"
-      ]
+      "tags": ["repair", "sustainability", "community", "volunteering"]
     },
     {
       "id": 9,
@@ -395,12 +356,7 @@
       "price": 0,
       "isFree": true,
       "isFeatured": false,
-      "tags": [
-        "family",
-        "games",
-        "kids",
-        "social"
-      ]
+      "tags": ["family", "games", "kids", "social"]
     },
     {
       "id": 10,
@@ -424,12 +380,7 @@
       "price": 35,
       "isFree": false,
       "isFeatured": false,
-      "tags": [
-        "pottery",
-        "art",
-        "workshop",
-        "crafts"
-      ]
+      "tags": ["pottery", "art", "workshop", "crafts"]
     }
   ],
   "savedEvents": [

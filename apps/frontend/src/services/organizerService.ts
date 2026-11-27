@@ -1,4 +1,4 @@
-import type { CreateOrganizer, Organizer } from "../types/Organizer";
+import type { CreateOrganizer, Organizer } from "../types/organizer";
 import { organizerRepository } from "../repositories/organizerRepository";
 
 function validateOrganizer(

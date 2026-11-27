@@ -5,31 +5,49 @@ import type {
 } from "../types/organizer";
 import { locationRepository } from "./locationRepository";
 
-export function toOrganizer(organizer: DbOrganizer): Organizer {
-    if (!organizer.location) {
+async function toOrganizer(organizer: DbOrganizer): Promise<Organizer> {
+    const location = await locationRepository.getById(organizer.locationId);
+
+    if (!location) {
       throw new Error("Location not found");
     }
 
     return {
         ...organizer,
+        id: organizer.id,
         email: organizer.email ?? undefined,
-        location: {
-          ...organizer.location,
-          venue: organizer.location.venue ?? undefined
-        }
+        location: location
     };
 }
 
 export const organizerRepository = {
   async getAll(): Promise<Organizer[]> {
-    const organizers = await prisma.organizer.findMany({
+    const dbOrganizers = await prisma.organizer.findMany({
       orderBy: { id: "asc" },
       include: {
         location: true
       },
     });
 
-    return organizers.map(toOrganizer);
+    const organizers: Organizer[] = [];
+    
+    for (const record of dbOrganizers) {
+      const organizer = await toOrganizer(record);
+      organizers.push(organizer);
+    }
+
+    return organizers;
+  },
+
+  async getById(id: number): Promise<Organizer | null> {
+    const organizer = await prisma.organizer.findUnique({
+      where: { id },
+      include: {
+        location: true,
+      },
+    });
+
+    return organizer ? toOrganizer(organizer) : null;
   },
 
   async add(input: CreateOrganizer): Promise<Organizer> {

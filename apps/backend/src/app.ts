@@ -8,6 +8,8 @@ import errorHandler from "./api/middleware/errorHandler";
 import savedEventRoutes from "./api/routes/savedEventsRoutes";
 import organizerRoutes from "./api/routes/organizerRoutes";
 
+import { eventRoutes } from "./api/routes/eventRoutes";
+
 const app = express();
 
 // Logging
@@ -25,5 +27,7 @@ app.use("/api/organizers", organizerRoutes)
 
 // Central error handler
 app.use(errorHandler);
+
+app.use("/api/events", eventRoutes);
 
 export default app;
