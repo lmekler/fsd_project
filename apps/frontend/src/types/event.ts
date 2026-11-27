@@ -4,4 +4,4 @@ export type {
   Location,
   SavedEvent,
   SavedEventWithDetails,
-} from "@shared/types/Event";
+} from "@shared/types/event";

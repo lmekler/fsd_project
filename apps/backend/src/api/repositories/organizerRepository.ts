@@ -1,23 +1,21 @@
 import type { CreateOrganizer, Organizer } from "@shared/types/organizer";
 import { prisma } from "../../db/prisma";
-import type {
-    DbOrganizer
-} from "../types/organizer";
+import type { DbOrganizer } from "../types/dbOrganizer";
 import { locationRepository } from "./locationRepository";
 
 async function toOrganizer(organizer: DbOrganizer): Promise<Organizer> {
-    const location = await locationRepository.getById(organizer.locationId);
+  const location = await locationRepository.getById(organizer.locationId);
 
-    if (!location) {
-      throw new Error("Location not found");
-    }
+  if (!location) {
+    throw new Error("Location not found");
+  }
 
-    return {
-        ...organizer,
-        id: organizer.id,
-        email: organizer.email ?? undefined,
-        location: location
-    };
+  return {
+    ...organizer,
+    id: organizer.id,
+    email: organizer.email ?? undefined,
+    location: location,
+  };
 }
 
 export const organizerRepository = {
@@ -25,12 +23,12 @@ export const organizerRepository = {
     const dbOrganizers = await prisma.organizer.findMany({
       orderBy: { id: "asc" },
       include: {
-        location: true
+        location: true,
       },
     });
 
     const organizers: Organizer[] = [];
-    
+
     for (const record of dbOrganizers) {
       const organizer = await toOrganizer(record);
       organizers.push(organizer);
@@ -61,10 +59,10 @@ export const organizerRepository = {
         phone: input.phone,
         email: input.email ?? null,
         image: input.image,
-        locationId: location.id
+        locationId: location.id,
       },
       include: {
-        location: true
+        location: true,
       },
     });
 
@@ -75,8 +73,8 @@ export const organizerRepository = {
     const organizer = await prisma.organizer.findUnique({
       where: { id },
       include: {
-        events: true
-      }
+        events: true,
+      },
     });
 
     if (!organizer) {
@@ -85,14 +83,14 @@ export const organizerRepository = {
 
     if (organizer.events.length > 0) {
       throw new Error(
-        "Cannot delete organizer because they have associated events."
+        "Cannot delete organizer because they have associated events.",
       );
     }
 
     await prisma.organizer.delete({
-      where: { id }
+      where: { id },
     });
 
     return true;
-  }
-}
+  },
+};

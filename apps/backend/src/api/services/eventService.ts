@@ -14,7 +14,7 @@ export const eventService = {
   async addEvent(input: NewEventInput): Promise<Event> {
     return eventRepository.add({
       ...input,
-      title: toTitle(input.title)
+      title: toTitle(input.title),
     });
   },
 
