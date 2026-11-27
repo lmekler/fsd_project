@@ -4,7 +4,7 @@ import type {
     SavedEventWithDetails
 } from "@shared/types/event";
 import type {
-    DbEventWithoutUsers,
+    DbEventWithRelations,
     DbLocation,
     DbSavedEventWithDetails
 } from "../types/event";
@@ -17,20 +17,20 @@ function toLocation(loc: DbLocation): Location {
     return { ...loc, venue: loc.venue ?? undefined };
 }
 
-function toEvent(event: DbEventWithoutUsers): Event {
+function toEvent(event: DbEventWithRelations): Event {
     return {
         ...event,
         description: event.description ?? undefined,
         category: event.category ?? undefined,
         endTime: event.endTime ?? undefined,
         image: event.image ?? undefined,
+        capacity: event.capacity ?? undefined,
         organizer: {
             ...event.organizer,
             email: event.organizer.email ?? undefined,
             location: toLocation(event.organizer.location)
         },
-        location: toLocation(event.location),
-        users: []
+        location: toLocation(event.location)
     };
 }
 
