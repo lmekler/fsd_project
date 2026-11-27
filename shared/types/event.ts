@@ -13,12 +13,11 @@ export interface Event {
   locationId: number;
   location: Location;
   image?: string;
-  capacity: number;
+  capacity?: number;
   registeredCount: number;
   price: number;
   isFeatured: boolean;
   tags?: string[];
-  users: SavedEvent[];
 }
 
 export interface Location {
