@@ -23,11 +23,10 @@ app.use(express.json());
 
 // Routes
 app.use("/saved-events", savedEventRoutes);
-app.use("/api/organizers", organizerRoutes)
+app.use("/api/organizers", organizerRoutes);
+app.use("/api/events", eventRoutes);
 
 // Central error handler
 app.use(errorHandler);
-
-app.use("/api/events", eventRoutes);
 
 export default app;
