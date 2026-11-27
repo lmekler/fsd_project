@@ -1,7 +1,7 @@
 import { prisma } from "../../db/prisma";
 
 import type { Event, NewEventInput } from "@shared/types/event";
-import type { DbEvent } from "../types/event"
+import type { DbEvent } from "../types/event";
 
 import { locationRepository } from "./locationRepository";
 import { organizerRepository } from "./organizerRepository";
@@ -63,7 +63,7 @@ export const eventRepository = {
   },
 
   async add(input: NewEventInput): Promise<Event> {
-    const location = await locationRepository.getOrCreate(input.location)
+    const location = await locationRepository.getOrCreate(input.location);
 
     const event = await prisma.event.create({
       data: {

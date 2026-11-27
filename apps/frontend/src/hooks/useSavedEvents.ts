@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import type { SavedEventWithDetails } from "@shared/types/Event";
+import type { SavedEventWithDetails } from "@shared/types/event";
 import { savedEventsService } from "../services/savedEventsService";
 
 export function useSavedEvents(userId: number | undefined) {

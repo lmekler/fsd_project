@@ -10,14 +10,14 @@ export function toLocation(row: DbLocation): Location {
     address: row.address,
     city: row.city,
     province: row.province,
-    postalCode: row.postalCode
+    postalCode: row.postalCode,
   };
 }
 
 export const locationRepository = {
   async getById(id: number): Promise<Location | null> {
     const location = await prisma.location.findUnique({
-      where: { id }
+      where: { id },
     });
 
     return location ? toLocation(location) : null;
@@ -44,5 +44,5 @@ export const locationRepository = {
     });
 
     return toLocation(location);
-  }
-}
+  },
+};

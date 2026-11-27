@@ -1,6 +1,6 @@
 import { useState } from "react"
-import type { CreateOrganizer } from "../../../types/Organizer"
-import { provinces } from "../../../types/Province";
+import type { CreateOrganizer } from "../../../types/organizer"
+import { provinces } from "../../../types/province";
 import Button from "../../common/button/Button";
 import { useOrganizer } from "../../../hooks/useOrganizer";
 import { OrganizerList } from "./organizer-list/OrganizerList";
