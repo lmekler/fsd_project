@@ -17,14 +17,6 @@ export const organizerRepository = {
     return readJson<Organizer[]>(response);
   },
 
-  async getById(id: number): Promise<Organizer | null> {
-    const response = await fetch(`${endpoint}/${id}`);
-
-    if (response.status === 404) return null;
-
-    return readJson<Organizer>(response);
-  },
-
   async add(input: CreateOrganizer): Promise<Organizer> {
     const response = await fetch(endpoint, {
       method: "POST",
