@@ -16,7 +16,7 @@ router.post(
 );
 
 router.delete(
-    "/:organizerId",
+    "/:id",
     validateOrganizerId,
     organizerController.remove
 )

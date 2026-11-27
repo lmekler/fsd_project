@@ -85,6 +85,10 @@ async function main() {
                         (SELECT MAX(id) FROM "Location"));
         `);
         await tx.$executeRawUnsafe(`
+          SELECT setval(pg_get_serial_sequence('"Organizer"', 'id'),
+                        (SELECT MAX(id) FROM "Organizer"));
+        `);
+        await tx.$executeRawUnsafe(`
           SELECT setval(pg_get_serial_sequence('"Event"', 'id'),
                         (SELECT MAX(id) FROM "Event"));
         `);

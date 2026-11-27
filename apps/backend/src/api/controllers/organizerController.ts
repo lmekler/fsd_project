@@ -39,7 +39,7 @@ export async function remove(
     next: NextFunction
 ): Promise<void> {
     try {
-        const organizerId: number = Number(req.params.organizerId);
+        const organizerId: number = Number(req.params.id);
         await organizerService.removeOrganizer(organizerId);
 
         res.status(HTTP_STATUS.NO_CONTENT).send();
