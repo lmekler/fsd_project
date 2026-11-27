@@ -7,6 +7,8 @@ import corsOptions from "../config/cors";
 import errorHandler from "./api/middleware/errorHandler";
 import savedEventRoutes from "./api/routes/savedEventsRoutes";
 
+import { eventRoutes } from "./api/routes/eventRoutes";
+
 const app = express();
 
 // Logging
@@ -23,5 +25,7 @@ app.use("/saved-events", savedEventRoutes);
 
 // Central error handler
 app.use(errorHandler);
+
+app.use("/api/events", eventRoutes);
 
 export default app;

@@ -271,11 +271,7 @@
       "description": "Join neighbours for a morning of cleaning up local parks and public spaces. Supplies will be provided, and everyone is welcome.",
       "category": "Community",
       "isFeatured": true,
-      "tags": [
-        "volunteering",
-        "community",
-        "outdoors"
-      ],
+      "tags": ["volunteering", "community", "outdoors"],
       "locationId": 11,
       "date": "2026-12-05",
       "startTime": "09:00",
@@ -304,12 +300,7 @@
       "description": "Learn the fundamentals of watercolour painting in this beginner-friendly workshop led by a local artist.",
       "category": "Arts & Culture",
       "isFeatured": true,
-      "tags": [
-        "art",
-        "painting",
-        "workshop",
-        "beginner"
-      ],
+      "tags": ["art", "painting", "workshop", "beginner"],
       "locationId": 12,
       "date": "2026-12-10",
       "startTime": "18:00",
@@ -338,12 +329,7 @@
       "description": "A casual evening of pick-up soccer. Players of all skill levels are welcome.",
       "category": "Sports & Recreation",
       "isFeatured": false,
-      "tags": [
-        "soccer",
-        "sports",
-        "recreation",
-        "outdoors"
-      ],
+      "tags": ["soccer", "sports", "recreation", "outdoors"],
       "locationId": 13,
       "date": "2026-12-12",
       "startTime": "18:30",
@@ -367,12 +353,7 @@
       "description": "Discover practical ways to grow vegetables, herbs, and pollinator-friendly plants in small urban spaces.",
       "category": "Environment",
       "isFeatured": false,
-      "tags": [
-        "gardening",
-        "environment",
-        "sustainability",
-        "workshop"
-      ],
+      "tags": ["gardening", "environment", "sustainability", "workshop"],
       "locationId": 14,
       "date": "2026-12-14",
       "startTime": "13:00",
@@ -396,12 +377,7 @@
       "description": "Bring a favourite dish and meet people from the neighbourhood at this casual community dinner.",
       "category": "Food & Social",
       "isFeatured": true,
-      "tags": [
-        "food",
-        "social",
-        "community",
-        "family"
-      ],
+      "tags": ["food", "social", "community", "family"],
       "locationId": 15,
       "date": "2026-12-18",
       "startTime": "18:00",
@@ -425,12 +401,7 @@
       "description": "Explore new work from emerging Winnipeg artists at this community exhibition featuring painting, photography, and mixed media.",
       "category": "Arts & Culture",
       "isFeatured": true,
-      "tags": [
-        "art",
-        "exhibition",
-        "culture",
-        "local-artists"
-      ],
+      "tags": ["art", "exhibition", "culture", "local-artists"],
       "locationId": 16,
       "date": "2027-01-09",
       "startTime": "10:00",
@@ -454,12 +425,7 @@
       "description": "Start your weekend with a relaxed outdoor yoga session designed for beginners and all fitness levels.",
       "category": "Health & Wellness",
       "isFeatured": false,
-      "tags": [
-        "yoga",
-        "wellness",
-        "fitness",
-        "outdoors"
-      ],
+      "tags": ["yoga", "wellness", "fitness", "outdoors"],
       "locationId": 17,
       "date": "2027-01-16",
       "startTime": "09:00",
@@ -483,12 +449,7 @@
       "description": "Bring a small household item that needs fixing and work alongside volunteers to repair it instead of throwing it away.",
       "category": "Environment",
       "isFeatured": false,
-      "tags": [
-        "repair",
-        "sustainability",
-        "community",
-        "volunteering"
-      ],
+      "tags": ["repair", "sustainability", "community", "volunteering"],
       "locationId": 18,
       "date": "2027-01-23",
       "startTime": "13:00",
@@ -512,12 +473,7 @@
       "description": "Bring the family for an evening of board games, snacks, and friendly competition. Games will be available for different age groups.",
       "category": "Family & Kids",
       "isFeatured": false,
-      "tags": [
-        "family",
-        "games",
-        "kids",
-        "social"
-      ],
+      "tags": ["family", "games", "kids", "social"],
       "locationId": 19,
       "date": "2027-02-06",
       "startTime": "17:30",
@@ -535,12 +491,7 @@
       "description": "Try your hand at pottery in this beginner workshop covering basic hand-building techniques.",
       "category": "Arts & Culture",
       "isFeatured": false,
-      "tags": [
-        "pottery",
-        "art",
-        "workshop",
-        "crafts"
-      ],
+      "tags": ["pottery", "art", "workshop", "crafts"],
       "locationId": 20,
       "date": "2027-02-13",
       "startTime": "14:00",

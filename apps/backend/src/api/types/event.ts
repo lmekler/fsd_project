@@ -1,9 +1,6 @@
-import type { DbOrganizer } from "./organizer";
-
 export type DbEvent = {
   id: number;
   organizerId: number;
-  organizer: DbOrganizer;
   title: string;
   description: string | null;
   category: string | null;
@@ -11,14 +8,12 @@ export type DbEvent = {
   startTime: string;
   endTime: string | null;
   image: string | null;
-  capacity: number;
+  capacity: number | null;
   registeredCount: number;
   price: number;
   isFeatured: boolean;
   tags: string[];
   locationId: number;
-  location: DbLocation;
-  users: DbSavedEvent[];
 };
 
 export type DbLocation = {

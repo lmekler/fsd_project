@@ -1,4 +1,4 @@
-import { Organizer } from "./organizer";
+import type { Organizer } from "./organizer";
 
 export interface Event {
   id: number;
@@ -13,13 +13,26 @@ export interface Event {
   locationId: number;
   location: Location;
   image?: string;
-  capacity: number;
+  capacity?: number;
   registeredCount: number;
   price: number;
   isFeatured: boolean;
   tags?: string[];
-  users: SavedEvent[];
 }
+
+// What a new event form sends (an event, excluding server owned values)
+export type NewEventInput = Omit<
+  Event,
+  | "id"
+  | "organizerId"
+  | "organizer"
+  | "locationId"
+  | "location"
+  | "registeredCount"
+  | "isFeatured"
+> & {
+  location: Omit<Location, "id">;
+};
 
 export interface Location {
   id: number;
@@ -27,7 +40,7 @@ export interface Location {
   address: string;
   city: string;
   province: string;
-  postalCode?: string;
+  postalCode: string;
 }
 
 export interface SavedEvent {

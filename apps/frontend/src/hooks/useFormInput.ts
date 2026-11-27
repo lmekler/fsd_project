@@ -13,7 +13,7 @@ export function useFormInput(
         extraFields?: any
     })
 {
-    const [value, setValue] = useState<string | number | undefined>("")
+    const [value, setValue] = useState<string | number | undefined>(dropdown?.[0] ?? "")
     const [error, setError] = useState<string | null>(null)
 
     function validate(validate: (value: string | number | undefined) => string | null): boolean
