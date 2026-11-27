@@ -35,7 +35,7 @@ export type DbSavedEvent = {
 
 // Includes the database relations for organizer and location
 export type DbEventWithRelations = DbEvent & {
-  organizer: DbOrganizer;
+  organizer: DbOrganizer & { location: DbLocation };
   location: DbLocation;
 };
 

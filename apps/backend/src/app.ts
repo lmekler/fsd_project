@@ -22,7 +22,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
-app.use("/saved-events", savedEventRoutes);
+app.use("/api/saved-events", savedEventRoutes);
 app.use("/api/organizers", organizerRoutes);
 app.use("/api/events", eventRoutes);
 
