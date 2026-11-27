@@ -7,7 +7,7 @@ import type {
   DbEventWithRelations,
   DbLocation,
   DbSavedEventWithDetails,
-} from "../types/event";
+} from "../types/dbEvent";
 import { savedEventsRepository } from "../repositories/savedEventsRepository";
 import { NotFoundError } from "../errors/errors";
 

@@ -1,7 +1,7 @@
 import { prisma } from "../../db/prisma";
 
 import type { Location } from "@shared/types/event";
-import type { DbLocation } from "../types/event";
+import type { DbLocation } from "../types/dbEvent";
 
 export function toLocation(row: DbLocation): Location {
   return {
