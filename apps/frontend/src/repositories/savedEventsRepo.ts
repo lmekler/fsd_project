@@ -3,7 +3,7 @@ import { BASE_URL, readJson } from "./apiHandler";
 
 export const savedEventsRepo = {
     async getByUser(userId: number): Promise<SavedEventWithDetails[]> {
-        const res: Response = await fetch(`${BASE_URL}/saved-events/${userId}`);
+        const res: Response = await fetch(`${BASE_URL}/api/saved-events/${userId}`);
 
         return readJson<SavedEventWithDetails[]>(res);
     },
@@ -12,7 +12,7 @@ export const savedEventsRepo = {
         userId: number,
         eventId: number
     ): Promise<SavedEventWithDetails> {
-        const res: Response = await fetch(`${BASE_URL}/saved-events/${userId}`, {
+        const res: Response = await fetch(`${BASE_URL}/api/saved-events/${userId}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ eventId })
@@ -25,7 +25,7 @@ export const savedEventsRepo = {
         userId: number,
         savedEventId: number
     ): Promise<void> {
-        const res: Response = await fetch(`${BASE_URL}/saved-events/${userId}/${savedEventId}`, {
+        const res: Response = await fetch(`${BASE_URL}/api/saved-events/${userId}/${savedEventId}`, {
             method: "DELETE"
         });
 
