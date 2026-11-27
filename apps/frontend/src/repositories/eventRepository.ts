@@ -1,15 +1,7 @@
 import type { Event, NewEventInput } from "../types/event";
+import { BASE_URL, readJson } from "./apiHandler";
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
-const endpoint = `${baseUrl}/api/events`;
-
-async function readJson<T>(response: Response): Promise<T> {
-  if (!response.ok) {
-    throw new Error(`API error: ${response.status}`);
-  }
-
-  return (await response.json()) as T;
-}
+const endpoint = `${BASE_URL}/api/events`;
 
 export const eventRepository = {
   async getAll(): Promise<Event[]> {
