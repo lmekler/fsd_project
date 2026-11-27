@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import { z } from "zod";
+import { provinces } from "@shared/types/province"
 
 const organizerSchema = z
   .object({
@@ -17,7 +18,17 @@ const organizerSchema = z
     email: z
       .string()
       .optional(),
-    image: z.string().trim()
+    image: z.string().trim(),
+    location: z.object({
+        venue: z.string().trim().optional(),
+        address: z.string().trim().nonempty(),
+        city: z.string().trim().nonempty(),
+        province: z.enum(provinces),
+        postalCode: z.string()
+            .trim()
+            .toUpperCase()
+            .regex(/^[A-Z]\d[A-Z] ?\d[A-Z]\d$/, "Postal code must be in valid format."),
+    })
   })
   .strict();
 
